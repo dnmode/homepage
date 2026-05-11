@@ -3049,7 +3049,10 @@
       if (certList) certList.classList.add("service-reveal-init");
 
       if (certSection && certTitle && certList) {
+        let certRevealed = false;
         const revealCert = () => {
+          if (certRevealed) return;
+          certRevealed = true;
           certTitle.classList.add("service-is-visible");
           window.setTimeout(() => {
             certList.classList.add("service-is-visible");
@@ -3065,10 +3068,25 @@
               }
             });
           },
-          { threshold: 0.3 }
+          { threshold: 0.08, rootMargin: "0px 0px -10% 0px" }
         );
 
         certObserver.observe(certSection);
+
+        // iOS Safari fallback: observer may miss during fast scroll/layout shifts.
+        const checkCertVisibility = () => {
+          if (certRevealed) return;
+          const rect = certSection.getBoundingClientRect();
+          const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+          if (rect.top < vh * 0.9) {
+            revealCert();
+            window.removeEventListener("scroll", checkCertVisibility);
+            window.removeEventListener("resize", checkCertVisibility);
+          }
+        };
+        window.addEventListener("scroll", checkCertVisibility, { passive: true });
+        window.addEventListener("resize", checkCertVisibility, { passive: true });
+        window.setTimeout(checkCertVisibility, 250);
       }
 
       if (teamTopFlow.length > 0) {
