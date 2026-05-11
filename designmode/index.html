@@ -396,7 +396,7 @@
       width: 100%;
       font-size: 16px;
       font-weight: 300;
-      line-height: normal;
+      line-height: 1.45;
       color: #ffffff;
       margin: 0;
     }
@@ -719,6 +719,10 @@
       line-height: normal;
       color: #d7df23;
       text-align: center;
+    }
+
+    .desktop-section-service__col:first-child h3 {
+      white-space: nowrap;
     }
 
     .desktop-section-service__list {
@@ -1715,6 +1719,7 @@
 
       .hero-body-kr {
         font-size: 15px;
+        line-height: 1.45;
       }
 
       /* Figma tablet(768w): outclients-list 540px 재배치 */
@@ -1963,7 +1968,7 @@
 
       .hero-body-kr {
         font-size: 13px;
-        line-height: 1.4;
+        line-height: 1.48;
       }
 
       .desktop-section-about__english {
@@ -2256,7 +2261,7 @@
 
       .hero-body-kr {
         font-size: 11px;
-        line-height: 1.35;
+        line-height: 1.45;
       }
 
       .hero-stack--side {
@@ -3072,7 +3077,10 @@
       if (teamBand) teamBand.classList.add("team-reveal-init");
 
       if (teamSection && teamBand && teamTopFlow.length > 0) {
+        let teamRevealed = false;
         const revealTeam = () => {
+          if (teamRevealed) return;
+          teamRevealed = true;
           teamTopFlow.forEach((node, index) => {
             window.setTimeout(() => {
               node.classList.add("team-is-visible");
@@ -3093,10 +3101,25 @@
               }
             });
           },
-          { threshold: 0.25 }
+          { threshold: 0.08, rootMargin: "0px 0px -10% 0px" }
         );
 
         teamObserver.observe(teamSection);
+
+        // iOS Safari fallback: observer misses on fast scroll/layout shifts.
+        const checkTeamVisibility = () => {
+          if (teamRevealed) return;
+          const rect = teamSection.getBoundingClientRect();
+          const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+          if (rect.top < vh * 0.9) {
+            revealTeam();
+            window.removeEventListener("scroll", checkTeamVisibility);
+            window.removeEventListener("resize", checkTeamVisibility);
+          }
+        };
+        window.addEventListener("scroll", checkTeamVisibility, { passive: true });
+        window.addEventListener("resize", checkTeamVisibility, { passive: true });
+        window.setTimeout(checkTeamVisibility, 250);
       }
 
       if (outclientsFlow.length > 0) {
@@ -3104,7 +3127,10 @@
       }
 
       if (outclientsSection && outclientsFlow.length > 0) {
+        let outclientsRevealed = false;
         const revealOutclients = () => {
+          if (outclientsRevealed) return;
+          outclientsRevealed = true;
           outclientsFlow.forEach((node, index) => {
             window.setTimeout(() => {
               node.classList.add("outclients-is-visible");
@@ -3121,10 +3147,25 @@
               }
             });
           },
-          { threshold: 0.25 }
+          { threshold: 0.08, rootMargin: "0px 0px -10% 0px" }
         );
 
         outclientsObserver.observe(outclientsSection);
+
+        // iOS Safari fallback: force reveal when section nears viewport.
+        const checkOutclientsVisibility = () => {
+          if (outclientsRevealed) return;
+          const rect = outclientsSection.getBoundingClientRect();
+          const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+          if (rect.top < vh * 0.9) {
+            revealOutclients();
+            window.removeEventListener("scroll", checkOutclientsVisibility);
+            window.removeEventListener("resize", checkOutclientsVisibility);
+          }
+        };
+        window.addEventListener("scroll", checkOutclientsVisibility, { passive: true });
+        window.addEventListener("resize", checkOutclientsVisibility, { passive: true });
+        window.setTimeout(checkOutclientsVisibility, 250);
       }
 
       if (contactFlow.length > 0) {
