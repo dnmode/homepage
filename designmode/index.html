@@ -1,10 +1,3216 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="refresh" content="0; url=./designmode/index.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>designmode</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>designmode — desktop</title>
+  <!-- Figma desktop(root): https://www.figma.com/design/weAWw4rnyX7VNMWSsgVghx/Untitled?node-id=2-67 — file weAWw4rnyX7VNMWSsgVghx, frame 2:67; header 2:54 -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #ffffff;
+      min-width: 1280px;
+      font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", Arial,
+        sans-serif;
+      letter-spacing: -0.025em;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .desktop-section-about__body-kr br.about-kr-mobile-br {
+      display: none;
+    }
+
+    .desktop-section-contactus__text br.contact-mobile-br {
+      display: none;
+    }
+
+    /* ——— Header (Figma desktop-header 2:54) ——— */
+    .desktop-header {
+      width: 100%;
+      background-color: #222222;
+      color: #ffffff;
+    }
+
+    .desktop-header__inner {
+      width: 100%;
+      max-width: 1920px;
+      margin: 0 auto;
+      padding: 32px 168px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+    }
+
+    .desktop-header__logo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 0;
+      flex-shrink: 0;
+    }
+
+    .desktop-header__logo img {
+      display: block;
+      width: 259px;
+      height: 45px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .desktop-header__nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 48px;
+      list-style: none;
+    }
+
+    .desktop-header__nav a {
+      font-size: 21px;
+      font-weight: 300;
+      line-height: 1;
+      color: #ffffff;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .desktop-header__nav a:hover,
+    .desktop-header__nav a:focus-visible {
+      opacity: 1;
+      color: #d7df23;
+    }
+
+    .desktop-header__nav a:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 4px;
+    }
+
+    .desktop-header__menu-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 12px;
+      background: transparent;
+      color: #ffffff;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .desktop-header__menu-btn svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    .desktop-header__menu-btn:focus-visible {
+      outline: 2px solid #d7df23;
+      outline-offset: 4px;
+    }
+
+    .desktop-header__drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+    }
+
+    body.is-drawer-open .desktop-header__drawer {
+      display: block;
+    }
+
+    .desktop-header__drawer-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+
+    .desktop-header__drawer-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: min(340px, 86vw);
+      background: #222222;
+      color: #ffffff;
+      padding: 20px 18px;
+      box-shadow: -20px 0 60px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .desktop-header__drawer-close {
+      align-self: flex-end;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 12px;
+      background: transparent;
+      color: #ffffff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .desktop-header__drawer-close svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    .desktop-header__drawer-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .desktop-header__drawer-nav a {
+      display: block;
+      padding: 12px 10px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .desktop-header__drawer-nav a:hover,
+    .desktop-header__drawer-nav a:focus-visible {
+      background: rgba(215, 223, 35, 0.14);
+      color: #d7df23;
+      outline: none;
+    }
+
+    /* Floating TOP button (bottom-left) */
+    .floating-top-btn {
+      position: fixed;
+      right: 32px;
+      bottom: 32px;
+      z-index: 999;
+      width: 56px;
+      height: 56px;
+      border-radius: 999px;
+      border: 1px solid rgba(34, 34, 34, 0.2);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #222222;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+    }
+
+    .floating-top-btn.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .floating-top-btn:hover {
+      border-color: rgba(215, 223, 35, 0.9);
+      color: #d7df23;
+    }
+
+    .floating-top-btn:focus-visible {
+      outline: 2px solid #d7df23;
+      outline-offset: 4px;
+    }
+
+    .floating-top-btn__icon {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    /* ——— Hero (3 circles 한 줄) ——— */
+    .desktop-section-hero {
+      position: relative;
+      width: 100%;
+      padding: 0 0 0px;
+      overflow: hidden;
+    }
+
+    .desktop-section-hero__bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: min(52vh, 520px);
+      background: linear-gradient(180deg,
+          #d7df23 0%,
+          #e8ef7a 28%,
+          #c8e070 52%,
+          #ffffff 100%);
+      z-index: 0;
+    }
+
+    .desktop-section-hero__inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1670px;
+      margin: 0 auto;
+      padding: 56px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .desktop-section-hero__circle-list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 24px;
+      width: 100%;
+    }
+
+    /* Figma text-list 2:106 — 원형 내부 타이포 (Pretendard Black / Light) */
+    .desktop-section-hero__circle {
+      --hero-gap: 24px;
+      flex: 0 0 auto;
+      background: #222222;
+      color: #fff;
+      width: min(540px,
+          calc((100% - 2 * var(--hero-gap)) / 3));
+      aspect-ratio: 1;
+      height: auto;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.13);
+      padding: 24px;
+      gap: 31px;
+      text-align: center;
+      font-family: "Pretendard Variable", Pretendard, sans-serif;
+    }
+
+    .desktop-section-hero__circle.hero-reveal-init {
+      opacity: 0;
+      transform: translateY(38px) scale(0.98);
+      transition: opacity 0.78s ease, transform 0.78s ease;
+      will-change: opacity, transform;
+    }
+
+    .desktop-section-hero__circle.hero-reveal-init.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .desktop-section-hero__circle.hero-reveal-init {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    .desktop-section-hero__circle--side {
+      gap: 19px;
+      padding: 97px 24px;
+    }
+
+    .hero-title-block {
+      margin: 0;
+      padding: 0;
+      color: #d7df23;
+      font-weight: 900;
+      line-height: 0.8;
+      text-align: center;
+    }
+
+    .hero-title-block__line {
+      display: block;
+      margin: 0;
+      font-weight: 900;
+      line-height: 0.8;
+    }
+
+    /* text1, text2: 57px + 88px */
+    .hero-title-block__line--57 {
+      font-size: 57px;
+    }
+
+    .hero-title-block__line--88 {
+      font-size: 88px;
+    }
+
+    /* text3: 88px(On) + 56px(the Client's Side) */
+    .hero-title-block--side .hero-title-block__line--on {
+      font-size: 88px;
+    }
+
+    .hero-title-block--side .hero-title-block__line--sub {
+      font-size: 56px;
+    }
+
+    .hero-body-en {
+      width: 100%;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: normal;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .hero-body-en p {
+      margin: 0;
+    }
+
+    .hero-body-en p+p {
+      margin-top: 0;
+    }
+
+    .hero-body-kr {
+      width: 100%;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.45;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .hero-body-kr p {
+      margin: 0;
+    }
+
+    .hero-body-kr p+p {
+      margin-top: 0;
+    }
+
+    .hero-stack--side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 13px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .hero-stack--side .hero-body-en,
+    .hero-stack--side .hero-body-kr {
+      text-align: center;
+    }
+
+    .hero-stack--side .hero-body-en {
+      font-size: 18px;
+    }
+
+    /* Figma desktop-section-logo 2:254 */
+    .desktop-section-logo {
+      width: 100%;
+      background-color: #ffffff;
+    }
+
+    .desktop-section-logo__inner {
+      max-width: 1920px;
+      margin: 0 auto;
+      padding: 180px 200px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 160px;
+    }
+
+    .desktop-section-logo__mark {
+      display: block;
+      width: 303px;
+      height: auto;
+      flex-shrink: 0;
+    }
+
+    .desktop-section-logo__line {
+      width: 100%;
+      max-width: 1520px;
+      line-height: 0;
+    }
+
+    .desktop-section-logo__line img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Figma desktop-section-about 8:10 */
+    .desktop-section-about {
+      width: 100%;
+      background-color: #ffffff;
+      padding: 180px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 112px;
+    }
+
+    .desktop-section-about__title {
+      margin: 0;
+      font-size: 44px;
+      font-weight: 700;
+      line-height: normal;
+      color: #222222;
+      text-align: center;
+    }
+
+    .desktop-section-about__ceo {
+      width: 100%;
+      max-width: 1520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .desktop-section-about__subtitle {
+      margin: 0;
+      font-size: 40px;
+      font-weight: 700;
+      line-height: normal;
+      color: #222222;
+      text-align: center;
+    }
+
+    .desktop-section-about__text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 56px;
+      width: 100%;
+    }
+
+    .desktop-section-about__english {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 26px;
+      max-width: 1364px;
+      width: 100%;
+      text-align: center;
+      color: #818181;
+      font-size: 22px;
+    }
+
+    .desktop-section-about__tagline {
+      margin: 0;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    .desktop-section-about__body-en {
+      margin: 0;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    .desktop-section-about__body-en p {
+      margin: 0;
+    }
+
+    .desktop-section-about__body-en p+p {
+      margin-top: 0;
+    }
+
+    .desktop-section-about__korean {
+      width: 100%;
+      max-width: 1200px;
+      background-color: #f4f4f4;
+      border-radius: 48px;
+      padding: 52px 48px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 26px;
+      box-sizing: border-box;
+    }
+
+    .desktop-section-about__kr-head {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: normal;
+      color: #818181;
+      text-align: center;
+    }
+
+    .desktop-section-about__body-kr {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.3;
+      color: #818181;
+      text-align: center;
+    }
+
+    .desktop-section-about__body-kr p {
+      margin: 0;
+    }
+
+    .desktop-section-about__sign {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 26px;
+      width: 100%;
+      padding: 8px 0 0;
+      box-sizing: border-box;
+    }
+
+    .desktop-section-about__sign-text {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.3;
+      color: #222222;
+      text-align: center;
+    }
+
+    .desktop-section-about__sign-text strong {
+      font-weight: 700;
+    }
+
+    .desktop-section-about__sign-text .name {
+      font-weight: 300;
+    }
+
+    .desktop-section-about__sign img {
+      display: block;
+      width: 122px;
+      height: auto;
+      flex-shrink: 0;
+      mix-blend-mode: multiply;
+    }
+
+    .about-reveal-target.about-reveal-init {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.68s ease, transform 0.68s ease;
+      will-change: opacity, transform;
+    }
+
+    .about-reveal-target.about-reveal-init.about-is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .service-reveal-target.service-reveal-init {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.62s ease, transform 0.62s ease;
+      will-change: opacity, transform;
+    }
+
+    .service-reveal-target.service-reveal-init.service-is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .team-reveal-target.team-reveal-init {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.62s ease, transform 0.62s ease;
+      will-change: opacity, transform;
+    }
+
+    .team-reveal-target.team-reveal-init.team-is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .outclients-reveal-target.outclients-reveal-init {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.62s ease, transform 0.62s ease;
+      will-change: opacity, transform;
+    }
+
+    .outclients-reveal-target.outclients-reveal-init.outclients-is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .contact-reveal-target.contact-reveal-init {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      will-change: opacity, transform;
+    }
+
+    .contact-reveal-target.contact-reveal-init.contact-is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Figma desktop-section-service 8:54 */
+    .desktop-section-service {
+      width: 100%;
+      background-color: #222222;
+      padding: 106px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .desktop-section-service__title {
+      margin: 0;
+      font-size: 44px;
+      font-weight: 700;
+      line-height: normal;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .desktop-section-service__grid {
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 100px;
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 122px;
+    }
+
+    .desktop-section-service__col {
+      flex: 1 1 200px;
+      max-width: 320px;
+      min-width: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .desktop-section-service__col h3 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 700;
+      line-height: normal;
+      color: #d7df23;
+      text-align: center;
+    }
+
+    .desktop-section-service__col:first-child h3 {
+      white-space: nowrap;
+    }
+
+    .desktop-section-service__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #ffffff;
+      text-align: left;
+      display: inline-block;
+    }
+
+    .desktop-section-service__list li {
+      position: relative;
+      padding-left: 1.1em;
+    }
+
+    .desktop-section-service__list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #d7df23;
+      font-weight: 700;
+    }
+
+    /* Figma desktop-section-certifiction 8:79 */
+    .desktop-section-certifiction {
+      width: 100%;
+      max-width: 1920px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 160px 24px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 160px;
+      box-sizing: border-box;
+    }
+
+    .desktop-section-certifiction__title {
+      margin: 0;
+      font-size: 44px;
+      font-weight: 700;
+      line-height: normal;
+      color: #222222;
+      text-align: center;
+    }
+
+    .desktop-section-certifiction__list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 48px;
+      width: 100%;
+      max-width: 1380px;
+    }
+
+    .desktop-section-certifiction__card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 428px;
+      max-width: 100%;
+    }
+
+    .desktop-section-certifiction__thumb {
+      border: 12px solid #dedbd7;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: -11px;
+      position: relative;
+      z-index: 1;
+      background-color: #ffffff;
+      box-sizing: border-box;
+    }
+
+    .desktop-section-certifiction__thumb img {
+      display: block;
+      width: 405px;
+      max-width: 100%;
+      height: auto;
+      aspect-ratio: 405 / 556;
+      object-fit: cover;
+    }
+
+    .desktop-section-certifiction__info {
+      width: 100%;
+      max-width: 428px;
+      min-height: 204px;
+      padding: 34px 16px;
+      box-sizing: border-box;
+      background-color: #222222;
+      border-bottom-left-radius: 277px;
+      border-bottom-right-radius: 277px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .desktop-section-certifiction__org {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 700;
+      line-height: normal;
+      color: #ffffff;
+    }
+
+    .desktop-section-certifiction__cert {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 300;
+      line-height: normal;
+      color: #d7df23;
+    }
+
+    .desktop-section-certifiction__cert p {
+      margin: 0;
+    }
+
+    .desktop-section-certifiction__line {
+      width: 100%;
+      max-width: 1520px;
+      line-height: 0;
+    }
+
+    .desktop-section-certifiction__line img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Figma desktop-section-team — 섹션 좌우 92px */
+    .desktop-section-team {
+      width: 100%;
+      background-color: #ffffff;
+      padding: 180px 92px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 112px;
+      box-sizing: border-box;
+    }
+
+    .desktop-section-team__title {
+      margin: 0;
+      font-size: 44px;
+      font-weight: 700;
+      line-height: normal;
+      color: #222222;
+      text-align: center;
+    }
+
+    /* 조직도(CEO~): 넓게 — 소제목(팀 바+상세)만 .band에서 1200 제한 */
+    .desktop-section-team__chart {
+      width: 100%;
+      max-width: 1520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .desktop-section-team__role {
+      margin: 0;
+      font-weight: 700;
+      line-height: normal;
+      color: #222222;
+      text-align: center;
+    }
+
+    .desktop-section-team__role--ceo {
+      font-size: 36px;
+    }
+
+    .desktop-section-team__role--sub {
+      font-size: 26px;
+    }
+
+    .desktop-section-team__connector {
+      display: block;
+      height: 88px;
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    /*
+        피그마 team-chart 8:134 — 자식 간 gap 28px
+        chart-list 11:169 / 하단 chart-list 29:1064: w 1450, flex + justify-between, px 98 py 24
+      */
+    .desktop-section-team__band {
+      width: 100%;
+      max-width: 1450px;
+      margin-inline: auto;
+      padding-inline: 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 28px;
+    }
+
+    .desktop-section-team__pill-shell {
+      width: 100%;
+      max-width: 1450px;
+      margin-inline: auto;
+      box-sizing: border-box;
+      padding: 24px 98px;
+      background-color: #818181;
+      border-radius: 100px;
+    }
+
+    .desktop-section-team__pill {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-size: 26px;
+      font-weight: 700;
+      line-height: normal;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .desktop-section-team__pill li {
+      margin: 0;
+      padding: 0;
+      flex: 0 0 auto;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .desktop-section-team__details {
+      width: 100%;
+      max-width: 1450px;
+      margin-inline: auto;
+      box-sizing: border-box;
+      padding: 24px 98px;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-size: 26px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: #818181;
+    }
+
+    .desktop-section-team__detail-col {
+      flex: 0 0 auto;
+      box-sizing: border-box;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      font-weight: inherit;
+    }
+
+    .desktop-section-team__detail-col p {
+      margin: 0;
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    .desktop-section-team__responsive-stack {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .desktop-section-team__responsive-shell {
+      width: 100%;
+      box-sizing: border-box;
+      background-color: #818181;
+      border-radius: 100px;
+      padding: 24px 32px;
+    }
+
+    .desktop-section-team__responsive-shell ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0;
+      text-align: center;
+      color: #fff;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .desktop-section-team__responsive-details {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 32px;
+      display: grid;
+      gap: 0;
+      text-align: center;
+      color: #818181;
+      font-size: 26px;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .desktop-section-team__responsive-details p {
+      margin: 0;
+    }
+
+    /* PORTFOLIO — 피그마 11:650: 6×4 셀 그리드 + 딤 + portpolio_btn(btn_default/hover) */
+    .desktop-section-portpolio {
+      position: relative;
+      width: 100%;
+      min-height: 1240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .desktop-section-portpolio__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-color: #0a0a0a;
+      overflow: hidden;
+    }
+
+    .desktop-section-portpolio__grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-rows: repeat(4, minmax(0, 1fr));
+      width: 100%;
+      height: 100%;
+      min-height: 1240px;
+    }
+
+    .desktop-section-portpolio__grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .desktop-section-portpolio__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.82);
+      pointer-events: none;
+    }
+
+    .desktop-section-portpolio__inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      margin-inline: auto;
+      padding: 80px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .desktop-section-portpolio__btn {
+      pointer-events: auto;
+      position: relative;
+      z-index: 0;
+      display: block;
+      width: min(100%, 1152px);
+      max-width: 1152px;
+      aspect-ratio: 1151.64 / 269.47;
+      margin: 0;
+      padding: 0;
+      border: none;
+      background-color: transparent;
+      background-image: url("images/btn_default.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* background-image 전환은 브라우저마다 불안정 → 호버 PNG는 ::after + opacity */
+    .desktop-section-portpolio__btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-color: transparent;
+      background-image: url("images/btn_hover.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .desktop-section-portpolio__btn:hover::after,
+    .desktop-section-portpolio__btn:focus-visible::after {
+      opacity: 1;
+    }
+
+    .desktop-section-portpolio__btn:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 6px;
+    }
+
+    .desktop-section-portpolio__btn-sr {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* OUT CLIENTS — 피그마 desktop-section-outclients 11:798 (배경 흰색) */
+    .desktop-section-outclients {
+      width: 100%;
+      max-width: 1920px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 180px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 160px;
+      box-sizing: border-box;
+    }
+
+    .desktop-section-outclients__masthead {
+      width: 100%;
+      max-width: 1212px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 160px;
+      box-sizing: border-box;
+    }
+
+    .desktop-section-outclients__title {
+      margin: 0;
+      font-size: 44px;
+      font-weight: 700;
+      line-height: normal;
+      color: #222222;
+      text-align: center;
+    }
+
+    /* 1행 4개 + 2행 3개 고정 배치 — 피그마 outclients-list */
+    .desktop-section-outclients__list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 53px;
+      width: 100%;
+      max-width: 1212px;
+      box-sizing: border-box;
+    }
+
+    .desktop-section-outclients__row {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      gap: 158px;
+      width: 100%;
+    }
+
+    .desktop-section-outclients__row--top {
+      max-width: 1212px;
+    }
+
+    .desktop-section-outclients__row--bottom {
+      max-width: 862px;
+    }
+
+    .desktop-section-outclients__row2 {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      gap: 158px;
+      flex: 1 1 100%;
+      box-sizing: border-box;
+    }
+
+    .desktop-section-outclients__logo {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .desktop-section-outclients__logo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Figma 11:798 기준 로고 실치수 */
+    .desktop-section-outclients__logo--lg {
+      width: 111.11px;
+      height: 48.94px;
+    }
+
+    .desktop-section-outclients__logo--lgdisplay {
+      width: 256.18px;
+      height: 50.76px;
+    }
+
+    .desktop-section-outclients__logo--lgcns {
+      width: 205.38px;
+      height: 48.94px;
+    }
+
+    .desktop-section-outclients__logo--hsad {
+      width: 165.36px;
+      height: 49.8px;
+    }
+
+    .desktop-section-outclients__logo--netxentire {
+      width: 290.08px;
+      height: 26.46px;
+    }
+
+    .desktop-section-outclients__logo--daedong {
+      width: 265.49px;
+      height: 50.71px;
+    }
+
+    .desktop-section-outclients__logo--smart {
+      width: 148px;
+      height: 50px;
+    }
+
+    .desktop-section-outclients__line {
+      width: 100%;
+      max-width: 1520px;
+      line-height: 0;
+    }
+
+    .desktop-section-outclients__line img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* CONTACT US — desktop-section-contactus */
+    .desktop-section-contactus {
+      width: 100%;
+      margin: 0;
+      background-color: #ffffff;
+      padding: 0px 0 112px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 72px;
+      box-sizing: border-box;
+    }
+
+    .desktop-section-contactus__title {
+      margin: 0;
+      font-size: 44px;
+      font-weight: 700;
+      line-height: normal;
+      color: #222222;
+      text-align: center;
+    }
+
+    .desktop-section-contactus__map-wrap {
+      width: 100%;
+      max-width: 1920px;
+    }
+
+    .desktop-section-contactus__map {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .desktop-section-contactus__info {
+      width: 100%;
+      max-width: 1520px;
+      padding: 0 92px;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 96px;
+      row-gap: 24px;
+      align-items: start;
+    }
+
+    .desktop-section-contactus__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      text-align: center;
+      color: #818181;
+    }
+
+    .desktop-section-contactus__icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 0;
+    }
+
+    .desktop-section-contactus__text {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.55;
+      color: #818181;
+      letter-spacing: inherit;
+    }
+
+    .desktop-section-contactus__nowrap {
+      white-space: nowrap;
+    }
+
+    /* COPYRIGHT — desktop-section-copyright */
+    .desktop-section-copyright {
+      width: 100%;
+      margin: 0;
+      background-color: #e7e3de;
+      padding: 34px 24px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .desktop-section-copyright__text {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: #2b2b2b;
+      letter-spacing: inherit;
+      text-wrap: balance;
+    }
+
+    .desktop-section-copyright__text br.copyright-mobile-br {
+      display: none;
+    }
+
+    @media (max-width: 1200px) {
+      body {
+        min-width: 0;
+      }
+
+      .desktop-header__inner {
+        padding: 24px 32px;
+      }
+
+      .desktop-header__nav {
+        gap: 32px;
+      }
+
+      .desktop-header__nav a {
+        font-size: 19px;
+      }
+
+      .desktop-section-hero__circle-list {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 24px;
+        overflow-x: hidden;
+        overflow-y: visible;
+        padding: 0;
+        scroll-snap-type: none;
+        -webkit-overflow-scrolling: auto;
+      }
+
+      .desktop-section-hero__circle {
+        width: min(540px, 100%);
+        height: auto;
+        aspect-ratio: 1 / 1;
+      }
+
+      .desktop-section-logo__inner {
+        padding: 120px 24px 80px;
+        gap: 80px;
+      }
+
+      .desktop-section-logo__mark {
+        width: min(303px, 80vw);
+      }
+
+      .desktop-section-about {
+        padding: 100px 20px;
+        gap: 64px;
+      }
+
+      .desktop-section-about__title {
+        font-size: 36px;
+      }
+
+      .desktop-section-about__subtitle {
+        font-size: 32px;
+      }
+
+      .desktop-section-about__english {
+        font-size: 18px;
+      }
+
+      .desktop-section-about__korean {
+        padding: 40px 24px 32px;
+        border-radius: 32px;
+      }
+
+      .desktop-section-about__kr-head {
+        font-size: 18px;
+      }
+
+      .desktop-section-about__body-kr {
+        font-size: 17px;
+      }
+
+      .desktop-section-about__sign {
+        flex-direction: column;
+        align-items: center;
+        padding: 16px 0 0;
+      }
+
+      .desktop-section-about__sign img {
+        width: 100px;
+      }
+
+      .desktop-section-service {
+        padding: 72px 20px;
+        gap: 32px;
+      }
+
+      .desktop-section-service__title {
+        font-size: 36px;
+      }
+
+      .desktop-section-service__grid {
+        padding: 0 16px;
+        gap: 48px;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .desktop-section-service__col {
+        flex: 0 0 auto;
+        max-width: 420px;
+        width: 100%;
+      }
+
+      .desktop-section-certifiction {
+        padding: 100px 20px 100px;
+        gap: 80px;
+      }
+
+      .desktop-section-certifiction__title {
+        font-size: 36px;
+      }
+
+      .desktop-section-certifiction__list {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .desktop-section-certifiction__card {
+        width: 100%;
+        max-width: 405px;
+      }
+
+      .desktop-section-certifiction__info {
+        border-bottom-left-radius: 120px;
+        border-bottom-right-radius: 120px;
+      }
+
+      .desktop-section-certifiction__org,
+      .desktop-section-certifiction__cert {
+        font-size: 22px;
+      }
+
+      .desktop-section-team {
+        padding: 160px 0;
+        gap: 112px;
+      }
+
+      .desktop-section-team__title {
+        font-size: 44px;
+      }
+
+      .desktop-section-team__role--ceo {
+        font-size: 36px;
+      }
+
+      .desktop-section-team__role--sub {
+        font-size: 26px;
+      }
+
+      .desktop-section-team__band {
+        width: 704px;
+        max-width: 100%;
+        padding-inline: 0;
+        gap: 28px;
+      }
+
+      .desktop-section-team__pill-shell,
+      .desktop-section-team__details {
+        display: none;
+      }
+
+      .desktop-section-team__responsive-stack {
+        display: flex;
+        width: 704px;
+        max-width: 100%;
+      }
+
+      .desktop-section-team__responsive-shell {
+        padding: 24px 32px;
+        border-radius: 100px;
+      }
+
+      .desktop-section-team__responsive-shell ul {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .desktop-section-team__responsive-shell--bottom ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .desktop-section-team__responsive-details {
+        padding: 0 32px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 36px;
+      }
+
+      .desktop-section-team__responsive-details--bottom {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 36px;
+      }
+
+      .desktop-section-portpolio {
+        min-height: 720px;
+      }
+
+      .desktop-section-portpolio__grid {
+        min-height: 720px;
+      }
+
+      .desktop-section-portpolio__inner {
+        padding: 48px 20px;
+      }
+
+      .desktop-section-portpolio__btn {
+        width: min(100%, 100vw - 40px);
+      }
+
+      .desktop-section-outclients {
+        padding: 100px 24px;
+        gap: 80px;
+      }
+
+      .desktop-section-outclients__masthead {
+        gap: 64px;
+      }
+
+      .desktop-section-outclients__title {
+        font-size: 36px;
+      }
+
+      .desktop-section-outclients__list {
+        gap: 32px;
+      }
+
+      .desktop-section-outclients__row,
+      .desktop-section-outclients__row2 {
+        gap: 40px;
+        max-width: 100%;
+      }
+
+      .desktop-section-outclients__logo {
+        transform-origin: center;
+        transform: scale(0.86);
+      }
+
+      .desktop-section-contactus {
+        padding: 64px 0 80px;
+        gap: 48px;
+      }
+
+      .desktop-section-contactus__info {
+        padding: 0 24px;
+        grid-template-columns: 1fr;
+        align-items: center;
+        row-gap: 42px;
+      }
+
+      .desktop-section-contactus__text {
+        font-size: 20px;
+      }
+    }
+
+    /* Tablet (landscape/portrait) */
+    @media (max-width: 1024px) {
+      html,
+      body {
+        overflow-x: hidden;
+      }
+
+      .desktop-header__inner {
+        padding: 32px;
+        gap: 24px;
+      }
+
+      .desktop-header__logo img {
+        width: 259px;
+        height: auto;
+      }
+
+      .desktop-header__nav {
+        display: none;
+      }
+
+      .desktop-header__menu-btn {
+        display: inline-flex;
+      }
+
+      .desktop-section-hero__inner {
+        padding-top: 44px;
+      }
+
+      /* Figma tablet(768w): 원 3개 세로 스택 + 540px */
+      .desktop-section-hero__circle-list {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        overflow-x: hidden;
+        overflow-y: visible;
+        padding: 0;
+        gap: 24px;
+        scroll-snap-type: none;
+        -webkit-overflow-scrolling: auto;
+      }
+
+      .desktop-section-hero__circle {
+        width: 540px;
+        height: 540px;
+      }
+
+      .hero-title-block__line--57 {
+        font-size: 46px;
+      }
+
+      .hero-title-block__line--88,
+      .hero-title-block--side .hero-title-block__line--on {
+        font-size: 72px;
+      }
+
+      .hero-title-block--side .hero-title-block__line--sub {
+        font-size: 44px;
+      }
+
+      .hero-body-en {
+        font-size: 18px;
+      }
+
+      .hero-body-kr {
+        font-size: 15px;
+        line-height: 1.45;
+      }
+
+      /* Figma tablet(768w): outclients-list 540px 재배치 */
+      .desktop-section-outclients {
+        padding: 160px 0 120px;
+        gap: 100px;
+      }
+
+      .desktop-section-outclients__title,
+      .desktop-section-contactus__title {
+        font-size: 44px;
+      }
+
+      .desktop-section-outclients__masthead {
+        gap: 112px;
+      }
+
+      .desktop-section-outclients__list {
+        width: 100%;
+        max-width: 290px;
+        gap: 52px;
+        align-items: center;
+      }
+
+      .desktop-section-outclients__row {
+        width: 100%;
+        max-width: 290px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 52px;
+      }
+
+      .desktop-section-outclients__row--top,
+      .desktop-section-outclients__row--bottom {
+        max-width: 290px;
+      }
+
+      .desktop-section-outclients__logo {
+        transform: none;
+      }
+
+      .desktop-section-outclients__logo--smart {
+        display: none;
+      }
+
+      .desktop-section-contactus {
+        padding: 160px 0 120px;
+        gap: 112px;
+      }
+
+      .desktop-section-contactus__map-wrap {
+        max-width: none;
+        width: 100%;
+      }
+
+      .desktop-section-contactus__map {
+        height: auto;
+        object-fit: contain;
+      }
+
+      .desktop-section-contactus__info {
+        max-width: 768px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 56px;
+      }
+
+      .desktop-section-contactus__item:nth-child(1) {
+        width: min(337px, 100%);
+      }
+
+      .desktop-section-contactus__item:nth-child(2) {
+        width: min(486px, 100%);
+      }
+
+      .desktop-section-contactus__item:nth-child(3) {
+        width: min(207px, 100%);
+      }
+
+      /* Figma tablet team (768): 3+2 구조 */
+      .desktop-section-team {
+        padding: 160px 0;
+        gap: 112px;
+      }
+
+      .desktop-section-team__title {
+        font-size: 44px;
+      }
+
+      .desktop-section-team__chart {
+        max-width: 768px;
+        gap: 28px;
+      }
+
+      .desktop-section-team__band {
+        width: 704px;
+        max-width: 100%;
+        padding-inline: 0;
+        gap: 28px;
+      }
+
+      .desktop-section-team__pill-shell,
+      .desktop-section-team__details {
+        display: none;
+      }
+
+      .desktop-section-team__responsive-stack {
+        display: flex;
+        width: 704px;
+        max-width: 100%;
+      }
+
+      .desktop-section-team__responsive-shell ul {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .desktop-section-team__responsive-shell--bottom ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .desktop-section-team__responsive-details {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 36px;
+      }
+
+      .desktop-section-team__responsive-details--bottom {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 36px;
+      }
+
+      .desktop-section-team__pill-shell,
+      .desktop-section-team__details {
+        display: none !important;
+      }
+    }
+
+    /* Mobile — 최소 가로 375px(Figma 기준), 그 이하에서는 가로 스크롤 */
+    @media (max-width: 768px) {
+      html,
+      body {
+        min-width: 375px;
+      }
+
+      main {
+        word-break: keep-all;
+      }
+
+      .hero-body-en,
+      .hero-body-kr,
+      .desktop-section-about__body-en,
+      .desktop-section-about__body-kr,
+      .desktop-section-contactus__text,
+      .desktop-section-copyright__text {
+        overflow-wrap: break-word;
+      }
+
+      .desktop-section-about__body-kr br.about-kr-mobile-br {
+        display: inline;
+      }
+
+      .desktop-section-copyright__text br.copyright-mobile-br {
+        display: inline;
+      }
+
+      .desktop-section-contactus__text br.contact-mobile-br {
+        display: inline;
+      }
+
+      .desktop-section-about__body-en {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.4;
+      }
+
+      .desktop-section-about__body-kr {
+        font-weight: 400;
+      }
+
+      .desktop-header__inner {
+        padding: 32px;
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .desktop-header__nav {
+        display: none;
+      }
+
+      .desktop-header__menu-btn {
+        display: inline-flex;
+        margin-left: auto;
+      }
+
+      .desktop-section-hero__bg {
+        height: 465px;
+      }
+
+      .desktop-section-hero,
+      .desktop-section-hero__inner {
+        overflow: hidden;
+      }
+
+      .desktop-section-hero__inner {
+        padding: 40px 16px 16px;
+      }
+
+      .desktop-section-hero__circle-list {
+        width: 100%;
+      }
+
+      .desktop-section-hero__circle {
+        width: min(540px, 100%);
+        height: min(540px, 100%);
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        gap: 16px;
+        padding: 20px 18px;
+      }
+
+      .desktop-section-hero__circle--side {
+        padding: 56px 20px;
+        gap: 14px;
+      }
+
+      .hero-title-block__line--57 {
+        font-size: 36px;
+      }
+
+      .hero-title-block__line--88,
+      .hero-title-block--side .hero-title-block__line--on {
+        font-size: 56px;
+      }
+
+      .hero-title-block--side .hero-title-block__line--sub {
+        font-size: 34px;
+      }
+
+      .hero-body-en {
+        font-size: 16px;
+        line-height: 1.35;
+      }
+
+      .hero-body-kr {
+        font-size: 13px;
+        line-height: 1.48;
+      }
+
+      .desktop-section-about__english {
+        font-size: 22px;
+      }
+
+      .desktop-section-about__kr-head {
+        font-size: 22px;
+      }
+
+      .desktop-section-about__body-kr {
+        font-size: 18px;
+        line-height: 1.3;
+      }
+
+      .desktop-section-about__sign-text {
+        font-size: 22px;
+      }
+
+      .desktop-section-service__col h3 {
+        font-size: 24px;
+      }
+
+      .desktop-section-service__list {
+        font-size: 17px;
+      }
+
+      .desktop-section-certifiction__org,
+      .desktop-section-certifiction__cert {
+        font-size: 21px;
+      }
+
+      .desktop-section-contactus__text {
+        font-size: 20px;
+        line-height: 1.55;
+      }
+
+      .desktop-section-portpolio {
+        min-height: 512px;
+      }
+
+      .desktop-section-portpolio__grid {
+        min-height: 512px;
+      }
+
+      .desktop-section-portpolio__btn {
+        max-width: 552px;
+        width: min(100%, 552px);
+      }
+
+      .desktop-section-copyright__text {
+        font-size: 20px;
+      }
+
+      .desktop-section-team__chart {
+        width: calc(100% - 32px);
+        margin-inline: auto;
+      }
+
+      .desktop-section-team__band {
+        width: 100%;
+      }
+
+      .desktop-section-team__responsive-stack {
+        width: 100%;
+        margin-inline: auto;
+      }
+
+      .desktop-section-team__details,
+      .desktop-section-team__responsive-details {
+        font-size: 18px;
+      }
+
+      .desktop-section-team__responsive-shell {
+        min-height: 132px;
+        display: flex;
+        align-items: center;
+      }
+
+      .desktop-section-team__responsive-shell ul li {
+        min-height: 2.6em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .desktop-section-team__responsive-shell ul {
+        column-gap: 16px;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .desktop-section-team__responsive-shell--bottom ul {
+        column-gap: 16px;
+      }
+
+      .desktop-section-team__responsive-details--top {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 32px;
+        justify-items: center;
+      }
+
+      .desktop-section-team__responsive-details--top > div {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+      }
+
+      .desktop-section-team__responsive-details--top p {
+        width: 100%;
+        text-align: center;
+        overflow-wrap: break-word;
+        font-size: inherit;
+        line-height: inherit;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .desktop-section-outclients__list {
+        width: 100%;
+        max-width: 241px;
+        gap: 52px;
+        align-items: center;
+      }
+
+      .desktop-section-outclients__row {
+        width: 100%;
+        max-width: 241px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 52px;
+      }
+
+      .desktop-section-outclients__row--top,
+      .desktop-section-outclients__row--bottom {
+        max-width: 241px;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 768px) {
+      .desktop-section-outclients__list {
+        width: 100%;
+        max-width: 290px;
+        gap: 52px;
+        align-items: center;
+      }
+
+      .desktop-section-outclients__row {
+        width: 100%;
+        max-width: 290px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 52px;
+      }
+
+      .desktop-section-outclients__row--top,
+      .desktop-section-outclients__row--bottom {
+        max-width: 290px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .desktop-header__inner {
+        padding: 32px;
+      }
+
+      .desktop-header__logo img {
+        width: 178px;
+      }
+
+      .desktop-header__nav a {
+        font-size: 15px;
+      }
+
+      .desktop-section-about__title,
+      .desktop-section-service__title,
+      .desktop-section-certifiction__title,
+      .desktop-section-team__title {
+        font-size: 32px;
+      }
+
+      .desktop-section-outclients__title,
+      .desktop-section-contactus__title {
+        font-size: 44px;
+      }
+
+      /* Figma mobile team (375): 3+2 구조, 폭 327 */
+      .desktop-section-team {
+        padding: 120px 0;
+        gap: 112px;
+      }
+
+      .desktop-section-team__chart {
+        max-width: none;
+        width: calc(100% - 32px);
+        margin-inline: auto;
+        gap: 28px;
+      }
+
+      .desktop-section-team__band {
+        width: 100%;
+        max-width: 100%;
+        gap: 28px;
+      }
+
+      .desktop-section-team__responsive-stack {
+        width: 100%;
+      }
+
+      .desktop-section-team__responsive-shell {
+        padding: 32px 24px;
+      }
+
+      .desktop-section-team__responsive-shell ul {
+        font-size: 16px;
+        line-height: 1.35;
+      }
+
+      .desktop-section-team__responsive-details {
+        padding: 0 24px;
+        font-size: 18px;
+        line-height: 1.55;
+        column-gap: 24px;
+      }
+
+      .desktop-section-team__pill-shell,
+      .desktop-section-team__details {
+        display: none !important;
+      }
+
+      .desktop-section-team__role--ceo {
+        font-size: 36px;
+      }
+
+      .desktop-section-team__role--sub {
+        font-size: 26px;
+      }
+
+      .desktop-section-portpolio {
+        min-height: 306px;
+      }
+
+      .desktop-section-portpolio__grid {
+        min-height: 306px;
+      }
+
+      .desktop-section-portpolio__btn {
+        max-width: 289px;
+        width: min(100%, 289px);
+      }
+
+      .desktop-section-hero__circle {
+        width: min(340px, 100%);
+        height: min(340px, 100%);
+        aspect-ratio: 1 / 1;
+        gap: 12px;
+        padding: 20px 8px;
+      }
+
+      .desktop-section-hero__circle--side {
+        padding: 34px 12px;
+        gap: 10px;
+      }
+
+      .hero-title-block,
+      .hero-title-block__line {
+        line-height: 0.88;
+      }
+
+      .hero-title-block__line--57 {
+        font-size: 34px;
+      }
+
+      .hero-title-block__line--88,
+      .hero-title-block--side .hero-title-block__line--on {
+        font-size: 54px;
+      }
+
+      .hero-title-block--side .hero-title-block__line--sub {
+        font-size: 30px;
+      }
+
+      .hero-body-en {
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .hero-body-kr {
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
+      .hero-stack--side {
+        gap: 10px;
+      }
+
+      .hero-stack--side .hero-body-en {
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      /* Figma mobile(375w): outclients-list 1열 */
+      .desktop-section-outclients {
+        padding: 120px 0;
+        gap: 80px;
+      }
+
+      .desktop-section-outclients__masthead {
+        gap: 72px;
+      }
+
+      .desktop-section-outclients__list {
+        width: 100%;
+        max-width: 241px;
+        gap: 52px;
+        align-items: center;
+      }
+
+      .desktop-section-outclients__row {
+        width: 100%;
+        max-width: 241px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 52px;
+      }
+
+      .desktop-section-outclients__row--top,
+      .desktop-section-outclients__row--bottom {
+        max-width: 241px;
+      }
+
+      .desktop-section-outclients__logo--smart {
+        display: none;
+      }
+
+      .desktop-section-contactus {
+        padding: 160px 0 120px;
+        gap: 112px;
+      }
+
+      .desktop-section-contactus__map-wrap {
+        max-width: 375px;
+      }
+
+      .desktop-section-contactus__map {
+        height: auto;
+        object-fit: contain;
+      }
+
+      .desktop-section-contactus__info {
+        max-width: 375px;
+        padding: 0;
+        gap: 44px;
+      }
+
+      .desktop-section-contactus__item:nth-child(1) {
+        width: min(337px, 100%);
+      }
+
+      .desktop-section-contactus__item:nth-child(2) {
+        width: min(375px, 100%);
+      }
+
+      .desktop-section-contactus__item:nth-child(3) {
+        width: min(207px, 100%);
+      }
+
+      .desktop-section-contactus__text {
+        font-size: 20px;
+        line-height: 1.55;
+      }
+
+      .desktop-section-contactus__nowrap {
+        white-space: normal;
+      }
+    }
+  </style>
 </head>
-<body></body>
+
+<body>
+  <header class="desktop-header">
+    <div class="desktop-header__inner">
+      <a class="desktop-header__logo" href="/" aria-label="designmode 홈">
+        <img src="images/logo_white.svg" alt="designmode — Creative Agency" width="259" height="45" />
+      </a>
+
+      <nav aria-label="주 메뉴">
+        <ul class="desktop-header__nav">
+          <li><a href="#about">ABOUT</a></li>
+          <li><a href="#service">SERVICE</a></li>
+          <li><a href="#certification">CERTIFICTION</a></li>
+          <li><a href="#team">TEAM</a></li>
+          <li><a href="#portfolio">PORTPOLIO</a></li>
+          <li><a href="#contact">CONTACT</a></li>
+        </ul>
+      </nav>
+
+      <button
+        type="button"
+        class="desktop-header__menu-btn"
+        id="headerMenuBtn"
+        aria-label="메뉴 열기"
+        aria-expanded="false"
+        aria-controls="headerDrawer"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16v2H4V7zm0 8h16v2H4v-2zm0-4h16v2H4v-2z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="desktop-header__drawer" id="headerDrawer" aria-hidden="true">
+      <div class="desktop-header__drawer-backdrop" data-drawer-close="true"></div>
+      <div class="desktop-header__drawer-panel" role="dialog" aria-label="메뉴">
+        <button
+          type="button"
+          class="desktop-header__drawer-close"
+          data-drawer-close="true"
+          aria-label="메뉴 닫기"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M18.3 5.71 12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.29 19.71 2.88 18.29 9.17 12 2.88 5.71 4.29 4.29l6.3 6.3 6.29-6.3 1.42 1.42z" fill="currentColor"/>
+          </svg>
+        </button>
+        <ul class="desktop-header__drawer-nav">
+          <li><a href="#about" data-drawer-close="true">ABOUT</a></li>
+          <li><a href="#service" data-drawer-close="true">SERVICE</a></li>
+          <li><a href="#certification" data-drawer-close="true">CERTIFICTION</a></li>
+          <li><a href="#team" data-drawer-close="true">TEAM</a></li>
+          <li><a href="#portfolio" data-drawer-close="true">PORTPOLIO</a></li>
+          <li><a href="#contact" data-drawer-close="true">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="desktop-section-hero" aria-label="소개">
+      <div class="desktop-section-hero__bg" aria-hidden="true"></div>
+      <div class="desktop-section-hero__inner">
+        <div class="desktop-section-hero__circle-list">
+          <article class="desktop-section-hero__circle">
+            <h2 class="hero-title-block">
+              <span class="hero-title-block__line hero-title-block__line--57">Value
+              </span>
+              <span class="hero-title-block__line hero-title-block__line--88">Creation!</span>
+            </h2>
+            <div class="hero-body-en">
+              <p>
+                Integrated marketing communication for our partners, <br>
+                creating new value through strategic collaboration <br>
+                and innovation.</p>
+            </div>
+            <div class="hero-body-kr">
+              <p>
+                파트너 고객사의 통합 마케팅 커뮤니케이션에 새로운 가치를
+                구현하기 위해
+              </p>
+              <p>
+                오랜 준비를 통한 치밀한 전략과 엄격한 내부 기준 그리고
+                조화롭고
+              </p>
+              <p>
+                효율적인 파트너쉽을 통해 혁신적이고 진보적인 가치를
+              </p>
+              <p>구현하기 위해 노력하고 있습니다.</p>
+            </div>
+          </article>
+          <article class="desktop-section-hero__circle">
+            <h2 class="hero-title-block">
+              <span class="hero-title-block__line hero-title-block__line--57">Creative
+              </span>
+              <span class="hero-title-block__line hero-title-block__line--88">Insight!</span>
+            </h2>
+            <p class="hero-body-en">
+              We deliver creative insights that unlock new possibilities <br>
+              and bring differentiated ideas to our customers.
+            </p>
+            <div class="hero-body-kr">
+              <p>
+                크리에이티브 한 통찰력으로 더 큰 미래를 위한 새로운 가능성을
+              </p>
+              <p>
+                줄 수 있는 차별화된 아이디어를 고객에게 제공하기 위해
+              </p>
+              <p>노력하고 있습니다.</p>
+            </div>
+          </article>
+          <article class="desktop-section-hero__circle desktop-section-hero__circle--side">
+            <h2 class="hero-title-block hero-title-block--side">
+              <span class="hero-title-block__line hero-title-block__line--on">On</span>
+              <span class="hero-title-block__line hero-title-block__line--sub">the Client’s Side</span>
+            </h2>
+            <div class="hero-stack--side">
+              <p class="hero-body-en">
+                We take a customer-centric approach, developing marketing<br>
+                strategies that resonate emotionally and build powerful brands. <br>
+                At designMODE, we consider both business perspectives and<br>
+                the interconnected nature of visual communication.
+              </p>
+       
+              <div class="hero-body-kr">
+                <p>
+                  소비자 중심의 커뮤니케이션 전략은 그 어떤 마케팅보다
+                  효과적이며,
+                </p>
+                <p>
+                  소비자의 감성을 자극하여 흡입력 있는 파워 브랜드를
+                  완성합니다.
+                </p>
+                <p>디자인모드는 항상 고객의 관점에서 비즈니스와</p>
+                <p>시각적 이미지의 상호 연관성을 고려합니다.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="desktop-section-logo" aria-label="designmode 로고">
+      <div class="desktop-section-logo__inner">
+        <img class="desktop-section-logo__mark" src="images/logo_dark.svg" alt="designmode — Creative Agency"
+          width="303" height="53" />
+        <div class="desktop-section-logo__line">
+          <img src="images/devide_line.svg" alt="" width="1520" height="2" />
+        </div>
+      </div>
+    </section>
+
+    <section class="desktop-section-about" id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading" class="desktop-section-about__title about-reveal-target">ABOUT</h2>
+      <div class="desktop-section-about__ceo">
+        <h3 class="desktop-section-about__subtitle about-reveal-target">CEO MESSAGE</h3>
+        <div class="desktop-section-about__text">
+          <div class="desktop-section-about__english about-reveal-target">
+            <p class="desktop-section-about__tagline">
+              Value Creation Through Design
+            </p>
+            <div class="desktop-section-about__body-en">
+              <p>
+                In a rapidly changing market,<br>
+                designMODE has been delivering integrated marketing services that drive our clients’ success.
+              </p>
+              <p>
+                Through in-depth research,<br>
+                strategic insight, and creative execution, we help businesses<br>
+                move forward and create meaningful value.
+              </p>
+              <p>
+                We believe that a customer-centric approach-grounded in both<br>
+                rational understanding and emotional insight-is key to building<br>
+                impactful design strategies. designMODE will continue to create new value from<br>
+                our customers’ perspective, today and into the future.
+              </p>
+            </div>
+          </div>
+          <div class="desktop-section-about__korean about-reveal-target">
+            <p class="desktop-section-about__kr-head">
+              디자인을 통해<br class="about-kr-mobile-br" aria-hidden="true" />
+              새로운 가치를 창출합니다.
+            </p>
+            <div class="desktop-section-about__body-kr">
+              <p>
+                급변하는 시장의 환경 속에서도<br class="about-kr-mobile-br" aria-hidden="true" />
+                디자인 모드는 디자인을 통해<br class="about-kr-mobile-br" aria-hidden="true" />
+                파트너 고객사의 통합 마케팅<br class="about-kr-mobile-br" aria-hidden="true" />
+                서비스를 성공리에 진행해 왔습니다.
+              </p>
+              <p>
+                시장과 고객을 움직일 수 있는<br class="about-kr-mobile-br" aria-hidden="true" />
+                한발 앞선 창조적 통찰력,<br class="about-kr-mobile-br" aria-hidden="true" />
+                치밀한 조사와 분석 그리고 실행을<br class="about-kr-mobile-br" aria-hidden="true" />
+                통한 새로운 가치 창출,
+              </p>
+              <p>
+                소비자의 이성과 감성을 움직일 수<br class="about-kr-mobile-br" aria-hidden="true" />
+                있는 고객 중심 디자인 전략<br class="about-kr-mobile-br" aria-hidden="true" />
+                디자인 모드는 창조적 통찰력으로<br class="about-kr-mobile-br" aria-hidden="true" />
+                고객의 관점에서 새로운 가치를
+              </p>
+              <p>
+                창출하기 위해 오늘도 그리고 내일도<br class="about-kr-mobile-br" aria-hidden="true" />
+                나아가겠습니다.
+              </p>
+              <p><br aria-hidden="true" />감사합니다.</p>
+            </div>
+            <div class="desktop-section-about__sign">
+              <p class="desktop-section-about__sign-text">
+                <strong>CEO</strong>
+                <span class="name"> Hyeon-jeong. Cho</span>
+              </p>
+              <img src="images/ceo-sign.png" alt="CEO 조현정 서명" width="122" height="92" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="desktop-section-service" id="service" aria-labelledby="service-heading">
+      <h2 id="service-heading" class="desktop-section-service__title service-reveal-target">
+        SERVICE
+      </h2>
+      <div class="desktop-section-service__grid service-reveal-target">
+        <div class="desktop-section-service__col">
+          <h3>ENVIRONMENT DESIGN</h3>
+          <ul class="desktop-section-service__list">
+            <li>POP Design</li>
+            <li>LACK Design</li>
+          </ul>
+        </div>
+        <div class="desktop-section-service__col">
+          <h3>GRAPHIC DESIGN</h3>
+          <ul class="desktop-section-service__list">
+            <li>Advertising Design</li>
+            <li>Brand Identity Design</li>
+            <li>Editorial Design</li>
+            <li>Package Design</li>
+            <li>Character Design</li>
+            <li>Web Banner Design</li>
+          </ul>
+        </div>
+        <div class="desktop-section-service__col">
+          <h3>Giveaway</h3>
+          <ul class="desktop-section-service__list">
+            <li>Marketing</li>
+            <li>Sales Promotion</li>
+            <li>Special Sales / Free Gift</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="desktop-section-certifiction" id="certification" aria-labelledby="certification-heading">
+      <h2 id="certification-heading" class="desktop-section-certifiction__title service-reveal-target">
+        CERTIFICTION
+      </h2>
+      <div class="desktop-section-certifiction__list service-reveal-target">
+        <article class="desktop-section-certifiction__card">
+          <div class="desktop-section-certifiction__thumb">
+            <img src="images/cert-icr.png" alt="ICR 품질경영시스템 ISO 9001 인증서" width="405" height="556" />
+          </div>
+          <div class="desktop-section-certifiction__info">
+            <p class="desktop-section-certifiction__org">ICR</p>
+            <p class="desktop-section-certifiction__cert">
+              품질경영시스템인증서
+            </p>
+          </div>
+        </article>
+        <article class="desktop-section-certifiction__card">
+          <div class="desktop-section-certifiction__thumb">
+            <img src="images/cert-kidp.png" alt="한국디자인진흥원 산업디자인전문회사 신고확인증" width="405" height="556" />
+          </div>
+          <div class="desktop-section-certifiction__info">
+            <p class="desktop-section-certifiction__org">한국디자인진흥원</p>
+            <div class="desktop-section-certifiction__cert">
+              <p>산업디자인전문회사</p>
+              <p>신고확인증</p>
+            </div>
+          </div>
+        </article>
+        <article class="desktop-section-certifiction__card">
+          <div class="desktop-section-certifiction__thumb">
+            <img src="images/cert-koita.png" alt="한국산업기술진흥협회 연구개발전담부서 인정서" width="405" height="556" />
+          </div>
+          <div class="desktop-section-certifiction__info">
+            <p class="desktop-section-certifiction__org">
+              한국산업기술진흥협회
+            </p>
+            <p class="desktop-section-certifiction__cert">
+              연구개발전담부서인정서
+            </p>
+          </div>
+        </article>
+      </div>
+      <div class="desktop-section-certifiction__line">
+        <img src="images/devide_line.svg" alt="" width="1520" height="2" />
+      </div>
+    </section>
+
+    <section class="desktop-section-team" id="team" aria-labelledby="team-heading">
+      <h2 id="team-heading" class="desktop-section-team__title team-reveal-target">TEAM</h2>
+      <div class="desktop-section-team__chart">
+        <p class="desktop-section-team__role desktop-section-team__role--ceo team-reveal-target">
+          CEO
+        </p>
+        <img class="desktop-section-team__connector team-reveal-target" src="images/team-connector.svg" alt="" width="2" height="88"
+          aria-hidden="true" />
+        <p class="desktop-section-team__role desktop-section-team__role--sub team-reveal-target">
+          Excutive Director
+        </p>
+        <img class="desktop-section-team__connector team-reveal-target" src="images/team-connector.svg" alt="" width="2" height="88"
+          aria-hidden="true" />
+        <p class="desktop-section-team__role desktop-section-team__role--sub team-reveal-target">
+          Design Director
+        </p>
+        <img class="desktop-section-team__connector team-reveal-target" src="images/team-connector.svg" alt="" width="2" height="88"
+          aria-hidden="true" />
+        <div class="desktop-section-team__band team-reveal-target team-band-target">
+          <div class="desktop-section-team__pill-shell">
+            <ul class="desktop-section-team__pill">
+              <li>Design Team 1</li>
+              <li>Design Team 2</li>
+              <li>Design Team 3</li>
+              <li>Planning Team</li>
+              <li>Associated Group</li>
+            </ul>
+          </div>
+          <div class="desktop-section-team__details">
+            <div class="desktop-section-team__detail-col">
+              <p>POP/Display</p>
+              <p>&amp; Environment</p>
+            </div>
+            <div class="desktop-section-team__detail-col">
+              <p>Homepage</p>
+              <p>Interactive</p>
+              <p>e-Design</p>
+            </div>
+            <div class="desktop-section-team__detail-col">
+              <p>Graphic</p>
+              <p>Editorial</p>
+              <p>Packaging</p>
+              <p>Promotion</p>
+            </div>
+            <div class="desktop-section-team__detail-col">
+              <p>Strategy</p>
+              <p>Planning</p>
+              <p>Marketing</p>
+              <p>CRM</p>
+            </div>
+            <div class="desktop-section-team__detail-col">
+              <p>Advisory Group</p>
+              <p>Production Group</p>
+              <p>Freelancer Group</p>
+            </div>
+          </div>
+
+          <div class="desktop-section-team__responsive-stack" aria-hidden="true">
+            <div class="desktop-section-team__responsive-shell desktop-section-team__responsive-shell--top">
+              <ul>
+                <li>Design Team 1</li>
+                <li>Design Team 2</li>
+                <li>Planning Team</li>
+              </ul>
+            </div>
+            <div class="desktop-section-team__responsive-details desktop-section-team__responsive-details--top">
+              <div>
+                <p>POP/Display</p>
+                <p>&amp; Environment</p>
+              </div>
+              <div>
+                <p>Graphic</p>
+                <p>Editorial</p>
+                <p>Packaging</p>
+                <p>Promotion</p>
+              </div>
+              <div>
+                <p>Strategy</p>
+                <p>Planning</p>
+                <p>Marketing</p>
+                <p>CRM</p>
+              </div>
+            </div>
+
+            <div class="desktop-section-team__responsive-shell desktop-section-team__responsive-shell--bottom">
+              <ul>
+                <li>Design Team 3</li>
+                <li>Associated Group</li>
+              </ul>
+            </div>
+            <div class="desktop-section-team__responsive-details desktop-section-team__responsive-details--bottom">
+              <div>
+                <p>Homepage</p>
+                <p>Interactive</p>
+                <p>e-Design</p>
+              </div>
+              <div>
+                <p>Advisory Group</p>
+                <p>Production Group</p>
+                <p>Freelancer Group</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="desktop-section-portpolio" id="portfolio" aria-labelledby="portfolio-heading">
+      <div class="desktop-section-portpolio__bg">
+        <div class="desktop-section-portpolio__grid" aria-hidden="true">
+          <img src="images/portfolio-grid/01.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/02.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/03.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/04.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/05.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/06.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/07.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/08.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/09.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/10.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/11.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/12.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/13.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/14.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/15.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/16.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/17.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/18.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/19.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/20.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/21.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/22.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/23.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+          <img src="images/portfolio-grid/24.png" alt="" width="320" height="310" loading="lazy" decoding="async" />
+        </div>
+      </div>
+      <div class="desktop-section-portpolio__overlay" aria-hidden="true"></div>
+      <div class="desktop-section-portpolio__inner">
+        <a class="desktop-section-portpolio__btn" href="images/portfolio-grid/2026_designmode portfolio_update.pdf"
+          target="_blank" rel="noopener noreferrer" type="application/pdf" aria-labelledby="portfolio-heading">
+          <span id="portfolio-heading" class="desktop-section-portpolio__btn-sr">포트폴리오 PDF 다운로드</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Figma desktop-section-outclients — 11:798 https://www.figma.com/design/weAWw4rnyX7VNMWSsgVghx?node-id=11-798 -->
+    <section class="desktop-section-outclients" id="outclients" aria-labelledby="outclients-heading">
+      <div class="desktop-section-outclients__masthead">
+        <h2 id="outclients-heading" class="desktop-section-outclients__title outclients-reveal-target">
+          OUT CLIENTS
+        </h2>
+        <ul class="desktop-section-outclients__list">
+          <li class="desktop-section-outclients__row desktop-section-outclients__row--top outclients-reveal-target">
+            <div class="desktop-section-outclients__logo desktop-section-outclients__logo--lg">
+              <img src="images/outclients/outclients-lg.png" alt="LG" width="111" height="49" loading="lazy"
+                decoding="async" />
+            </div>
+            <div class="desktop-section-outclients__logo desktop-section-outclients__logo--lgdisplay">
+              <img src="images/outclients/outclients-lgdisplay.png" alt="LG Display" width="256" height="51"
+                loading="lazy" decoding="async" />
+            </div>
+            <div class="desktop-section-outclients__logo desktop-section-outclients__logo--lgcns">
+              <img src="images/outclients/outclients-lgcns.png" alt="LG CNS" width="205" height="49" loading="lazy"
+                decoding="async" />
+            </div>
+            <div class="desktop-section-outclients__logo desktop-section-outclients__logo--hsad">
+              <img src="images/outclients/outclients-hsad.png" alt="HSAD" width="1370" height="412" loading="lazy"
+                decoding="async" />
+            </div>
+          </li>
+          <li class="desktop-section-outclients__row desktop-section-outclients__row--bottom outclients-reveal-target">
+            <div class="desktop-section-outclients__logo desktop-section-outclients__logo--netxentire">
+              <img src="images/outclients/outclients-netxentire.png" alt="넥센타이어" width="290" height="26" loading="lazy"
+                decoding="async" />
+            </div>
+            <div class="desktop-section-outclients__logo desktop-section-outclients__logo--daedong" aria-label="대동">
+              <img src="images/outclients/outclients-daedong.png" alt="대동" width="531" height="102" loading="lazy"
+                decoding="async" />
+            </div>
+            <div class="desktop-section-outclients__logo desktop-section-outclients__logo--smart">
+              <img src="images/outclients/outclients-smart.png" alt="smart 스마트 학생복" width="295" height="100"
+                loading="lazy" decoding="async" />
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="desktop-section-outclients__line outclients-reveal-target">
+        <img src="images/devide_line.svg" alt="" width="1520" height="2" />
+      </div>
+    </section>
+
+    <section class="desktop-section-contactus" id="contact" aria-label="Contact us">
+      <h2 class="desktop-section-contactus__title contact-reveal-target">CONTACT US</h2>
+      <div class="desktop-section-contactus__map-wrap contact-reveal-target">
+        <picture>
+          <source media="(max-width: 600px)" srcset="images/img-map_mobile.png" />
+          <img class="desktop-section-contactus__map" src="images/img-map.png" alt="designmode 위치 안내 지도" width="1024"
+            height="718" loading="lazy" decoding="async" />
+        </picture>
+      </div>
+      <div class="desktop-section-contactus__info">
+        <article class="desktop-section-contactus__item contact-reveal-target">
+          <img class="desktop-section-contactus__icon" src="images/icon_call.svg" alt="" aria-hidden="true" />
+          <p class="desktop-section-contactus__text">
+            02-541-2013&nbsp;&nbsp;/&nbsp;&nbsp;F 02-541-1747<br />
+            +82-2-541-2013&nbsp;&nbsp;/&nbsp;&nbsp;F +82-2-541-1747
+          </p>
+        </article>
+        <article class="desktop-section-contactus__item contact-reveal-target">
+          <img class="desktop-section-contactus__icon" src="images/icon_location.svg" alt="" aria-hidden="true" />
+          <p class="desktop-section-contactus__text">
+            <span class="desktop-section-contactus__nowrap">서울 강남구 학동로 5길 8, 2층<br class="contact-mobile-br" aria-hidden="true" />(논현동, 마가SY빌딩) / 06044</span><br />
+            2F MAGA SY B/D, 8, Hakdong-ro 5-gil,<br class="contact-mobile-br" aria-hidden="true" />Gangnam-gu,<br />
+            Seoul, Republic of Korea
+          </p>
+        </article>
+        <article class="desktop-section-contactus__item contact-reveal-target">
+          <img class="desktop-section-contactus__icon" src="images/icon_mail.svg" alt="" aria-hidden="true" />
+          <p class="desktop-section-contactus__text">dnmode@dnmode.com</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="desktop-section-copyright" aria-label="사업자 정보">
+      <p class="desktop-section-copyright__text">
+        상호: 디자인모드<br class="copyright-mobile-br" aria-hidden="true" />
+        사업자번호: 211-03-55241<br class="copyright-mobile-br" aria-hidden="true" />
+        대표: 조현정<br class="copyright-mobile-br" aria-hidden="true" />
+        주소: 서울 강남구 학동로 5길 8, 2층<br class="copyright-mobile-br" aria-hidden="true" />
+        (논현동, 마가SY빌딩)<br class="copyright-mobile-br" aria-hidden="true" />
+        Tel: 02-541-2013&nbsp;&nbsp;팩스: 02-541-1747<br class="copyright-mobile-br" aria-hidden="true" />
+        이메일: dnmode@dnmode.com
+      </p>
+    </section>
+  </main>
+
+  <button
+    type="button"
+    class="floating-top-btn"
+    id="floatingTopBtn"
+    aria-label="맨 위로 이동"
+    title="TOP"
+  >
+    <svg class="floating-top-btn__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 5l7 7-1.7 1.7L13.2 9.6V20h-2.4V9.6L6.7 13.7 5 12l7-7z" fill="currentColor"/>
+    </svg>
+  </button>
+
+  <script>
+    (function () {
+      const menuBtn = document.getElementById("headerMenuBtn");
+      const drawer = document.getElementById("headerDrawer");
+      const btn = document.getElementById("floatingTopBtn");
+      const circles = Array.from(document.querySelectorAll(".desktop-section-hero__circle"));
+      const circleList = document.querySelector(".desktop-section-hero__circle-list");
+      const aboutSection = document.querySelector(".desktop-section-about");
+      const aboutGroups = Array.from(document.querySelectorAll(".desktop-section-about .about-reveal-target"));
+      const serviceSection = document.querySelector(".desktop-section-service");
+      const serviceTitle = document.querySelector(".desktop-section-service__title.service-reveal-target");
+      const serviceGrid = document.querySelector(".desktop-section-service__grid.service-reveal-target");
+      const certSection = document.querySelector(".desktop-section-certifiction");
+      const certTitle = document.querySelector(".desktop-section-certifiction__title.service-reveal-target");
+      const certList = document.querySelector(".desktop-section-certifiction__list.service-reveal-target");
+      const teamSection = document.querySelector(".desktop-section-team");
+      const teamBand = document.querySelector(".desktop-section-team .team-band-target");
+      const teamTopFlow = Array.from(
+        document.querySelectorAll(".desktop-section-team .team-reveal-target:not(.team-band-target)")
+      );
+      const outclientsSection = document.querySelector(".desktop-section-outclients");
+      const outclientsFlow = Array.from(
+        document.querySelectorAll(".desktop-section-outclients .outclients-reveal-target")
+      );
+      const contactSection = document.querySelector(".desktop-section-contactus");
+      const contactFlow = Array.from(
+        document.querySelectorAll(".desktop-section-contactus .contact-reveal-target")
+      );
+
+      const setDrawerOpen = (open) => {
+        document.body.classList.toggle("is-drawer-open", open);
+        if (drawer) drawer.setAttribute("aria-hidden", open ? "false" : "true");
+        if (menuBtn) menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        if (menuBtn) menuBtn.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
+        document.body.style.overflow = open ? "hidden" : "";
+      };
+
+      if (menuBtn && drawer) {
+        menuBtn.addEventListener("click", () => {
+          const open = !document.body.classList.contains("is-drawer-open");
+          setDrawerOpen(open);
+        });
+
+        drawer.addEventListener("click", (e) => {
+          const target = e.target;
+          if (target && target instanceof Element && target.closest('[data-drawer-close="true"]')) {
+            setDrawerOpen(false);
+          }
+        });
+
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") setDrawerOpen(false);
+        });
+
+        window.addEventListener(
+          "resize",
+          () => {
+            if (window.innerWidth > 1024) setDrawerOpen(false);
+          },
+          { passive: true }
+        );
+      }
+
+      if (circles.length > 0) {
+        circles.forEach((circle) => circle.classList.add("hero-reveal-init"));
+      }
+
+      if (circleList && circles.length > 0) {
+        const revealCircles = () => {
+          circles.forEach((circle, index) => {
+            window.setTimeout(() => {
+              circle.classList.add("is-visible");
+            }, index * 240);
+          });
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                revealCircles();
+                observer.disconnect();
+              }
+            });
+          },
+          { threshold: 0.35 }
+        );
+
+        observer.observe(circleList);
+      }
+
+      if (aboutGroups.length > 0) {
+        aboutGroups.forEach((group) => group.classList.add("about-reveal-init"));
+      }
+
+      if (aboutSection && aboutGroups.length > 0) {
+        const revealAboutGroups = () => {
+          aboutGroups.forEach((group, index) => {
+            window.setTimeout(() => {
+              group.classList.add("about-is-visible");
+            }, index * 190);
+          });
+        };
+
+        const aboutObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                revealAboutGroups();
+                aboutObserver.disconnect();
+              }
+            });
+          },
+          { threshold: 0.25 }
+        );
+
+        aboutObserver.observe(aboutSection);
+      }
+
+      if (serviceTitle) serviceTitle.classList.add("service-reveal-init");
+      if (serviceGrid) serviceGrid.classList.add("service-reveal-init");
+
+      if (serviceSection && serviceTitle && serviceGrid) {
+        const revealService = () => {
+          serviceTitle.classList.add("service-is-visible");
+          window.setTimeout(() => {
+            serviceGrid.classList.add("service-is-visible");
+          }, 240);
+        };
+
+        const serviceObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                revealService();
+                serviceObserver.disconnect();
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+
+        serviceObserver.observe(serviceSection);
+      }
+
+      if (certTitle) certTitle.classList.add("service-reveal-init");
+      if (certList) certList.classList.add("service-reveal-init");
+
+      if (certSection && certTitle && certList) {
+        const revealCert = () => {
+          certTitle.classList.add("service-is-visible");
+          window.setTimeout(() => {
+            certList.classList.add("service-is-visible");
+          }, 240);
+        };
+
+        const certObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                revealCert();
+                certObserver.disconnect();
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+
+        certObserver.observe(certSection);
+      }
+
+      if (teamTopFlow.length > 0) {
+        teamTopFlow.forEach((node) => node.classList.add("team-reveal-init"));
+      }
+      if (teamBand) teamBand.classList.add("team-reveal-init");
+
+      if (teamSection && teamBand && teamTopFlow.length > 0) {
+        let teamRevealed = false;
+        const revealTeam = () => {
+          if (teamRevealed) return;
+          teamRevealed = true;
+          teamTopFlow.forEach((node, index) => {
+            window.setTimeout(() => {
+              node.classList.add("team-is-visible");
+            }, index * 140);
+          });
+
+          window.setTimeout(() => {
+            teamBand.classList.add("team-is-visible");
+          }, teamTopFlow.length * 140 + 120);
+        };
+
+        const teamObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                revealTeam();
+                teamObserver.disconnect();
+              }
+            });
+          },
+          { threshold: 0.08, rootMargin: "0px 0px -10% 0px" }
+        );
+
+        teamObserver.observe(teamSection);
+
+        // iOS Safari fallback: observer misses on fast scroll/layout shifts.
+        const checkTeamVisibility = () => {
+          if (teamRevealed) return;
+          const rect = teamSection.getBoundingClientRect();
+          const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+          if (rect.top < vh * 0.9) {
+            revealTeam();
+            window.removeEventListener("scroll", checkTeamVisibility);
+            window.removeEventListener("resize", checkTeamVisibility);
+          }
+        };
+        window.addEventListener("scroll", checkTeamVisibility, { passive: true });
+        window.addEventListener("resize", checkTeamVisibility, { passive: true });
+        window.setTimeout(checkTeamVisibility, 250);
+      }
+
+      if (outclientsFlow.length > 0) {
+        outclientsFlow.forEach((node) => node.classList.add("outclients-reveal-init"));
+      }
+
+      if (outclientsSection && outclientsFlow.length > 0) {
+        let outclientsRevealed = false;
+        const revealOutclients = () => {
+          if (outclientsRevealed) return;
+          outclientsRevealed = true;
+          outclientsFlow.forEach((node, index) => {
+            window.setTimeout(() => {
+              node.classList.add("outclients-is-visible");
+            }, index * 170);
+          });
+        };
+
+        const outclientsObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                revealOutclients();
+                outclientsObserver.disconnect();
+              }
+            });
+          },
+          { threshold: 0.08, rootMargin: "0px 0px -10% 0px" }
+        );
+
+        outclientsObserver.observe(outclientsSection);
+
+        // iOS Safari fallback: force reveal when section nears viewport.
+        const checkOutclientsVisibility = () => {
+          if (outclientsRevealed) return;
+          const rect = outclientsSection.getBoundingClientRect();
+          const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+          if (rect.top < vh * 0.9) {
+            revealOutclients();
+            window.removeEventListener("scroll", checkOutclientsVisibility);
+            window.removeEventListener("resize", checkOutclientsVisibility);
+          }
+        };
+        window.addEventListener("scroll", checkOutclientsVisibility, { passive: true });
+        window.addEventListener("resize", checkOutclientsVisibility, { passive: true });
+        window.setTimeout(checkOutclientsVisibility, 250);
+      }
+
+      if (contactFlow.length > 0) {
+        contactFlow.forEach((node) => node.classList.add("contact-reveal-init"));
+      }
+
+      if (contactSection && contactFlow.length > 0) {
+        const revealContact = () => {
+          contactFlow.forEach((node, index) => {
+            window.setTimeout(() => {
+              node.classList.add("contact-is-visible");
+            }, index * 150);
+          });
+        };
+
+        const contactObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                revealContact();
+                contactObserver.disconnect();
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+
+        contactObserver.observe(contactSection);
+      }
+
+      if (btn) {
+        const toggle = () => {
+          const y = window.scrollY || document.documentElement.scrollTop || 0;
+          btn.classList.toggle("is-visible", y > 240);
+        };
+
+        btn.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        window.addEventListener("scroll", toggle, { passive: true });
+        toggle();
+      }
+    })();
+  </script>
+</body>
+
 </html>
