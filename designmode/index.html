@@ -2322,15 +2322,153 @@
       }
     }
 
-    /* Mobile — 최소 가로 375px(Figma 기준), 그 이하에서는 가로 스크롤 */
+    /* Mobile — 뷰포트 안에 좌우 고정(가로 스크롤·넘침 방지) */
     @media (max-width: 768px) {
-      html,
+      :root {
+        --mob-gutter: 16px;
+      }
+
+      html {
+        width: 100%;
+        overflow-x: clip;
+      }
+
       body {
-        min-width: 375px;
+        min-width: 0;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: clip;
       }
 
       main {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: clip;
         word-break: keep-all;
+      }
+
+      .desktop-header,
+      main > section,
+      .desktop-section-hero__inner,
+      .desktop-section-logo__inner,
+      .desktop-section-about,
+      .desktop-section-service,
+      .desktop-section-certifiction,
+      .desktop-section-team,
+      .desktop-section-portpolio__inner,
+      .desktop-section-outclients,
+      .desktop-section-contactus,
+      .desktop-section-copyright {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      .desktop-section-hero__bg {
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        transform: none;
+      }
+
+      .desktop-header__inner {
+        max-width: 100%;
+        padding-inline: var(--mob-gutter);
+      }
+
+      .desktop-section-hero__inner {
+        max-width: 100%;
+        padding-left: var(--mob-gutter);
+        padding-right: var(--mob-gutter);
+      }
+
+      .desktop-section-hero__circle-list {
+        max-width: 100%;
+        padding-inline: 0;
+      }
+
+      .desktop-section-logo__inner {
+        padding: 80px var(--mob-gutter);
+        gap: 80px;
+      }
+
+      .desktop-section-logo__mark {
+        width: min(303px, 100%);
+      }
+
+      .desktop-section-logo__line {
+        width: 100%;
+        max-width: 100%;
+        padding-inline: 0;
+      }
+
+      .desktop-section-service {
+        padding: 72px var(--mob-gutter);
+        gap: 32px;
+      }
+
+      .desktop-section-service__title {
+        padding-inline: 0;
+        width: 100%;
+      }
+
+      .desktop-section-service__grid {
+        width: 100%;
+        max-width: 100%;
+        padding-inline: 0;
+      }
+
+      .desktop-section-service__col {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .desktop-section-certifiction {
+        padding: 160px var(--mob-gutter) 0;
+      }
+
+      .desktop-section-team {
+        padding-inline: var(--mob-gutter);
+      }
+
+      .desktop-section-portpolio__inner {
+        padding-inline: var(--mob-gutter);
+      }
+
+      .desktop-section-outclients {
+        padding-left: var(--mob-gutter);
+        padding-right: var(--mob-gutter);
+      }
+
+      .desktop-section-contactus {
+        padding-left: var(--mob-gutter);
+        padding-right: var(--mob-gutter);
+      }
+
+      .desktop-section-contactus__map-wrap,
+      .desktop-section-contactus__info {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .desktop-section-copyright {
+        padding-inline: var(--mob-gutter);
+      }
+
+      .desktop-section-hero__circle,
+      .desktop-section-hero__circle-list,
+      .desktop-section-about__ceo,
+      .desktop-section-about__text {
+        max-width: 100%;
+      }
+
+      img,
+      .desktop-section-logo__line img,
+      .desktop-section-portpolio__grid img,
+      .desktop-section-contactus__map {
+        max-width: 100%;
+        height: auto;
       }
 
       .hero-body-en,
@@ -2526,8 +2664,8 @@
 
       .desktop-section-hero__inner {
         --hero-pad-top: 40px;
-        --hero-circle-d: min(540px, 100cqi);
-        padding: 40px 16px 0;
+        --hero-circle-d: min(540px, calc(100cqi - 2 * var(--mob-gutter)));
+        padding: 40px var(--mob-gutter) 0;
       }
 
       .desktop-section-hero__circle-list {
@@ -2947,7 +3085,7 @@
       }
 
       .desktop-section-team__chart {
-        width: calc(100% - 48px);
+        width: 100%;
         max-width: 327px;
         margin-inline: auto;
         gap: 28px;
@@ -3149,8 +3287,12 @@
     }
 
     @media (max-width: 480px) {
+      :root {
+        --mob-gutter: 16px;
+      }
+
       .desktop-header__inner {
-        padding: 32px;
+        padding: 24px var(--mob-gutter);
       }
 
       .desktop-header__logo img {
