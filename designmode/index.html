@@ -19,14 +19,12 @@
     html {
       scroll-behavior: smooth;
       width: 100%;
-      overflow-x: hidden;
     }
 
     body {
       background-color: #ffffff;
       min-width: 0;
       width: 100%;
-      overflow-x: hidden;
       font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", Arial,
         sans-serif;
       letter-spacing: -0.025em;
@@ -307,18 +305,21 @@
       flex-wrap: nowrap;
       justify-content: center;
       align-items: flex-start;
-      gap: 24px;
+      gap: var(--hero-gap);
       width: 100%;
+      max-width: 100%;
+      margin-inline: auto;
     }
 
     /* Figma text-list 2:106 — hero-01(49:405) row gap 24px items-start */
     .desktop-section-hero__circle {
       --hero-gap: 24px;
-      flex: 0 0 auto;
+      flex: 1 1 0;
       background: #222222;
       color: #fff;
-      width: min(540px,
-          calc((100% - 2 * var(--hero-gap)) / 3));
+      width: auto;
+      min-width: 0;
+      max-width: 540px;
       aspect-ratio: 1;
       height: auto;
       border-radius: 50%;
@@ -628,8 +629,33 @@
       margin-top: 0;
     }
 
-    /* text-list PC — hero-01/02/03 (49:400·49:395·49:390) */
+    /* text-list PC — 3열 원이 뷰포트 안에 들어오도록 flex 축소 */
     @media (min-width: 769px) {
+      .desktop-section-hero__inner {
+        width: 100%;
+        max-width: min(1670px, 100%);
+        padding-inline: 24px;
+        box-sizing: border-box;
+      }
+
+      .desktop-section-hero__circle-list {
+        width: 100%;
+        max-width: min(1668px, 100%);
+        gap: 24px;
+      }
+
+      .desktop-section-hero {
+        overflow-x: visible;
+        overflow-y: hidden;
+      }
+
+      .desktop-section-hero__circle {
+        flex: 1 1 0;
+        width: auto;
+        min-width: 0;
+        max-width: 540px;
+      }
+
       .desktop-section-hero__circle .hero-body-en--mobile,
       .desktop-section-hero__circle .hero-body-kr--mobile,
       .hero-title-block__side-mob {
@@ -2494,6 +2520,7 @@
       }
 
       .desktop-section-hero__circle {
+        flex: 0 0 auto;
         width: min(340px, var(--mob-safe-w), 100%);
         max-width: 100%;
       }
@@ -2748,6 +2775,7 @@
       }
 
       .desktop-section-hero__circle {
+        flex: 0 0 auto;
         width: min(340px, var(--mob-safe-w), 100%);
         height: auto;
         aspect-ratio: 1;
@@ -3402,6 +3430,7 @@
       }
 
       .desktop-section-hero__circle {
+        flex: 0 0 auto;
         width: min(340px, var(--mob-safe-w), 100%);
         gap: 20px;
         padding: 20px 16px;
