@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
   <title>designmode — desktop</title>
   <!-- Figma desktop(root): https://www.figma.com/design/weAWw4rnyX7VNMWSsgVghx/Untitled?node-id=2-67 — file weAWw4rnyX7VNMWSsgVghx, frame 2:67; header 2:54 -->
   <link rel="stylesheet"
@@ -15,16 +16,28 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
     body {
       background-color: #ffffff;
-      min-width: 1280px;
+      min-width: 0;
+      width: 100%;
+      overflow-x: hidden;
       font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", Arial,
         sans-serif;
       letter-spacing: -0.025em;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
-    html {
-      scroll-behavior: smooth;
+    @media (min-width: 1281px) {
+      body {
+        min-width: 1280px;
+      }
     }
 
     .desktop-section-contactus__text br.contact-mobile-br {
@@ -257,9 +270,10 @@
     .desktop-section-hero__bg {
       position: absolute;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100vw;
+      left: 0;
+      right: 0;
+      width: 100%;
+      max-width: 100%;
       height: calc(var(--hero-pad-top) + var(--hero-circle-d) / 2);
       background-color: #d7df23;
       background-image: url("images/main_backgorund.svg");
@@ -1876,10 +1890,6 @@
     }
 
     @media (max-width: 1200px) {
-      body {
-        min-width: 0;
-      }
-
       .desktop-header__inner {
         padding: 24px 32px;
       }
@@ -2136,7 +2146,10 @@
     /* Tablet (landscape/portrait) */
     @media (max-width: 1024px) {
       html,
-      body {
+      body,
+      main {
+        width: 100%;
+        max-width: 100%;
         overflow-x: hidden;
       }
 
@@ -2322,46 +2335,69 @@
       }
     }
 
-    /* Mobile — 뷰포트 안에 좌우 고정(가로 스크롤·넘침 방지) */
+    /* Mobile — 뷰포트 안에 좌우 고정(Android 포함, 가로 스크롤 방지) */
     @media (max-width: 768px) {
       :root {
         --mob-gutter: 16px;
+        --mob-safe-w: calc(100vw - 2 * var(--mob-gutter));
       }
 
       html {
         width: 100%;
-        overflow-x: clip;
+        max-width: 100%;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
       }
 
       body {
-        min-width: 0;
+        min-width: 0 !important;
         width: 100%;
         max-width: 100%;
-        overflow-x: clip;
+        overflow-x: hidden;
+        position: relative;
+        touch-action: pan-y pinch-zoom;
       }
 
       main {
         width: 100%;
         max-width: 100%;
-        overflow-x: clip;
-        word-break: keep-all;
+        overflow-x: hidden;
+        word-break: normal;
+        overflow-wrap: break-word;
       }
 
       .desktop-header,
+      main,
       main > section,
+      .desktop-section-hero,
       .desktop-section-hero__inner,
+      .desktop-section-hero__circle-list,
+      .desktop-section-logo,
       .desktop-section-logo__inner,
       .desktop-section-about,
       .desktop-section-service,
       .desktop-section-certifiction,
       .desktop-section-team,
+      .desktop-section-portpolio,
       .desktop-section-portpolio__inner,
       .desktop-section-outclients,
+      .desktop-section-outclients__list,
       .desktop-section-contactus,
       .desktop-section-copyright {
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
+        overflow-x: hidden;
+      }
+
+      .desktop-section-hero__inner {
+        container-type: normal;
+      }
+
+      .desktop-section-hero__circle--value,
+      .desktop-section-hero__circle--creative,
+      .desktop-section-hero__circle--side {
+        container-type: normal;
       }
 
       .desktop-section-hero__bg {
@@ -2370,6 +2406,7 @@
         width: 100%;
         max-width: 100%;
         transform: none;
+        margin: 0;
       }
 
       .desktop-header__inner {
@@ -2456,11 +2493,44 @@
         padding-inline: var(--mob-gutter);
       }
 
-      .desktop-section-hero__circle,
+      .desktop-section-hero__circle {
+        width: min(340px, var(--mob-safe-w), 100%);
+        max-width: 100%;
+      }
+
       .desktop-section-hero__circle-list,
       .desktop-section-about__ceo,
       .desktop-section-about__text {
         max-width: 100%;
+      }
+
+      .desktop-section-certifiction__card,
+      .desktop-section-certifiction__thumb,
+      .desktop-section-certifiction__info {
+        width: min(312px, 100%);
+        max-width: 100%;
+      }
+
+      .desktop-section-portpolio__btn {
+        width: min(100%, var(--mob-safe-w));
+        max-width: 100%;
+      }
+
+      .desktop-section-outclients__logo {
+        max-width: 100%;
+      }
+
+      .hero-title-block__line,
+      .hero-body-en--mobile,
+      .hero-body-kr--mobile,
+      .hero-body-en--desktop,
+      .hero-body-kr--desktop,
+      .hero-body-en--mobile p,
+      .hero-body-kr--mobile p,
+      .hero-body-en--desktop p,
+      .hero-body-kr--desktop p {
+        overflow-wrap: break-word;
+        word-break: normal;
       }
 
       img,
@@ -2678,11 +2748,12 @@
       }
 
       .desktop-section-hero__circle {
-        width: min(540px, 100%);
+        width: min(340px, var(--mob-safe-w), 100%);
         height: auto;
         aspect-ratio: 1;
         gap: 24px;
         padding: 24px;
+        max-width: 100%;
       }
 
       /* hero-01 모바일 (25:667) */
@@ -3331,9 +3402,10 @@
       }
 
       .desktop-section-hero__circle {
-        width: min(340px, 100%);
+        width: min(340px, var(--mob-safe-w), 100%);
         gap: 20px;
         padding: 20px 16px;
+        max-width: 100%;
       }
 
       .desktop-section-hero__circle--creative {
