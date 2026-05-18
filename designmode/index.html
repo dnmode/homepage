@@ -2446,12 +2446,6 @@
         container-type: normal;
       }
 
-      .desktop-section-hero__bg {
-        top: 0;
-        bottom: 0;
-        height: 100%;
-      }
-
       .desktop-header__inner {
         max-width: 100%;
         padding-inline: var(--mob-gutter);
@@ -2771,7 +2765,18 @@
       /* Figma mobile text-list 25:666 — 세로 스택 */
       .desktop-section-hero {
         --hero-pad-top: 40px;
+        --hero-mob-circle-size: min(340px, var(--mob-safe-w), 100%);
         --hero-circle-d: min(540px, calc(100cqi - 2 * var(--mob-gutter)));
+      }
+
+      /* MAIN_2_5 — 두 번째 원(hero-02) 세로 중앙까지 */
+      .desktop-section-hero__bg {
+        top: 0;
+        bottom: auto;
+        height: calc(
+          var(--hero-pad-top) + var(--hero-mob-circle-size) + var(--hero-gap) +
+            var(--hero-mob-circle-size) / 2
+        );
       }
 
       .desktop-section-hero__inner {
