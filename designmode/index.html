@@ -27,10 +27,6 @@
       scroll-behavior: smooth;
     }
 
-    .desktop-section-about__body-kr br.about-kr-mobile-br {
-      display: none;
-    }
-
     .desktop-section-contactus__text br.contact-mobile-br {
       display: none;
     }
@@ -261,24 +257,31 @@
     .desktop-section-hero__bg {
       position: absolute;
       top: 0;
-      left: 0;
-      width: 100%;
-      height: min(52vh, 520px);
-      background: linear-gradient(180deg,
-          #d7df23 0%,
-          #e8ef7a 28%,
-          #c8e070 52%,
-          #ffffff 100%);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: calc(var(--hero-pad-top) + var(--hero-circle-d) / 2);
+      background-color: #d7df23;
+      background-image: url("images/main_backgorund.svg");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
       z-index: 0;
     }
 
     .desktop-section-hero__inner {
       position: relative;
       z-index: 1;
+      container-type: inline-size;
+      container-name: hero-inner;
+      --hero-pad-top: 56px;
+      --hero-gap: 24px;
+      --hero-circle-d: min(540px,
+          calc((100cqi - 2 * var(--hero-gap)) / 3));
       width: 100%;
       max-width: 1670px;
       margin: 0 auto;
-      padding: 56px 24px 24px;
+      padding: var(--hero-pad-top) 24px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -294,7 +297,7 @@
       width: 100%;
     }
 
-    /* Figma text-list 2:106 — 원형 내부 타이포 (Pretendard Black / Light) */
+    /* Figma text-list 2:106 — hero-01(49:405) row gap 24px items-start */
     .desktop-section-hero__circle {
       --hero-gap: 24px;
       flex: 0 0 auto;
@@ -309,11 +312,156 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 24px;
       box-shadow: 0 6px 32px rgba(0, 0, 0, 0.13);
       padding: 24px;
-      gap: 31px;
       text-align: center;
       font-family: "Pretendard Variable", Pretendard, sans-serif;
+      font-weight: 300;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    /* hero-01 — container 기준 유동 (cqi는 자식 선택자에 직접 적용) */
+    .desktop-section-hero__circle--value {
+      container-type: inline-size;
+      container-name: hero-value;
+      gap: clamp(14px, 4.444cqi, 24px);
+      padding: clamp(16px, 4.444cqi, 24px);
+    }
+
+    @container hero-value (min-width: 0) {
+      .desktop-section-hero__circle--value .hero-title-block {
+        flex-shrink: 1;
+        min-width: 0;
+        max-width: min(74.259cqi, 401px);
+        width: 100%;
+        min-height: clamp(72px, 25.556cqi, 138px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+      }
+
+      .desktop-section-hero__circle--value .hero-title-block__line--57 {
+        font-size: clamp(34px, 10.556cqi, 57px);
+        font-weight: 900;
+        line-height: 0.8;
+      }
+
+      .desktop-section-hero__circle--value .hero-title-block__line--88 {
+        font-size: clamp(48px, 16.296cqi, 88px);
+        font-weight: 900;
+        line-height: 0.8;
+      }
+
+      .desktop-section-hero__circle--value .hero-body-en--desktop,
+      .desktop-section-hero__circle--value .hero-body-kr--desktop {
+        flex-shrink: 1;
+        min-width: 0;
+        width: 100%;
+        align-self: center;
+        text-align: center;
+      }
+
+      .desktop-section-hero__circle--value .hero-body-en--desktop {
+        font-size: clamp(14px, 4.706cqi, 20px);
+        line-height: 1.35;
+        max-width: min(87.037cqi, 470px);
+      }
+
+      .desktop-section-hero__circle--value .hero-body-kr--desktop {
+        font-size: clamp(13px, 4.118cqi, 16px);
+        line-height: 1.4;
+        max-width: min(85.185cqi, 460px);
+      }
+
+      .desktop-section-hero__circle--value .hero-body-en--desktop p,
+      .desktop-section-hero__circle--value .hero-body-kr--desktop p {
+        font-size: inherit;
+        line-height: inherit;
+        margin-inline: auto;
+        text-align: center;
+      }
+
+      .desktop-section-hero__circle--value .hero-body-en--mobile,
+      .desktop-section-hero__circle--value .hero-body-kr--mobile {
+        font-size: clamp(12px, 4.706cqi, 16px);
+        line-height: 1.35;
+        max-width: min(85.882cqi, 292px);
+        flex-shrink: 1;
+        width: 100%;
+        text-align: center;
+      }
+
+      .desktop-section-hero__circle--value .hero-body-kr--mobile {
+        font-size: clamp(11px, 4.118cqi, 14px);
+        line-height: 1.4;
+      }
+
+      .desktop-section-hero__circle--value .hero-body-en--mobile p,
+      .desktop-section-hero__circle--value .hero-body-kr--mobile p {
+        font-size: inherit;
+        line-height: inherit;
+        margin-inline: auto;
+        text-align: center;
+      }
+    }
+
+    .hero-body-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .hero-body-stack .hero-body-en,
+    .hero-body-stack .hero-body-kr {
+      width: 100%;
+    }
+
+    .hero-body-en--mobile,
+    .hero-body-kr--mobile,
+    .hero-title-block__side-mob {
+      display: none;
+    }
+
+    .hero-body-en--desktop,
+    .hero-body-kr--desktop {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-self: center;
+      min-width: 0;
+      box-sizing: border-box;
+      width: 100%;
+      margin-inline: auto;
+      text-align: center;
+      text-wrap: initial;
+      color: #ffffff;
+    }
+
+    .hero-body-en--desktop {
+      font-weight: 300;
+    }
+
+    .hero-body-en--desktop p,
+    .hero-body-kr--desktop p {
+      margin: 0;
+      margin-inline: auto;
+      width: auto;
+      max-width: 100%;
+      text-align: center;
+      font-weight: 300;
+    }
+
+    .hero-title-block__side-pc {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .desktop-section-hero__circle.hero-reveal-init {
@@ -336,11 +484,6 @@
       }
     }
 
-    .desktop-section-hero__circle--side {
-      gap: 19px;
-      padding: 97px 24px;
-    }
-
     .hero-title-block {
       margin: 0;
       padding: 0;
@@ -348,6 +491,25 @@
       font-weight: 900;
       line-height: 0.8;
       text-align: center;
+      width: 100%;
+      max-width: min(401px, 100%);
+      margin-inline: auto;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .hero-title-block__creative-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 0.8;
+    }
+
+    .hero-title-block__creative-inner .hero-title-block__line {
+      display: block;
+      margin: 0;
+      font-weight: 900;
+      line-height: 0.8;
     }
 
     .hero-title-block__line {
@@ -366,26 +528,58 @@
       font-size: 88px;
     }
 
-    /* text3: 88px(On) + 56px(the Client's Side) */
+    /* text3 (49:396): On 88px + the Client's Side 50px, leading 1.05 */
+    .hero-title-block--side {
+      line-height: 1.05;
+    }
+
+    .hero-title-block--side .hero-title-block__line {
+      line-height: 1.05;
+    }
+
     .hero-title-block--side .hero-title-block__line--on {
       font-size: 88px;
     }
 
     .hero-title-block--side .hero-title-block__line--sub {
-      font-size: 56px;
+      font-size: 50px;
     }
 
     .hero-body-en {
+      min-width: 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      align-self: center;
       width: 100%;
+      max-width: min(470px, 100%);
+      margin: 0;
+      margin-inline: auto;
+      text-align: center;
+      text-wrap: initial;
       font-size: 20px;
       font-weight: 300;
       line-height: normal;
       color: #ffffff;
-      margin: 0;
+    }
+
+    /* Figma 49:397 — text3 영문 18px, w 470px */
+    .desktop-section-hero__circle--side .hero-body-en {
+      font-size: 18px;
+      line-height: normal;
+      max-width: 470px;
     }
 
     .hero-body-en p {
       margin: 0;
+      margin-inline: auto;
+      width: auto;
+      max-width: 100%;
+      text-align: center;
+      text-wrap: initial;
+      font-weight: 300;
     }
 
     .hero-body-en p+p {
@@ -393,41 +587,265 @@
     }
 
     .hero-body-kr {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 100%;
+      max-width: min(460px, 100%);
+      margin-inline: auto;
+      text-align: center;
       font-size: 16px;
       font-weight: 300;
-      line-height: 1.45;
+      line-height: normal;
       color: #ffffff;
       margin: 0;
+      gap: 0;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .hero-body-kr p {
       margin: 0;
+      text-align: center;
+      font-weight: 300;
     }
 
     .hero-body-kr p+p {
       margin-top: 0;
     }
 
-    .hero-stack--side {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 13px;
-      width: 100%;
-      text-align: center;
+    /* text-list PC — hero-01/02/03 (49:400·49:395·49:390) */
+    @media (min-width: 769px) {
+      .desktop-section-hero__circle .hero-body-en--mobile,
+      .desktop-section-hero__circle .hero-body-kr--mobile,
+      .hero-title-block__side-mob {
+        display: none !important;
+      }
+
+      .desktop-section-hero__circle .hero-body-en--desktop,
+      .desktop-section-hero__circle .hero-body-kr--desktop {
+        display: flex;
+      }
+
+      .hero-title-block__side-pc {
+        display: flex;
+      }
+
+      .desktop-section-hero__circle .hero-title-block {
+        max-width: 401px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .desktop-section-hero__circle .hero-body-en,
+      .desktop-section-hero__circle .hero-body-kr {
+        text-wrap: initial;
+        overflow-wrap: normal;
+        word-break: normal;
+      }
+
+      .desktop-section-hero__circle .hero-body-en--desktop {
+        align-self: center;
+        max-width: 470px;
+        width: 100%;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: normal;
+        text-align: center;
+      }
+
+      .desktop-section-hero__circle .hero-body-en p {
+        margin: 0;
+        margin-inline: auto;
+        width: auto;
+        max-width: 100%;
+        text-align: center;
+        text-wrap: initial;
+      }
+
+      .desktop-section-hero__circle .hero-body-kr p {
+        margin: 0;
+        text-wrap: initial;
+      }
+
+      .hero-body-stack .hero-body-en {
+        align-self: center;
+        margin-inline: auto;
+      }
+
+      .desktop-section-hero__circle .hero-body-kr {
+        max-width: 460px;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: normal;
+      }
+
+      .desktop-section-hero__circle--creative .hero-title-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .desktop-section-hero__circle--side .hero-title-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        line-height: 1.05;
+      }
+
+      .desktop-section-hero__circle--side .hero-title-block__line {
+        line-height: 1.05;
+      }
     }
 
-    .hero-stack--side .hero-body-en,
-    .hero-stack--side .hero-body-kr {
-      text-align: center;
+    /* hero-01·02·03 — PC 유동 (공통 57/88px 규칙보다 우선) */
+    @media (min-width: 769px) {
+      .desktop-section-hero__circle--value .hero-title-block {
+        min-height: clamp(100px, 25.556cqi, 138px);
+      }
+
+      .desktop-section-hero__circle--value .hero-title-block__line--57 {
+        font-size: clamp(40px, 10.556cqi, 57px);
+      }
+
+      .desktop-section-hero__circle--value .hero-title-block__line--88 {
+        font-size: clamp(48px, 16.296cqi, 88px);
+      }
+
+      .desktop-section-hero__circle--value .hero-body-en--desktop {
+        font-size: clamp(14px, 3.704cqi, 20px);
+        max-width: min(87.037cqi, 470px);
+      }
+
+      .desktop-section-hero__circle--value .hero-body-kr--desktop {
+        font-size: clamp(13px, 2.963cqi, 16px);
+        max-width: min(85.185cqi, 460px);
+      }
+
+      .desktop-section-hero__circle--creative {
+        container-type: inline-size;
+        container-name: hero-creative;
+        --hc-gap: clamp(24px, 10cqi, 54px);
+        --hc-pad: clamp(16px, 4.444cqi, 24px);
+        --hc-title-57: clamp(34px, 10.556cqi, 57px);
+        --hc-title-88: clamp(48px, 16.296cqi, 88px);
+        --hc-body-en: clamp(14px, 3.704cqi, 20px);
+        --hc-body-kr: clamp(13px, 2.963cqi, 16px);
+        --hc-stack-gap: 0px;
+        gap: var(--hc-gap);
+        padding: var(--hc-pad);
+      }
+
+      .desktop-section-hero__circle--creative .hero-title-block {
+        min-height: clamp(100px, 31.481cqi, 170px);
+        max-width: min(74.259cqi, 401px);
+        flex-shrink: 1;
+      }
+
+      .desktop-section-hero__circle--creative .hero-title-block__line--57 {
+        font-size: var(--hc-title-57);
+      }
+
+      .desktop-section-hero__circle--creative .hero-title-block__line--88 {
+        font-size: var(--hc-title-88);
+      }
+
+      .desktop-section-hero__circle--creative .hero-body-stack {
+        gap: var(--hc-stack-gap);
+        flex-shrink: 1;
+        min-height: 0;
+        width: 100%;
+      }
+
+      .desktop-section-hero__circle--creative .hero-body-en {
+        font-size: var(--hc-body-en);
+        line-height: 1.35;
+        max-width: min(87.037cqi, 470px);
+        flex-shrink: 1;
+      }
+
+      .desktop-section-hero__circle--creative .hero-body-en p {
+        font-size: inherit;
+        line-height: inherit;
+      }
+
+      .desktop-section-hero__circle--creative .hero-body-kr {
+        font-size: var(--hc-body-kr);
+        line-height: 1.4;
+        max-width: min(85.185cqi, 460px);
+        flex-shrink: 1;
+      }
+
+      .desktop-section-hero__circle--creative .hero-body-kr p {
+        font-size: inherit;
+        line-height: inherit;
+      }
+
+      /* hero-02 Side — PC 유동 */
+      .desktop-section-hero__circle--side {
+        container-type: inline-size;
+        container-name: hero-side;
+        --hs-gap: clamp(14px, 6.481cqi, 35px);
+        --hs-pad: clamp(16px, 4.444cqi, 24px);
+        --hs-stack-gap: clamp(14px, 5.37cqi, 29px);
+        --hs-title-on: clamp(48px, 16.296cqi, 88px);
+        --hs-title-sub: clamp(28px, 9.259cqi, 50px);
+        --hs-body-en: clamp(14px, 3.333cqi, 18px);
+        --hs-body-kr: clamp(13px, 2.963cqi, 16px);
+        gap: var(--hs-gap);
+        padding: var(--hs-pad);
+      }
+
+      .desktop-section-hero__circle--side .hero-title-block {
+        min-height: clamp(96px, 30.37cqi, 164px);
+        max-width: min(74.259cqi, 401px);
+        flex-shrink: 1;
+      }
+
+      .desktop-section-hero__circle--side .hero-title-block__line--on {
+        font-size: var(--hs-title-on);
+      }
+
+      .desktop-section-hero__circle--side .hero-title-block__line--sub {
+        font-size: var(--hs-title-sub);
+      }
+
+      .desktop-section-hero__circle--side .hero-body-stack {
+        gap: var(--hs-stack-gap);
+        flex-shrink: 1;
+        min-height: 0;
+        width: 100%;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-en {
+        font-size: var(--hs-body-en);
+        line-height: 1.35;
+        max-width: min(87.037cqi, 470px);
+        flex-shrink: 1;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-en p {
+        font-size: inherit;
+        line-height: inherit;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-kr {
+        font-size: var(--hs-body-kr);
+        line-height: 1.4;
+        max-width: min(85.185cqi, 460px);
+        flex-shrink: 1;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-kr p {
+        font-size: inherit;
+        line-height: inherit;
+      }
     }
 
-    .hero-stack--side .hero-body-en {
-      font-size: 18px;
-    }
-
-    /* Figma desktop-section-logo 2:254 */
+    /* desktop-section-logo — hero와의 간격 80px */
     .desktop-section-logo {
       width: 100%;
       background-color: #ffffff;
@@ -436,7 +854,7 @@
     .desktop-section-logo__inner {
       max-width: 1920px;
       margin: 0 auto;
-      padding: 180px 200px 0px;
+      padding: 80px 200px 0px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -462,7 +880,7 @@
       height: auto;
     }
 
-    /* Figma desktop-section-about 8:10 */
+    /* ABOUT — PC 기본(≥1201) · Figma desktop-section-about 8:10 */
     .desktop-section-about {
       width: 100%;
       background-color: #ffffff;
@@ -518,22 +936,24 @@
       text-align: center;
       color: #818181;
       font-size: 22px;
+      font-weight: 400;
     }
 
     .desktop-section-about__tagline {
       margin: 0;
-      font-weight: 700;
-      line-height: normal;
+      font-weight: 500;
+      line-height: 1.45;
     }
 
     .desktop-section-about__body-en {
       margin: 0;
       font-weight: 400;
-      line-height: 1.3;
+      line-height: 1.52;
     }
 
     .desktop-section-about__body-en p {
       margin: 0;
+      font-weight: 400;
     }
 
     .desktop-section-about__body-en p+p {
@@ -557,7 +977,7 @@
       margin: 0;
       font-size: 22px;
       font-weight: 700;
-      line-height: normal;
+      line-height: 1.2;
       color: #818181;
       text-align: center;
     }
@@ -566,20 +986,30 @@
       margin: 0;
       font-size: 20px;
       font-weight: 400;
-      line-height: 1.3;
+      line-height: 1.18;
       color: #818181;
       text-align: center;
     }
 
     .desktop-section-about__body-kr p {
       margin: 0;
+      font-weight: 400;
+    }
+
+    .desktop-section-about__body-kr p+p {
+      margin-top: 0.45em;
+    }
+
+    .desktop-section-about__body-kr-outro {
+      margin: 0.55em 0 0;
+      font-weight: 400;
     }
 
     .desktop-section-about__sign {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
       gap: 26px;
       width: 100%;
       padding: 8px 0 0;
@@ -589,9 +1019,10 @@
     .desktop-section-about__sign-text {
       margin: 0;
       font-size: 22px;
+      font-weight: 400;
       line-height: 1.3;
       color: #222222;
-      text-align: center;
+      text-align: right;
     }
 
     .desktop-section-about__sign-text strong {
@@ -599,7 +1030,7 @@
     }
 
     .desktop-section-about__sign-text .name {
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .desktop-section-about__sign img {
@@ -608,6 +1039,19 @@
       height: auto;
       flex-shrink: 0;
       mix-blend-mode: multiply;
+    }
+
+    br.about-mob-br {
+      display: none;
+    }
+
+    br.about-en-pc-br {
+      display: inline;
+    }
+
+    .desktop-section-about__body-en--mobile,
+    .desktop-section-about__body-kr--mobile {
+      display: none;
     }
 
     .about-reveal-target.about-reveal-init {
@@ -688,16 +1132,22 @@
       line-height: normal;
       color: #ffffff;
       text-align: center;
+      align-self: center;
+      width: 100%;
+      max-width: 1200px;
+      box-sizing: border-box;
+      padding: 0 100px;
     }
 
     .desktop-section-service__grid {
+      align-self: center;
       width: 100%;
       max-width: 1200px;
       padding: 0 100px;
       box-sizing: border-box;
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: flex-start;
       gap: 122px;
     }
@@ -708,7 +1158,7 @@
       min-width: 180px;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       gap: 24px;
     }
 
@@ -718,7 +1168,7 @@
       font-weight: 700;
       line-height: normal;
       color: #d7df23;
-      text-align: center;
+      text-align: left;
     }
 
     .desktop-section-service__col:first-child h3 {
@@ -734,7 +1184,8 @@
       line-height: 1.6;
       color: #ffffff;
       text-align: left;
-      display: inline-block;
+      display: block;
+      width: 100%;
     }
 
     .desktop-section-service__list li {
@@ -793,9 +1244,10 @@
 
     .desktop-section-certifiction__thumb {
       border: 12px solid #dedbd7;
-      border-radius: 16px;
+      border-bottom: none;
+      border-radius: 16px 16px 0 0;
       overflow: hidden;
-      margin-bottom: -11px;
+      margin-bottom: 0;
       position: relative;
       z-index: 1;
       background-color: #ffffff;
@@ -814,18 +1266,19 @@
     .desktop-section-certifiction__info {
       width: 100%;
       max-width: 428px;
-      min-height: 204px;
-      padding: 34px 16px;
+      aspect-ratio: 2 / 1;
+      padding: 0 16px;
       box-sizing: border-box;
       background-color: #222222;
-      border-bottom-left-radius: 277px;
-      border-bottom-right-radius: 277px;
+      border-bottom-left-radius: 50% 100%;
+      border-bottom-right-radius: 50% 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      gap: 16px;
+      justify-content: center;
+      gap: 12px;
       text-align: center;
+      margin-top: -1px;
     }
 
     .desktop-section-certifiction__org {
@@ -916,7 +1369,7 @@
 
     /*
         피그마 team-chart 8:134 — 자식 간 gap 28px
-        chart-list 11:169 / 하단 chart-list 29:1064: w 1450, flex + justify-between, px 98 py 24
+        chart-list 11:169 / 하단 chart-list 29:1064: w 1450, flex + justify-between, px 98 py 16
       */
     .desktop-section-team__band {
       width: 100%;
@@ -935,7 +1388,7 @@
       max-width: 1450px;
       margin-inline: auto;
       box-sizing: border-box;
-      padding: 24px 98px;
+      padding: 16px 98px;
       background-color: #818181;
       border-radius: 100px;
     }
@@ -1004,12 +1457,16 @@
       gap: 28px;
     }
 
+    .desktop-section-team__responsive-stack--mobile {
+      display: none;
+    }
+
     .desktop-section-team__responsive-shell {
       width: 100%;
       box-sizing: border-box;
       background-color: #818181;
       border-radius: 100px;
-      padding: 24px 32px;
+      padding: 16px 32px;
     }
 
     .desktop-section-team__responsive-shell ul {
@@ -1039,6 +1496,23 @@
 
     .desktop-section-team__responsive-details p {
       margin: 0;
+    }
+
+    .desktop-section-team__chart-list-01-text > div,
+    .desktop-section-team__chart-list-02-text > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .desktop-section-team__chart-list-01-text p,
+    .desktop-section-team__chart-list-02-text p {
+      margin: 0;
+      line-height: 1.5;
     }
 
     /* PORTFOLIO — 피그마 11:650: 6×4 셀 그리드 + 딤 + portpolio_btn(btn_default/hover) */
@@ -1367,6 +1841,7 @@
 
     .desktop-section-contactus__nowrap {
       white-space: nowrap;
+      font-weight: inherit;
     }
 
     /* COPYRIGHT — desktop-section-copyright */
@@ -1417,27 +1892,8 @@
         font-size: 19px;
       }
 
-      .desktop-section-hero__circle-list {
-        flex-direction: column;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 24px;
-        overflow-x: hidden;
-        overflow-y: visible;
-        padding: 0;
-        scroll-snap-type: none;
-        -webkit-overflow-scrolling: auto;
-      }
-
-      .desktop-section-hero__circle {
-        width: min(540px, 100%);
-        height: auto;
-        aspect-ratio: 1 / 1;
-      }
-
       .desktop-section-logo__inner {
-        padding: 120px 24px 80px;
+        padding: 80px 24px 80px;
         gap: 80px;
       }
 
@@ -1445,40 +1901,35 @@
         width: min(303px, 80vw);
       }
 
+      /* ABOUT — 태블릿(≤1200): 여백·박스만 조정(PC와 동일 글자 크기·두께·줄간격·줄바꿈) */
       .desktop-section-about {
         padding: 100px 20px;
         gap: 64px;
       }
 
-      .desktop-section-about__title {
-        font-size: 36px;
+      .desktop-section-about__ceo {
+        gap: 24px;
       }
 
-      .desktop-section-about__subtitle {
-        font-size: 32px;
+      .desktop-section-about__text {
+        gap: 48px;
       }
 
       .desktop-section-about__english {
-        font-size: 18px;
+        gap: 22px;
       }
 
       .desktop-section-about__korean {
         padding: 40px 24px 32px;
         border-radius: 32px;
-      }
-
-      .desktop-section-about__kr-head {
-        font-size: 18px;
-      }
-
-      .desktop-section-about__body-kr {
-        font-size: 17px;
+        gap: 22px;
       }
 
       .desktop-section-about__sign {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-end;
         padding: 16px 0 0;
+        gap: 20px;
       }
 
       .desktop-section-about__sign img {
@@ -1492,6 +1943,8 @@
 
       .desktop-section-service__title {
         font-size: 36px;
+        padding: 0 16px;
+        align-self: center;
       }
 
       .desktop-section-service__grid {
@@ -1499,12 +1952,36 @@
         gap: 48px;
         flex-direction: column;
         align-items: center;
+        align-self: center;
+        justify-content: center;
       }
 
       .desktop-section-service__col {
         flex: 0 0 auto;
         max-width: 420px;
         width: 100%;
+        align-items: center;
+      }
+
+      .desktop-section-service__col h3 {
+        text-align: center;
+        white-space: normal;
+      }
+
+      .desktop-section-service__list {
+        width: 100%;
+        max-width: 420px;
+        margin-inline: auto;
+        text-align: center;
+      }
+
+      .desktop-section-service__list li {
+        padding-left: 0;
+      }
+
+      .desktop-section-service__list li::before {
+        position: static;
+        margin-right: 0.35em;
       }
 
       .desktop-section-certifiction {
@@ -1524,11 +2001,6 @@
       .desktop-section-certifiction__card {
         width: 100%;
         max-width: 405px;
-      }
-
-      .desktop-section-certifiction__info {
-        border-bottom-left-radius: 120px;
-        border-bottom-right-radius: 120px;
       }
 
       .desktop-section-certifiction__org,
@@ -1565,14 +2037,18 @@
         display: none;
       }
 
-      .desktop-section-team__responsive-stack {
+      .desktop-section-team__responsive-stack--tablet {
         display: flex;
         width: 704px;
         max-width: 100%;
       }
 
+      .desktop-section-team__responsive-stack--mobile {
+        display: none !important;
+      }
+
       .desktop-section-team__responsive-shell {
-        padding: 24px 32px;
+        padding: 16px 32px;
         border-radius: 100px;
       }
 
@@ -1653,6 +2129,7 @@
 
       .desktop-section-contactus__text {
         font-size: 20px;
+        font-weight: 300;
       }
     }
 
@@ -1681,49 +2158,27 @@
         display: inline-flex;
       }
 
-      .desktop-section-hero__inner {
-        padding-top: 44px;
+      /* ABOUT — 태블릿(≤1024): 1200 규칙 유지 + 좌우 24px 인셋 */
+      .desktop-section-about {
+        padding: 96px 24px;
+        gap: 72px;
       }
 
-      /* Figma tablet(768w): 원 3개 세로 스택 + 540px */
-      .desktop-section-hero__circle-list {
-        flex-direction: column;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: flex-start;
-        overflow-x: hidden;
-        overflow-y: visible;
-        padding: 0;
+      .desktop-section-about__ceo {
         gap: 24px;
-        scroll-snap-type: none;
-        -webkit-overflow-scrolling: auto;
       }
 
-      .desktop-section-hero__circle {
-        width: 540px;
-        height: 540px;
+      .desktop-section-about__text {
+        gap: 48px;
       }
 
-      .hero-title-block__line--57 {
-        font-size: 46px;
+      .desktop-section-about__english {
+        gap: 22px;
       }
 
-      .hero-title-block__line--88,
-      .hero-title-block--side .hero-title-block__line--on {
-        font-size: 72px;
-      }
-
-      .hero-title-block--side .hero-title-block__line--sub {
-        font-size: 44px;
-      }
-
-      .hero-body-en {
-        font-size: 18px;
-      }
-
-      .hero-body-kr {
-        font-size: 15px;
-        line-height: 1.45;
+      .desktop-section-about__korean {
+        padding: 40px 28px 32px;
+        gap: 22px;
       }
 
       /* Figma tablet(768w): outclients-list 540px 재배치 */
@@ -1833,10 +2288,14 @@
         display: none;
       }
 
-      .desktop-section-team__responsive-stack {
+      .desktop-section-team__responsive-stack--tablet {
         display: flex;
         width: 704px;
         max-width: 100%;
+      }
+
+      .desktop-section-team__responsive-stack--mobile {
+        display: none !important;
       }
 
       .desktop-section-team__responsive-shell ul {
@@ -1876,15 +2335,152 @@
 
       .hero-body-en,
       .hero-body-kr,
-      .desktop-section-about__body-en,
-      .desktop-section-about__body-kr,
       .desktop-section-contactus__text,
       .desktop-section-copyright__text {
         overflow-wrap: break-word;
       }
 
-      .desktop-section-about__body-kr br.about-kr-mobile-br {
+      .hero-body-en,
+      .hero-body-en p {
+        text-align: center;
+        word-break: normal;
+      }
+
+      br.about-mob-br {
         display: inline;
+      }
+
+      br.about-en-pc-br {
+        display: none;
+      }
+
+      .desktop-section-about__body-en--desktop {
+        display: none;
+      }
+
+      .desktop-section-about__body-en--mobile {
+        display: block;
+      }
+
+      .desktop-section-about__body-kr--desktop,
+      .desktop-section-about__kr-head {
+        display: none;
+      }
+
+      .desktop-section-about__body-kr--mobile {
+        display: block;
+      }
+
+      .desktop-section-about .desktop-section-about__body-en,
+      .desktop-section-about .desktop-section-about__body-kr,
+      .desktop-section-about .desktop-section-about__body-kr--mobile p {
+        word-break: normal;
+        overflow-wrap: break-word;
+      }
+
+      /* ABOUT — Figma 375 (25:684) */
+      .desktop-section-about {
+        padding: 120px 32px 80px;
+        gap: 112px;
+      }
+
+      .desktop-section-about__title {
+        font-size: 32px;
+        color: #000000;
+      }
+
+      .desktop-section-about__ceo {
+        gap: 28px;
+        width: 100%;
+        max-width: 375px;
+      }
+
+      .desktop-section-about__subtitle {
+        font-size: 24px;
+        color: #000000;
+      }
+
+      .desktop-section-about__text {
+        gap: 56px;
+        width: 100%;
+        max-width: 375px;
+        padding-inline: 0;
+      }
+
+      .desktop-section-about__english {
+        width: 100%;
+        max-width: 311px;
+        font-size: 16px;
+        gap: 0;
+        line-height: 1.5;
+      }
+
+      .desktop-section-about__tagline {
+        display: none;
+      }
+
+      .desktop-section-about__body-en--mobile {
+        line-height: 1.5;
+      }
+
+      .desktop-section-about__body-en--mobile p {
+        margin: 0;
+      }
+
+      .desktop-section-about__body-en--mobile .desktop-section-about__tagline-mob {
+        font-weight: 700;
+      }
+
+      .desktop-section-about__korean {
+        width: 100%;
+        max-width: 311px;
+        padding: 52px 24px;
+        border-radius: 48px;
+        gap: 26px;
+      }
+
+      .desktop-section-about__body-kr--mobile {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #818181;
+        text-align: center;
+      }
+
+      .desktop-section-about__body-kr--mobile p {
+        margin: 0;
+      }
+
+      .desktop-section-about__body-kr--mobile .desktop-section-about__kr-head-mob {
+        font-weight: 700;
+      }
+
+      .desktop-section-about__sign {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 263px;
+        min-height: 147px;
+        margin-inline: auto;
+        padding: 0;
+        gap: 0;
+      }
+
+      .desktop-section-about__sign-text {
+        font-size: 22px;
+        line-height: 1.3;
+        text-align: center;
+        color: #000000;
+      }
+
+      .desktop-section-about__sign-text .name {
+        font-weight: 300;
+      }
+
+      .desktop-section-about__sign img {
+        width: 122px;
       }
 
       .desktop-section-copyright__text br.copyright-mobile-br {
@@ -1897,16 +2493,6 @@
 
       .desktop-section-contactus__text br.contact-mobile-br {
         display: inline;
-      }
-
-      .desktop-section-about__body-en {
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 1.4;
-      }
-
-      .desktop-section-about__body-kr {
-        font-weight: 400;
       }
 
       .desktop-header__inner {
@@ -1925,75 +2511,282 @@
         margin-left: auto;
       }
 
-      .desktop-section-hero__bg {
-        height: 465px;
-      }
-
       .desktop-section-hero,
       .desktop-section-hero__inner {
         overflow: hidden;
       }
 
+      /* Figma mobile text-list 25:666 — 세로 스택 */
+      .desktop-section-hero__bg {
+        height: calc(
+          var(--hero-pad-top) + var(--hero-circle-d) + var(--hero-gap) +
+            var(--hero-circle-d) / 2
+        );
+      }
+
       .desktop-section-hero__inner {
-        padding: 40px 16px 16px;
+        --hero-pad-top: 40px;
+        --hero-circle-d: min(540px, 100cqi);
+        padding: 40px 16px 0;
       }
 
       .desktop-section-hero__circle-list {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 24px;
         width: 100%;
       }
 
       .desktop-section-hero__circle {
         width: min(540px, 100%);
-        height: min(540px, 100%);
-        aspect-ratio: 1 / 1;
-        overflow: hidden;
-        gap: 16px;
-        padding: 20px 18px;
+        height: auto;
+        aspect-ratio: 1;
+        gap: 24px;
+        padding: 24px;
       }
 
-      .desktop-section-hero__circle--side {
-        padding: 56px 20px;
-        gap: 14px;
+      /* hero-01 모바일 (25:667) */
+      .desktop-section-hero__circle--value {
+        container-type: inline-size;
+        gap: clamp(10px, 4.118cqi, 14px);
+        padding: clamp(14px, 4.444cqi, 24px);
       }
 
-      .hero-title-block__line--57 {
-        font-size: 36px;
+      .desktop-section-hero__circle--value .hero-title-block {
+        min-height: 0;
+        flex-shrink: 1;
       }
 
-      .hero-title-block__line--88,
-      .hero-title-block--side .hero-title-block__line--on {
-        font-size: 56px;
+      .desktop-section-hero__circle--value .hero-title-block__line--57 {
+        font-size: clamp(26px, 10cqi, 34px);
+        font-weight: 900;
+        line-height: 0.8;
       }
 
-      .hero-title-block--side .hero-title-block__line--sub {
-        font-size: 34px;
+      .desktop-section-hero__circle--value .hero-title-block__line--88 {
+        font-size: clamp(38px, 14.118cqi, 48px);
+        font-weight: 900;
+        line-height: 0.8;
       }
 
-      .hero-body-en {
-        font-size: 16px;
+      .desktop-section-hero__circle--value .hero-body-en--mobile {
+        font-size: clamp(12px, 4.706cqi, 16px);
         line-height: 1.35;
+        max-width: min(85.882cqi, 292px);
+        width: 100%;
+        flex-shrink: 1;
+        text-align: center;
       }
 
-      .hero-body-kr {
-        font-size: 13px;
-        line-height: 1.48;
+      .desktop-section-hero__circle--value .hero-body-kr--mobile {
+        font-size: clamp(11px, 4.118cqi, 14px);
+        line-height: 1.4;
+        max-width: min(85.882cqi, 292px);
+        width: 100%;
+        flex-shrink: 1;
+        text-align: center;
       }
 
-      .desktop-section-about__english {
-        font-size: 22px;
+      .desktop-section-hero__circle--value .hero-body-en--mobile p,
+      .desktop-section-hero__circle--value .hero-body-kr--mobile p {
+        font-size: inherit;
+        line-height: inherit;
+        margin-inline: auto;
+        text-align: center;
       }
 
-      .desktop-section-about__kr-head {
-        font-size: 22px;
+      .hero-body-en--desktop,
+      .hero-body-kr--desktop,
+      .hero-title-block__side-pc {
+        display: none;
       }
 
-      .desktop-section-about__body-kr {
-        font-size: 18px;
-        line-height: 1.3;
+      .hero-body-en--mobile,
+      .hero-body-kr--mobile,
+      .hero-title-block__side-mob {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-self: center;
+        min-width: 0;
+        box-sizing: border-box;
+        width: 100%;
+        margin-inline: auto;
+        text-align: center;
+        text-wrap: initial;
+        color: #ffffff;
+        font-weight: 300;
       }
 
-      .desktop-section-about__sign-text {
-        font-size: 22px;
+      .hero-body-en--mobile p,
+      .hero-body-kr--mobile p {
+        margin: 0;
+        margin-inline: auto;
+        width: auto;
+        max-width: 100%;
+        text-align: center;
+        font-weight: 300;
+      }
+
+      .hero-title-block__side-mob {
+        line-height: 0.8;
+      }
+
+      /* hero-03 모바일 (25:1054) */
+      .desktop-section-hero__circle--creative {
+        container-type: inline-size;
+        --hc-gap: clamp(10px, 4.118cqi, 14px);
+        --hc-pad: clamp(14px, 4.444cqi, 24px);
+        --hc-title-57: clamp(26px, 10cqi, 34px);
+        --hc-title-88: clamp(38px, 14.118cqi, 48px);
+        --hc-body-en: clamp(12px, 4.706cqi, 16px);
+        --hc-body-kr: clamp(11px, 4.118cqi, 14px);
+        gap: var(--hc-gap);
+        padding: var(--hc-pad);
+      }
+
+      .desktop-section-hero__circle--creative .hero-title-block {
+        min-height: 0;
+        justify-content: center;
+        flex-shrink: 1;
+      }
+
+      .desktop-section-hero__circle--creative .hero-title-block__line--57 {
+        font-size: var(--hc-title-57);
+      }
+
+      .desktop-section-hero__circle--creative .hero-title-block__line--88 {
+        font-size: var(--hc-title-88);
+      }
+
+      .desktop-section-hero__circle--creative .hero-body-stack {
+        gap: var(--hc-gap);
+        flex-shrink: 1;
+        min-height: 0;
+      }
+
+      .desktop-section-hero__circle--creative .hero-body-en--mobile {
+        font-size: var(--hc-body-en);
+        line-height: 1.35;
+        max-width: min(85.882cqi, 292px);
+        width: 100%;
+        flex-shrink: 1;
+        text-align: center;
+      }
+
+      .desktop-section-hero__circle--creative .hero-body-kr--mobile {
+        font-size: var(--hc-body-kr);
+        line-height: 1.4;
+        max-width: min(85.882cqi, 292px);
+        width: 100%;
+        flex-shrink: 1;
+        text-align: center;
+      }
+
+      .desktop-section-hero__circle--creative .hero-body-en--mobile p,
+      .desktop-section-hero__circle--creative .hero-body-kr--mobile p {
+        font-size: inherit;
+        line-height: inherit;
+        margin-inline: auto;
+        text-align: center;
+      }
+
+      /* hero-02 모바일 (25:1059) */
+      .desktop-section-hero__circle--side {
+        container-type: inline-size;
+        --hs-gap: clamp(10px, 4.118cqi, 14px);
+        --hs-pad: clamp(14px, 4.444cqi, 24px);
+        --hs-title-on: clamp(26px, 10cqi, 34px);
+        --hs-title-sub: clamp(30px, 10.882cqi, 37px);
+        --hs-body-en: clamp(11px, 4.118cqi, 14px);
+        --hs-body-kr: clamp(10px, 3.529cqi, 12px);
+        gap: var(--hs-gap);
+        padding: var(--hs-pad);
+      }
+
+      .desktop-section-hero__circle--side .hero-title-block {
+        min-height: 0;
+        justify-content: center;
+        line-height: 0.8;
+        flex-shrink: 1;
+      }
+
+      .desktop-section-hero__circle--side .hero-title-block__line--on {
+        font-size: var(--hs-title-on);
+        line-height: 0.8;
+      }
+
+      .desktop-section-hero__circle--side .hero-title-block__line--sub-m {
+        font-size: var(--hs-title-sub);
+        line-height: 0.8;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-stack {
+        gap: var(--hs-gap);
+        flex-shrink: 1;
+        min-height: 0;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-en--mobile {
+        font-size: var(--hs-body-en);
+        line-height: 1.35;
+        max-width: min(85.882cqi, 292px);
+        flex-shrink: 1;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-kr--mobile {
+        font-size: var(--hs-body-kr);
+        line-height: 1.4;
+        max-width: min(85.882cqi, 292px);
+        flex-shrink: 1;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-en--mobile p,
+      .desktop-section-hero__circle--side .hero-body-kr--mobile p {
+        font-size: inherit;
+        line-height: inherit;
+        margin-inline: auto;
+        text-align: center;
+      }
+
+      .desktop-section-hero__circle--creative .hero-title-block__line--57,
+      .desktop-section-hero__circle--creative .hero-title-block__line--88,
+      .desktop-section-hero__circle--side .hero-title-block__line--on,
+      .desktop-section-hero__circle--side .hero-title-block__line--sub-m {
+        font-weight: 900;
+      }
+
+      @container hero-value (max-width: 360px) {
+        .desktop-section-hero__circle--value .hero-title-block__line--57 {
+          font-size: clamp(24px, 9.5cqi, 32px);
+        }
+
+        .desktop-section-hero__circle--value .hero-title-block__line--88 {
+          font-size: clamp(34px, 13cqi, 44px);
+        }
+
+        .desktop-section-hero__circle--value .hero-body-en--mobile {
+          font-size: clamp(11px, 4.2cqi, 14px);
+        }
+
+        .desktop-section-hero__circle--value .hero-body-kr--mobile {
+          font-size: clamp(10px, 3.8cqi, 12px);
+        }
+
+        .desktop-section-hero__circle--creative {
+          --hc-gap: clamp(8px, 3.529cqi, 12px);
+          --hc-body-en: clamp(11px, 4.118cqi, 14px);
+          --hc-body-kr: clamp(10px, 3.529cqi, 12px);
+        }
+
+        .desktop-section-hero__circle--side {
+          --hs-gap: clamp(8px, 3.529cqi, 12px);
+          --hs-title-sub: clamp(28px, 9.5cqi, 34px);
+          --hs-body-en: clamp(10px, 3.824cqi, 13px);
+          --hs-body-kr: clamp(9px, 3.235cqi, 11px);
+        }
       }
 
       .desktop-section-service__col h3 {
@@ -2004,14 +2797,105 @@
         font-size: 17px;
       }
 
-      .desktop-section-certifiction__org,
+      /* CERTIFICATION — Figma 375 (25:713) */
+      .desktop-section-certifiction {
+        padding: 160px 0 0;
+        gap: 160px;
+      }
+
+      .desktop-section-certifiction__title {
+        font-size: 32px;
+        color: #000000;
+      }
+
+      .desktop-section-certifiction__list {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        width: 100%;
+        max-width: 312px;
+        margin-inline: auto;
+        padding-inline: 0;
+        gap: 64px;
+        box-sizing: border-box;
+      }
+
+      .desktop-section-certifiction__card {
+        width: 312px;
+        max-width: 100%;
+      }
+
+      .desktop-section-certifiction__thumb {
+        position: relative;
+        z-index: 1;
+        width: 312px;
+        max-width: 100%;
+        margin-inline: auto;
+        margin-bottom: -11px;
+        border: 12px solid #dedbd7;
+        border-bottom: 12px solid #dedbd7;
+        border-radius: 16px;
+        box-sizing: border-box;
+        overflow: hidden;
+        background-color: #ffffff;
+      }
+
+      .desktop-section-certifiction__thumb img {
+        display: block;
+        width: 100%;
+        max-width: none;
+        height: auto;
+        aspect-ratio: auto;
+        object-fit: cover;
+      }
+
+      .desktop-section-certifiction__info {
+        position: relative;
+        z-index: 0;
+        width: 312px;
+        max-width: 100%;
+        min-height: 149px;
+        margin-inline: auto;
+        margin-top: 0;
+        padding: 32px 16px 34px;
+        box-sizing: border-box;
+        aspect-ratio: auto;
+        background-color: #222222;
+        border-bottom-left-radius: 277px;
+        border-bottom-right-radius: 277px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .desktop-section-certifiction__org {
+        font-size: 22px;
+        font-weight: 700;
+        line-height: normal;
+        color: #ffffff;
+      }
+
       .desktop-section-certifiction__cert {
-        font-size: 21px;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: normal;
+        color: #d7df23;
+      }
+
+      .desktop-section-certifiction__line {
+        width: 100%;
+        max-width: 340px;
+        padding-inline: 17.5px;
+        box-sizing: border-box;
       }
 
       .desktop-section-contactus__text {
         font-size: 20px;
         line-height: 1.55;
+        font-weight: 300;
       }
 
       .desktop-section-portpolio {
@@ -2029,69 +2913,180 @@
 
       .desktop-section-copyright__text {
         font-size: 20px;
+        font-weight: 300;
+      }
+
+      /* Figma mobile team (375): 3+2 구조, 폭 327, 좌우 24px */
+      .desktop-section-team {
+        padding: 160px 0;
+        gap: 112px;
+      }
+
+      .desktop-section-team__title {
+        font-size: 32px;
+        color: #000000;
+      }
+
+      /* team-chart 25:739 — CEO·Director 24px Bold */
+      .desktop-section-team__chart .desktop-section-team__role {
+        font-size: 24px;
+        font-weight: 700;
+        color: #000000;
       }
 
       .desktop-section-team__chart {
-        width: calc(100% - 32px);
+        width: calc(100% - 48px);
+        max-width: 327px;
         margin-inline: auto;
+        gap: 28px;
       }
 
       .desktop-section-team__band {
         width: 100%;
-      }
-
-      .desktop-section-team__responsive-stack {
-        width: 100%;
+        max-width: 327px;
         margin-inline: auto;
+        gap: 28px;
       }
 
-      .desktop-section-team__details,
-      .desktop-section-team__responsive-details {
-        font-size: 18px;
+      .desktop-section-team__responsive-stack--tablet {
+        display: none !important;
       }
 
-      .desktop-section-team__responsive-shell {
-        min-height: 132px;
-        display: flex;
-        align-items: center;
+      .desktop-section-team__responsive-stack--mobile {
+        display: flex !important;
+        width: 100%;
+        max-width: 327px;
+        margin-inline: auto;
+        gap: 28px;
       }
 
-      .desktop-section-team__responsive-shell ul li {
-        min-height: 2.6em;
+      /*
+        Figma 375 Frame 42 — chart-list / chart-list2
+        폭 327 (좌우 24), 블록 간 gap 28
+        chart-list-1: h102, pad 32 / chart-list2-1: h88, cols 96+17+73+17+76
+        chart-list-2: h86, pad 24·좌53 / chart-list2-2: cols 67+58+120
+      */
+      .desktop-section-team__responsive-stack--mobile {
+        gap: 28px;
+      }
+
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__responsive-shell {
+        width: 100%;
+        box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: center;
-        text-align: center;
+        background-color: #818181;
       }
 
-      .desktop-section-team__responsive-shell ul {
-        column-gap: 16px;
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-01 {
+        min-height: 102px;
+        padding: 32px;
+        border-radius: 51px;
+      }
+
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-02 {
+        min-height: 86px;
+        padding: 24px 32px;
+        border-radius: 43px;
+      }
+
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-01 ul,
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-02 ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        width: fit-content;
+        max-width: 100%;
+        margin-inline: auto;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        text-align: center;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 19px;
+      }
+
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-01 ul {
+        grid-template-columns: 96px 73px 76px;
+        column-gap: 8px;
+      }
+
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-02 ul {
+        grid-template-columns: 67px 120px;
+        column-gap: 24px;
+      }
+
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-01 ul li,
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-02 ul li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        white-space: normal;
+        word-break: keep-all;
+      }
+
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-01-text,
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-02-text {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0;
+        display: grid;
+        align-items: start;
         justify-items: center;
         text-align: center;
+        color: #818181;
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 1.6;
       }
 
-      .desktop-section-team__responsive-shell--bottom ul {
-        column-gap: 16px;
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-01-text {
+        min-height: 88px;
+        width: fit-content;
+        max-width: 100%;
+        margin-inline: auto;
+        grid-template-columns: 96px 73px 76px;
+        column-gap: 8px;
+        justify-content: center;
       }
 
-      .desktop-section-team__responsive-details--top {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        column-gap: 32px;
-        justify-items: center;
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-02-text {
+        min-height: 88px;
+        width: fit-content;
+        max-width: 100%;
+        margin-inline: auto;
+        grid-template-columns: 67px 120px;
+        column-gap: 24px;
+        justify-content: center;
       }
 
-      .desktop-section-team__responsive-details--top > div {
-        width: 100%;
-        max-width: none;
-        min-width: 0;
-      }
-
-      .desktop-section-team__responsive-details--top p {
-        width: 100%;
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-01-text p,
+      .desktop-section-team__responsive-stack--mobile .desktop-section-team__chart-list-02-text p {
+        font-size: 12px;
+        line-height: 1.6;
         text-align: center;
         overflow-wrap: break-word;
-        font-size: inherit;
-        line-height: inherit;
+      }
+
+      /* OUT CLIENTS — 모바일: 타이틀 32px, 로고 2/3 */
+      .desktop-section-outclients__title {
+        font-size: 32px;
+        color: #000000;
+      }
+
+      .desktop-section-outclients__logo {
+        transform-origin: center;
+        transform: scale(0.6666667);
+      }
+
+      .desktop-section-contactus__title {
+        font-size: 32px;
+        color: #000000;
       }
     }
 
@@ -2154,68 +3149,18 @@
         font-size: 15px;
       }
 
-      .desktop-section-about__title,
       .desktop-section-service__title,
       .desktop-section-certifiction__title,
       .desktop-section-team__title {
         font-size: 32px;
       }
 
-      .desktop-section-outclients__title,
+      .desktop-section-outclients__title {
+        font-size: 32px;
+      }
+
       .desktop-section-contactus__title {
-        font-size: 44px;
-      }
-
-      /* Figma mobile team (375): 3+2 구조, 폭 327 */
-      .desktop-section-team {
-        padding: 120px 0;
-        gap: 112px;
-      }
-
-      .desktop-section-team__chart {
-        max-width: none;
-        width: calc(100% - 32px);
-        margin-inline: auto;
-        gap: 28px;
-      }
-
-      .desktop-section-team__band {
-        width: 100%;
-        max-width: 100%;
-        gap: 28px;
-      }
-
-      .desktop-section-team__responsive-stack {
-        width: 100%;
-      }
-
-      .desktop-section-team__responsive-shell {
-        padding: 32px 24px;
-      }
-
-      .desktop-section-team__responsive-shell ul {
-        font-size: 16px;
-        line-height: 1.35;
-      }
-
-      .desktop-section-team__responsive-details {
-        padding: 0 24px;
-        font-size: 18px;
-        line-height: 1.55;
-        column-gap: 24px;
-      }
-
-      .desktop-section-team__pill-shell,
-      .desktop-section-team__details {
-        display: none !important;
-      }
-
-      .desktop-section-team__role--ceo {
-        font-size: 36px;
-      }
-
-      .desktop-section-team__role--sub {
-        font-size: 26px;
+        font-size: 32px;
       }
 
       .desktop-section-portpolio {
@@ -2233,52 +3178,22 @@
 
       .desktop-section-hero__circle {
         width: min(340px, 100%);
-        height: min(340px, 100%);
-        aspect-ratio: 1 / 1;
-        gap: 12px;
-        padding: 20px 8px;
+        gap: 20px;
+        padding: 20px 16px;
+      }
+
+      .desktop-section-hero__circle--creative {
+        gap: var(--hc-gap);
+        padding: var(--hc-pad);
       }
 
       .desktop-section-hero__circle--side {
-        padding: 34px 12px;
-        gap: 10px;
+        gap: var(--hs-gap);
+        padding: var(--hs-pad);
       }
 
-      .hero-title-block,
-      .hero-title-block__line {
-        line-height: 0.88;
-      }
-
-      .hero-title-block__line--57 {
-        font-size: 34px;
-      }
-
-      .hero-title-block__line--88,
-      .hero-title-block--side .hero-title-block__line--on {
-        font-size: 54px;
-      }
-
-      .hero-title-block--side .hero-title-block__line--sub {
-        font-size: 30px;
-      }
-
-      .hero-body-en {
-        font-size: 13px;
-        line-height: 1.35;
-      }
-
-      .hero-body-kr {
-        font-size: 11px;
-        line-height: 1.45;
-      }
-
-      .hero-stack--side {
-        gap: 10px;
-      }
-
-      .hero-stack--side .hero-body-en {
-        font-size: 13px;
-        line-height: 1.35;
+      .desktop-section-hero__inner {
+        --hero-circle-d: min(340px, 100cqi);
       }
 
       /* Figma mobile(375w): outclients-list 1열 */
@@ -2289,6 +3204,10 @@
 
       .desktop-section-outclients__masthead {
         gap: 72px;
+      }
+
+      .desktop-section-outclients__title {
+        font-size: 32px;
       }
 
       .desktop-section-outclients__list {
@@ -2310,6 +3229,11 @@
       .desktop-section-outclients__row--top,
       .desktop-section-outclients__row--bottom {
         max-width: 241px;
+      }
+
+      .desktop-section-outclients__logo {
+        transform-origin: center;
+        transform: scale(0.6666667);
       }
 
       .desktop-section-outclients__logo--smart {
@@ -2351,6 +3275,7 @@
       .desktop-section-contactus__text {
         font-size: 20px;
         line-height: 1.55;
+        font-weight: 300;
       }
 
       .desktop-section-contactus__nowrap {
@@ -2419,80 +3344,95 @@
 
   <main>
     <section class="desktop-section-hero" aria-label="소개">
-      <div class="desktop-section-hero__bg" aria-hidden="true"></div>
       <div class="desktop-section-hero__inner">
+        <div class="desktop-section-hero__bg" aria-hidden="true"></div>
         <div class="desktop-section-hero__circle-list">
-          <article class="desktop-section-hero__circle">
+          <article class="desktop-section-hero__circle desktop-section-hero__circle--value">
             <h2 class="hero-title-block">
-              <span class="hero-title-block__line hero-title-block__line--57">Value
-              </span>
+              <span class="hero-title-block__line hero-title-block__line--57">Value </span>
               <span class="hero-title-block__line hero-title-block__line--88">Creation!</span>
             </h2>
-            <div class="hero-body-en">
-              <p>
-                Integrated marketing communication for our partners, <br>
-                creating new value through strategic collaboration <br>
-                and innovation.</p>
+            <div class="hero-body-en hero-body-en--desktop">
+              <p>Integrated marketing communication for our partners,</p>
+              <p>creating new value through strategic collaboration</p>
+              <p>and innovation.</p>
             </div>
-            <div class="hero-body-kr">
-              <p>
-                파트너 고객사의 통합 마케팅 커뮤니케이션에 새로운 가치를
-                구현하기 위해
-              </p>
-              <p>
-                오랜 준비를 통한 치밀한 전략과 엄격한 내부 기준 그리고
-                조화롭고
-              </p>
-              <p>
-                효율적인 파트너쉽을 통해 혁신적이고 진보적인 가치를
-              </p>
+            <div class="hero-body-en--mobile">
+              <p>Integrated marketing communication for our partners, creating new value through strategic collaboration</p>
+              <p>and innovation.</p>
+            </div>
+            <div class="hero-body-kr hero-body-kr--desktop">
+              <p>파트너 고객사의 통합 마케팅 커뮤니케이션에 새로운 가치를 구현하기 위해</p>
+              <p>오랜 준비를 통한 치밀한 전략과 엄격한 내부 기준 그리고 조화롭고</p>
+              <p>효율적인 파트너쉽을 통해 혁신적이고 진보적인 가치를</p>
+              <p>구현하기 위해 노력하고 있습니다.</p>
+            </div>
+            <div class="hero-body-kr--mobile">
+              <p>파트너 고객사의 통합 마케팅 커뮤니케이션에 새로운 가치를 구현하기 위해 오랜 준비를 통한 치밀한 전략과 엄격한 내부 기준 그리고 조화롭고</p>
+              <p>효율적인 파트너쉽을 통해 </p>
+              <p>혁신적이고 진보적인 가치를</p>
               <p>구현하기 위해 노력하고 있습니다.</p>
             </div>
           </article>
-          <article class="desktop-section-hero__circle">
-            <h2 class="hero-title-block">
-              <span class="hero-title-block__line hero-title-block__line--57">Creative
-              </span>
-              <span class="hero-title-block__line hero-title-block__line--88">Insight!</span>
+          <article class="desktop-section-hero__circle desktop-section-hero__circle--creative">
+            <h2 class="hero-title-block hero-title-block--creative">
+              <span class="hero-title-block__creative-inner"><span class="hero-title-block__line hero-title-block__line--57">Creative </span><span class="hero-title-block__line hero-title-block__line--88">Insight!</span></span>
             </h2>
-            <p class="hero-body-en">
-              We deliver creative insights that unlock new possibilities <br>
-              and bring differentiated ideas to our customers.
-            </p>
-            <div class="hero-body-kr">
-              <p>
-                크리에이티브 한 통찰력으로 더 큰 미래를 위한 새로운 가능성을
-              </p>
-              <p>
-                줄 수 있는 차별화된 아이디어를 고객에게 제공하기 위해
-              </p>
-              <p>노력하고 있습니다.</p>
+            <div class="hero-body-stack hero-body-stack--creative">
+              <div class="hero-body-en hero-body-en--desktop">
+                <p>We deliver creative insights that unlock new</p>
+                <p>possibilities and bring differentiated ideas to our</p>
+                <p>customers.</p>
+              </div>
+              <div class="hero-body-en--mobile">
+                <p>We deliver creative insights that unlock new possibilities and bring differentiated ideas to our customers.</p>
+              </div>
+              <div class="hero-body-kr hero-body-kr--desktop">
+                <p>크리에이티브 한 통찰력으로 더 큰 미래를 위한 새로운 가능성을</p>
+                <p>줄 수 있는 차별화된 아이디어를 고객에게 제공하기 위해</p>
+                <p>노력하고 있습니다.</p>
+              </div>
+              <div class="hero-body-kr--mobile">
+                <p>크리에이티브 한 통찰력으로 더 큰 미래를 위한 새로운 가능성을 줄 수 있는 차별화된 아이디어를 고객에게</p>
+                <p>제공하기 위해 노력하고 있습니다.</p>
+              </div>
             </div>
           </article>
           <article class="desktop-section-hero__circle desktop-section-hero__circle--side">
             <h2 class="hero-title-block hero-title-block--side">
-              <span class="hero-title-block__line hero-title-block__line--on">On</span>
-              <span class="hero-title-block__line hero-title-block__line--sub">the Client’s Side</span>
+              <span class="hero-title-block__side-pc">
+                <span class="hero-title-block__line hero-title-block__line--on">On</span>
+                <span class="hero-title-block__line hero-title-block__line--sub">the Client’s Side</span>
+              </span>
+              <span class="hero-title-block__side-mob">
+                <span class="hero-title-block__line hero-title-block__line--on">ON</span>
+                <span class="hero-title-block__line hero-title-block__line--sub-m">the Client’s</span>
+                <span class="hero-title-block__line hero-title-block__line--sub-m">Side</span>
+              </span>
             </h2>
-            <div class="hero-stack--side">
-              <p class="hero-body-en">
-                We take a customer-centric approach, developing marketing<br>
-                strategies that resonate emotionally and build powerful brands. <br>
-                At designMODE, we consider both business perspectives and<br>
-                the interconnected nature of visual communication.
-              </p>
-       
-              <div class="hero-body-kr">
-                <p>
-                  소비자 중심의 커뮤니케이션 전략은 그 어떤 마케팅보다
-                  효과적이며,
-                </p>
-                <p>
-                  소비자의 감성을 자극하여 흡입력 있는 파워 브랜드를
-                  완성합니다.
-                </p>
+            <div class="hero-body-stack hero-body-stack--side">
+              <div class="hero-body-en hero-body-en--desktop">
+                <p>We take a customer-centric approach, developing</p>
+                <p>marketing strategies that resonate emotionally and build</p>
+                <p>powerful brands. At designMODE, we consider both</p>
+                <p>business perspectives and the interconnected nature of</p>
+                <p>visual communication.</p>
+              </div>
+              <div class="hero-body-en--mobile">
+                <p>We take a customer-centric approach, developing marketing strategies that resonate emotionally and build powerful brands. At designMODE, we consider both business perspectives and the interconnected nature of visual communication.</p>
+              </div>
+              <div class="hero-body-kr hero-body-kr--desktop">
+                <p>소비자 중심의 커뮤니케이션 전략은 그 어떤 마케팅보다 효과적이며,</p>
+                <p>소비자의 감성을 자극하여 흡입력 있는 파워 브랜드를 완성합니다.</p>
                 <p>디자인모드는 항상 고객의 관점에서 비즈니스와</p>
                 <p>시각적 이미지의 상호 연관성을 고려합니다.</p>
+              </div>
+              <div class="hero-body-kr--mobile">
+                <p>소비자 중심의 커뮤니케이션 전략은 그 어떤 마케팅보다 </p>
+                <p>효과적이며, 소비자의 감성을 자극하여 흡입력 있는 </p>
+                <p>파워 브랜드를 완성합니다. 디자인모드는 항상 고객의 </p>
+                <p>관점에서 비즈니스와 시각적 이미지의 </p>
+                <p>상호 연관성을 고려합니다.</p>
               </div>
             </div>
           </article>
@@ -2519,53 +3459,98 @@
             <p class="desktop-section-about__tagline">
               Value Creation Through Design
             </p>
-            <div class="desktop-section-about__body-en">
+            <div class="desktop-section-about__body-en desktop-section-about__body-en--desktop">
               <p>
+                In a rapidly changing market, designMODE has been delivering integrated marketing services that drive our clients’ success.
+              </p>
+              <p>
+                Through in-depth research, strategic insight, and creative execution, we help businesses move forward and create meaningful value.
+              </p>
+              <p>
+                We believe that a customer-centric approach-grounded in both rational understanding and emotional insight-is key to building impactful<br class="about-en-pc-br" aria-hidden="true" />
+                design strategies. designMODE will continue to create new value from our customers’ perspective, today and into the future.
+              </p>
+            </div>
+            <div class="desktop-section-about__body-en desktop-section-about__body-en--mobile">
+              <p>
+                <span class="desktop-section-about__tagline-mob">Value Creation Through Design</span><br>
+                <br>
                 In a rapidly changing market,<br>
-                designMODE has been delivering integrated marketing services that drive our clients’ success.
-              </p>
-              <p>
+                designMODE has been delivering<br>
+                integrated marketing services<br>
+                that drive our clients’ success.<br>
+                <br>
                 Through in-depth research,<br>
-                strategic insight, and creative execution, we help businesses<br>
-                move forward and create meaningful value.
-              </p>
-              <p>
-                We believe that a customer-centric approach-grounded in both<br>
-                rational understanding and emotional insight-is key to building<br>
-                impactful design strategies. designMODE will continue to create new value from<br>
-                our customers’ perspective, today and into the future.
+                strategic insight,<br>
+                and creative execution,<br>
+                we help businesses<br>
+                move forward<br>
+                and create meaningful value.<br>
+                <br>
+                We believe that<br>
+                a customer-centric approach,<br>
+                grounded in rational understanding<br>
+                and emotional insight,<br>
+                is key to building<br>
+                impactful design strategies.<br>
+                <br>
+                designMODE will continue<br>
+                to create new value<br>
+                from our customers’ perspective,<br>
+                today and into the future.
               </p>
             </div>
           </div>
           <div class="desktop-section-about__korean about-reveal-target">
             <p class="desktop-section-about__kr-head">
-              디자인을 통해<br class="about-kr-mobile-br" aria-hidden="true" />
-              새로운 가치를 창출합니다.
+              디자인을 통해<br class="about-mob-br" aria-hidden="true" /> 새로운 가치를 창출합니다.
             </p>
-            <div class="desktop-section-about__body-kr">
+            <div class="desktop-section-about__body-kr desktop-section-about__body-kr--desktop">
               <p>
-                급변하는 시장의 환경 속에서도<br class="about-kr-mobile-br" aria-hidden="true" />
-                디자인 모드는 디자인을 통해<br class="about-kr-mobile-br" aria-hidden="true" />
-                파트너 고객사의 통합 마케팅<br class="about-kr-mobile-br" aria-hidden="true" />
-                서비스를 성공리에 진행해 왔습니다.
+                급변하는 시장의 환경 속에서도 디자인 모드는 디자인을 통해 파트너 고객사의 통합 마케팅 서비스를 성공리에 진행해 왔습니다.
               </p>
               <p>
-                시장과 고객을 움직일 수 있는<br class="about-kr-mobile-br" aria-hidden="true" />
-                한발 앞선 창조적 통찰력,<br class="about-kr-mobile-br" aria-hidden="true" />
-                치밀한 조사와 분석 그리고 실행을<br class="about-kr-mobile-br" aria-hidden="true" />
-                통한 새로운 가치 창출,
+                시장과 고객을 움직일 수 있는 한발 앞선 창조적 통찰력, 치밀한 조사와 분석 그리고 실행을 통한 새로운 가치 창출,
               </p>
               <p>
-                소비자의 이성과 감성을 움직일 수<br class="about-kr-mobile-br" aria-hidden="true" />
-                있는 고객 중심 디자인 전략<br class="about-kr-mobile-br" aria-hidden="true" />
-                디자인 모드는 창조적 통찰력으로<br class="about-kr-mobile-br" aria-hidden="true" />
-                고객의 관점에서 새로운 가치를
+                소비자의 이성과 감성을 움직일 수 있는 고객 중심 디자인 전략 디자인 모드는 창조적 통찰력으로 고객의 관점에서
               </p>
               <p>
-                창출하기 위해 오늘도 그리고 내일도<br class="about-kr-mobile-br" aria-hidden="true" />
-                나아가겠습니다.
+                새로운 가치를 창출하기 위해 오늘도 그리고 내일도 나아가겠습니다.
               </p>
-              <p><br aria-hidden="true" />감사합니다.</p>
+              <p class="desktop-section-about__body-kr-outro">감사합니다.</p>
+            </div>
+            <div class="desktop-section-about__body-kr desktop-section-about__body-kr--mobile">
+              <p>
+                <span class="desktop-section-about__kr-head-mob">디자인을 통해<br>
+                새로운 가치를 창출합니다.</span><br>
+                <br>
+                급변하는 시장 환경 속에서도<br>
+                디자인 모드는<br>
+                파트너 고객사의<br>
+                통합 마케팅 서비스를<br>
+                성공적으로 진행해 왔습니다.<br>
+                <br>
+                시장과 고객을 움직이는<br>
+                한발 앞선 창조적 통찰력,<br>
+                <br>
+                치밀한 조사와 분석,<br>
+                그리고 실행을 통한<br>
+                새로운 가치 창출,<br>
+                <br>
+                소비자의 이성과 감성을<br>
+                함께 움직이는<br>
+                고객 중심 디자인 전략.<br>
+                <br>
+                디자인 모드는<br>
+                창조적 통찰력을 바탕으로<br>
+                고객의 관점에서<br>
+                새로운 가치를 창출하기 위해<br>
+                오늘도, 그리고 내일도<br>
+                나아가겠습니다.<br>
+                <br>
+                감사합니다.
+              </p>
             </div>
             <div class="desktop-section-about__sign">
               <p class="desktop-section-about__sign-text">
@@ -2624,9 +3609,10 @@
           </div>
           <div class="desktop-section-certifiction__info">
             <p class="desktop-section-certifiction__org">ICR</p>
-            <p class="desktop-section-certifiction__cert">
-              품질경영시스템인증서
-            </p>
+            <div class="desktop-section-certifiction__cert">
+              <p>품질경영시스템</p>
+              <p>인증서</p>
+            </div>
           </div>
         </article>
         <article class="desktop-section-certifiction__card">
@@ -2649,9 +3635,10 @@
             <p class="desktop-section-certifiction__org">
               한국산업기술진흥협회
             </p>
-            <p class="desktop-section-certifiction__cert">
-              연구개발전담부서인정서
-            </p>
+            <div class="desktop-section-certifiction__cert">
+              <p>연구개발전담부서</p>
+              <p>인정서</p>
+            </div>
           </div>
         </article>
       </div>
@@ -2694,15 +3681,11 @@
               <p>&amp; Environment</p>
             </div>
             <div class="desktop-section-team__detail-col">
-              <p>Homepage</p>
-              <p>Interactive</p>
-              <p>e-Design</p>
-            </div>
-            <div class="desktop-section-team__detail-col">
               <p>Graphic</p>
               <p>Editorial</p>
               <p>Packaging</p>
               <p>Promotion</p>
+             
             </div>
             <div class="desktop-section-team__detail-col">
               <p>Strategy</p>
@@ -2711,21 +3694,26 @@
               <p>CRM</p>
             </div>
             <div class="desktop-section-team__detail-col">
+              <p>Homepage</p>
+              <p>Interactive</p>
+              <p>e-Design</p>
+            </div>
+            <div class="desktop-section-team__detail-col">
               <p>Advisory Group</p>
               <p>Production Group</p>
               <p>Freelancer Group</p>
             </div>
           </div>
 
-          <div class="desktop-section-team__responsive-stack" aria-hidden="true">
-            <div class="desktop-section-team__responsive-shell desktop-section-team__responsive-shell--top">
+          <div class="desktop-section-team__responsive-stack desktop-section-team__responsive-stack--tablet" aria-hidden="true">
+            <div class="desktop-section-team__responsive-shell desktop-section-team__responsive-shell--top desktop-section-team__chart-list-01">
               <ul>
-                <li>Design Team 1</li>
-                <li>Design Team 2</li>
-                <li>Planning Team</li>
+                <li>Design<br aria-hidden="true" />Team 1</li>
+                <li>Design<br aria-hidden="true" />Team 2</li>
+                <li>Planning<br aria-hidden="true" />Team</li>
               </ul>
             </div>
-            <div class="desktop-section-team__responsive-details desktop-section-team__responsive-details--top">
+            <div class="desktop-section-team__responsive-details desktop-section-team__responsive-details--top desktop-section-team__chart-list-01-text">
               <div>
                 <p>POP/Display</p>
                 <p>&amp; Environment</p>
@@ -2744,17 +3732,64 @@
               </div>
             </div>
 
-            <div class="desktop-section-team__responsive-shell desktop-section-team__responsive-shell--bottom">
+            <div class="desktop-section-team__responsive-shell desktop-section-team__responsive-shell--bottom desktop-section-team__chart-list-02">
               <ul>
-                <li>Design Team 3</li>
-                <li>Associated Group</li>
+                <li>Design<br aria-hidden="true" />Team 3</li>
+                <li>Associated<br aria-hidden="true" />Group</li>
               </ul>
             </div>
-            <div class="desktop-section-team__responsive-details desktop-section-team__responsive-details--bottom">
+            <div class="desktop-section-team__responsive-details desktop-section-team__responsive-details--bottom desktop-section-team__chart-list-02-text">
               <div>
                 <p>Homepage</p>
                 <p>Interactive</p>
                 <p>e-Design</p>
+              </div>
+              <div>
+                <p>Advisory Group</p>
+                <p>Production Group</p>
+                <p>Freelancer Group</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="desktop-section-team__responsive-stack desktop-section-team__responsive-stack--mobile" aria-hidden="true">
+            <div class="desktop-section-team__responsive-shell desktop-section-team__responsive-shell--top desktop-section-team__chart-list-01">
+              <ul>
+                <li>Design<br aria-hidden="true" />Team 1</li>
+                <li>Design<br aria-hidden="true" />Team 2</li>
+                <li>Design<br aria-hidden="true" />Team 3</li>
+              </ul>
+            </div>
+            <div class="desktop-section-team__responsive-details desktop-section-team__responsive-details--top desktop-section-team__chart-list-01-text">
+              <div>
+                <p>POP/Display</p>
+                <p>&amp; Environment</p>
+              </div>
+              <div>
+                <p>Graphic</p>
+                <p>Editorial</p>
+                <p>Packaging</p>
+                <p>Promotion</p>
+              </div>
+              <div>
+                <p>Homepage</p>
+                <p>Interactive</p>
+                <p>e-Design</p>
+              </div>
+            </div>
+
+            <div class="desktop-section-team__responsive-shell desktop-section-team__responsive-shell--bottom desktop-section-team__chart-list-02">
+              <ul>
+                <li>Planning<br aria-hidden="true" />Team</li>
+                <li>Associated<br aria-hidden="true" />Group</li>
+              </ul>
+            </div>
+            <div class="desktop-section-team__responsive-details desktop-section-team__responsive-details--bottom desktop-section-team__chart-list-02-text">
+              <div>
+                <p>Strategy</p>
+                <p>Planning</p>
+                <p>Marketing</p>
+                <p>CRM</p>
               </div>
               <div>
                 <p>Advisory Group</p>
