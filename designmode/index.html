@@ -271,29 +271,6 @@
           calc((100cqi - 2 * var(--hero-gap)) / 3));
     }
 
-    .desktop-section-hero__bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: calc(var(--hero-pad-top) + var(--hero-circle-d) / 2);
-      background-color: #d7df23;
-      overflow: hidden;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* MAIN_2_5 — PNG 단일 이미지(SVG pattern 타일 방지) */
-    .desktop-section-hero__bg img {
-      display: block;
-      width: 100%;
-      min-width: 100%;
-      height: 100%;
-      min-height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
 
     .desktop-section-hero__inner {
       position: relative;
@@ -302,8 +279,7 @@
       container-name: hero-inner;
       --hero-pad-top: 56px;
       --hero-gap: 24px;
-      --hero-circle-d: min(540px,
-          calc((100cqi - 2 * var(--hero-gap)) / 3));
+      --hero-circle-d: min(540px, calc((100cqi - 2 * var(--hero-gap)) / 3));
       width: 100%;
       max-width: 1670px;
       margin: 0 auto;
@@ -313,12 +289,34 @@
       align-items: center;
     }
 
+    /* 배경 — main_backgorund.png 전용(전체 색상, 모든 해상도 100% 채움) */
+    .desktop-section-hero__inner > .desktop-section-hero__bg {
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 50%;
+      right: auto;
+      width: 100vw;
+      max-width: none;
+      margin-left: -50vw;
+      height: calc(var(--hero-pad-top) + var(--hero-circle-d) / 2);
+      background-color: #d7df23;
+      background-image: url("images/main_backgorund.png");
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: 100% 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
     .desktop-section-hero__circle-list {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
       gap: var(--hero-gap);
       width: 100%;
       max-width: 100%;
@@ -327,6 +325,16 @@
 
     /* Figma text-list 2:106 — hero-01(49:405) row gap 24px items-start */
     .desktop-section-hero__circle {
+      /* 모바일·태블릿 타이포 (PC는 min-width:769px에서 별도 적용) */
+      --hero-t57: clamp(26px, 10cqi, 34px);
+      --hero-t88: clamp(38px, 14.118cqi, 48px);
+      --hero-en: clamp(14px, 4.706cqi, 16px);
+      --hero-kr: clamp(13px, 4.118cqi, 16px);
+      --hero-side-en: clamp(14px, 4.118cqi, 16px);
+      --hero-side-kr: clamp(13px, 3.529cqi, 16px);
+      --hero-side-sub: clamp(30px, 10.882cqi, 37px);
+      --hero-text-w: min(85.882cqi, 292px);
+      --hero-inner-gap: clamp(10px, 4.118cqi, 14px);
       --hero-gap: 24px;
       flex: 1 1 0;
       background: #222222;
@@ -341,7 +349,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 24px;
+      gap: 0;
       box-shadow: 0 6px 32px rgba(0, 0, 0, 0.13);
       padding: 24px;
       text-align: center;
@@ -355,7 +363,20 @@
     .desktop-section-hero__circle--value {
       container-type: inline-size;
       container-name: hero-value;
-      gap: clamp(14px, 4.444cqi, 24px);
+      gap: 0;
+      padding: clamp(16px, 4.444cqi, 24px);
+    }
+
+    .desktop-section-hero__circle--value .hero-circle-inner,
+    .desktop-section-hero__circle--creative .hero-circle-inner,
+    .desktop-section-hero__circle--side .hero-circle-inner {
+      gap: var(--hero-inner-gap);
+    }
+
+    .desktop-section-hero__circle--creative {
+      container-type: inline-size;
+      container-name: hero-creative;
+      gap: 0;
       padding: clamp(16px, 4.444cqi, 24px);
     }
 
@@ -365,7 +386,8 @@
         min-width: 0;
         max-width: min(74.259cqi, 401px);
         width: 100%;
-        min-height: clamp(72px, 25.556cqi, 138px);
+        min-height: 0;
+        flex: 0 1 auto;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -373,14 +395,8 @@
         box-sizing: border-box;
       }
 
-      .desktop-section-hero__circle--value .hero-title-block__line--57 {
-        font-size: clamp(34px, 10.556cqi, 57px);
-        font-weight: 900;
-        line-height: 0.8;
-      }
-
+      .desktop-section-hero__circle--value .hero-title-block__line--57,
       .desktop-section-hero__circle--value .hero-title-block__line--88 {
-        font-size: clamp(48px, 16.296cqi, 88px);
         font-weight: 900;
         line-height: 0.8;
       }
@@ -394,18 +410,6 @@
         text-align: center;
       }
 
-      .desktop-section-hero__circle--value .hero-body-en--desktop {
-        font-size: clamp(14px, 4.706cqi, 20px);
-        line-height: 1.35;
-        max-width: min(87.037cqi, 470px);
-      }
-
-      .desktop-section-hero__circle--value .hero-body-kr--desktop {
-        font-size: clamp(13px, 4.118cqi, 16px);
-        line-height: 1.4;
-        max-width: min(85.185cqi, 460px);
-      }
-
       .desktop-section-hero__circle--value .hero-body-en--desktop p,
       .desktop-section-hero__circle--value .hero-body-kr--desktop p {
         font-size: inherit;
@@ -413,29 +417,61 @@
         margin-inline: auto;
         text-align: center;
       }
+    }
 
-      .desktop-section-hero__circle--value .hero-body-en--mobile,
-      .desktop-section-hero__circle--value .hero-body-kr--mobile {
-        font-size: clamp(12px, 4.706cqi, 16px);
-        line-height: 1.35;
-        max-width: min(85.882cqi, 292px);
+    @container hero-creative (min-width: 0) {
+      .desktop-section-hero__circle--creative .hero-title-block {
         flex-shrink: 1;
+        min-width: 0;
+        max-width: min(74.259cqi, 401px);
         width: 100%;
+        min-height: 0;
+        flex: 0 1 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+      }
+
+      .desktop-section-hero__circle--creative .hero-title-block__line--57,
+      .desktop-section-hero__circle--creative .hero-title-block__line--88 {
+        font-weight: 900;
+        line-height: 0.8;
+      }
+
+      .desktop-section-hero__circle--creative .hero-body-en--desktop,
+      .desktop-section-hero__circle--creative .hero-body-kr--desktop {
+        flex-shrink: 1;
+        min-width: 0;
+        width: 100%;
+        align-self: center;
         text-align: center;
       }
 
-      .desktop-section-hero__circle--value .hero-body-kr--mobile {
-        font-size: clamp(11px, 4.118cqi, 14px);
-        line-height: 1.4;
-      }
-
-      .desktop-section-hero__circle--value .hero-body-en--mobile p,
-      .desktop-section-hero__circle--value .hero-body-kr--mobile p {
+      .desktop-section-hero__circle--creative .hero-body-en--desktop p,
+      .desktop-section-hero__circle--creative .hero-body-kr--desktop p {
         font-size: inherit;
         line-height: inherit;
         margin-inline: auto;
         text-align: center;
       }
+    }
+
+    /* 원 안 타이틀·본문 블록 — 세로 중앙 정렬 단위 */
+    .hero-circle-inner {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-width: 0;
+      min-height: 0;
+      flex: 1 1 auto;
+      max-height: 100%;
+      gap: var(--hero-inner-gap);
+      text-align: center;
     }
 
     .hero-body-stack {
@@ -453,9 +489,20 @@
     }
 
     .hero-body-en--mobile,
-    .hero-body-kr--mobile,
+    .hero-body-kr--mobile {
+      display: none !important;
+    }
+
+    .hero-title-block__side-pc {
+      display: none !important;
+    }
+
     .hero-title-block__side-mob {
-      display: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 0.8;
+      color: #d7df23;
     }
 
     .hero-body-en--desktop,
@@ -474,7 +521,26 @@
     }
 
     .hero-body-en--desktop {
+      font-size: var(--hero-en);
+      line-height: 1.35;
+      max-width: var(--hero-text-w);
+      width: 100%;
       font-weight: 300;
+    }
+
+    .hero-body-kr--desktop {
+      font-size: var(--hero-kr);
+      line-height: 1.4;
+      max-width: var(--hero-text-w);
+      width: 100%;
+    }
+
+    .desktop-section-hero__circle--side .hero-body-en--desktop {
+      font-size: var(--hero-side-en);
+    }
+
+    .desktop-section-hero__circle--side .hero-body-kr--desktop {
+      font-size: var(--hero-side-kr);
     }
 
     .hero-body-en--desktop p,
@@ -485,12 +551,6 @@
       max-width: 100%;
       text-align: center;
       font-weight: 300;
-    }
-
-    .hero-title-block__side-pc {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
 
     .desktop-section-hero__circle.hero-reveal-init {
@@ -548,30 +608,20 @@
       line-height: 0.8;
     }
 
-    /* text1, text2: 57px + 88px */
     .hero-title-block__line--57 {
-      font-size: 57px;
+      font-size: var(--hero-t57);
     }
 
     .hero-title-block__line--88 {
-      font-size: 88px;
-    }
-
-    /* text3 (49:396): On 88px + the Client's Side 50px, leading 1.05 */
-    .hero-title-block--side {
-      line-height: 1.05;
-    }
-
-    .hero-title-block--side .hero-title-block__line {
-      line-height: 1.05;
+      font-size: var(--hero-t88);
     }
 
     .hero-title-block--side .hero-title-block__line--on {
-      font-size: 88px;
+      font-size: var(--hero-t57);
     }
 
-    .hero-title-block--side .hero-title-block__line--sub {
-      font-size: 50px;
+    .hero-title-block--side .hero-title-block__line--sub-m {
+      font-size: var(--hero-side-sub);
     }
 
     .hero-body-en {
@@ -583,22 +633,53 @@
       justify-content: center;
       align-self: center;
       width: 100%;
-      max-width: min(470px, 100%);
+      max-width: var(--hero-text-w);
       margin: 0;
       margin-inline: auto;
       text-align: center;
       text-wrap: initial;
-      font-size: 20px;
+      font-size: var(--hero-en);
       font-weight: 300;
-      line-height: normal;
+      line-height: 1.35;
       color: #ffffff;
     }
 
-    /* Figma 49:397 — text3 영문 18px, w 470px */
+    /* hero-03 — 원 중앙 정렬 */
+    .desktop-section-hero__circle--side {
+      container-type: inline-size;
+      container-name: hero-side;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+    }
+
+
+    .desktop-section-hero__circle--side .hero-title-block {
+      flex: 0 1 auto;
+      min-height: 0;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .desktop-section-hero__circle--side .hero-body-stack {
+      flex: 0 1 auto;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 0;
+    }
+
     .desktop-section-hero__circle--side .hero-body-en {
-      font-size: 18px;
-      line-height: normal;
-      max-width: 470px;
+      line-height: 1.35;
+      max-width: var(--hero-text-w);
+      width: 100%;
+    }
+
+    .desktop-section-hero__circle--side .hero-body-en p {
+      width: 100%;
+      max-width: 100%;
+      margin-inline: 0;
+      text-align: center;
     }
 
     .hero-body-en p {
@@ -620,12 +701,12 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      max-width: min(460px, 100%);
+      max-width: var(--hero-text-w);
       margin-inline: auto;
       text-align: center;
-      font-size: 16px;
+      font-size: var(--hero-kr);
       font-weight: 300;
-      line-height: normal;
+      line-height: 1.4;
       color: #ffffff;
       margin: 0;
       gap: 0;
@@ -643,8 +724,66 @@
       margin-top: 0;
     }
 
-    /* text-list PC — 3열 원이 뷰포트 안에 들어오도록 flex 축소 */
-    @media (min-width: 769px) {
+    /* hero — PC/모바일 본문 분리 */
+    .hero-copy--pc {
+      display: none;
+    }
+
+    .hero-copy--mid {
+      display: none;
+    }
+
+    .hero-copy--mob {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-copy--pc p,
+    .hero-copy--mob p {
+      margin: 0;
+      text-align: center;
+      font-weight: 300;
+    }
+
+    /* hero-01 국문 모바일 — 4줄 블록 */
+    .desktop-section-hero__circle--value .hero-body-kr__value {
+      margin: 0;
+      width: 100%;
+      max-width: var(--hero-text-w);
+      font-size: var(--hero-kr);
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .desktop-section-hero__circle--value .hero-body-kr__value p {
+      margin: 0;
+      font-size: inherit;
+      line-height: inherit;
+      font-weight: 300;
+      text-align: center;
+    }
+
+    .desktop-section-hero__circle--value .hero-kr-line {
+      white-space: nowrap;
+      font-size: inherit;
+      line-height: inherit;
+      font-weight: inherit;
+    }
+
+    .desktop-section-hero__circle--value .hero-body-kr--desktop,
+    .desktop-section-hero__circle--value .hero-body-kr--mobile {
+      line-height: 1.4;
+    }
+
+    .desktop-section-hero__circle--value .hero-body-kr--desktop p,
+    .desktop-section-hero__circle--value .hero-body-kr--mobile p {
+      line-height: 1.4;
+    }
+
+    /* text-list PC·태블릿(601+) — 3열 원 */
+    @media (min-width: 601px) {
       .desktop-section-hero__inner {
         width: 100%;
         max-width: min(1670px, 100%);
@@ -653,6 +792,10 @@
       }
 
       .desktop-section-hero__circle-list {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
         width: 100%;
         max-width: min(1668px, 100%);
         gap: 24px;
@@ -667,21 +810,6 @@
         width: auto;
         min-width: 0;
         max-width: 540px;
-      }
-
-      .desktop-section-hero__circle .hero-body-en--mobile,
-      .desktop-section-hero__circle .hero-body-kr--mobile,
-      .hero-title-block__side-mob {
-        display: none !important;
-      }
-
-      .desktop-section-hero__circle .hero-body-en--desktop,
-      .desktop-section-hero__circle .hero-body-kr--desktop {
-        display: flex;
-      }
-
-      .hero-title-block__side-pc {
-        display: flex;
       }
 
       .desktop-section-hero__circle .hero-title-block {
@@ -699,11 +827,9 @@
 
       .desktop-section-hero__circle .hero-body-en--desktop {
         align-self: center;
-        max-width: 470px;
+        max-width: var(--hero-text-w);
         width: 100%;
-        font-size: 20px;
         font-weight: 300;
-        line-height: normal;
         text-align: center;
       }
 
@@ -727,174 +853,249 @@
       }
 
       .desktop-section-hero__circle .hero-body-kr {
-        max-width: 460px;
+        max-width: var(--hero-text-w);
         width: 100%;
-        font-size: 16px;
         font-weight: 300;
-        line-height: normal;
       }
 
-      .desktop-section-hero__circle--creative .hero-title-block {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
-      }
-
-      .desktop-section-hero__circle--side .hero-title-block {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
-        line-height: 1.05;
-      }
-
-      .desktop-section-hero__circle--side .hero-title-block__line {
-        line-height: 1.05;
-      }
     }
 
-    /* hero-01·02·03 — PC 유동 (공통 57/88px 규칙보다 우선) */
-    @media (min-width: 769px) {
-      .desktop-section-hero__circle--value .hero-title-block {
-        min-height: clamp(100px, 25.556cqi, 138px);
+    /* hero-01·02·03 — PC·태블릿(601+) 레이아웃 + 수정 전 타이포 */
+    @media (min-width: 601px) {
+      .desktop-section-hero__circle {
+        --hero-t57: clamp(40px, 10.556cqi, 57px);
+        --hero-t88: clamp(48px, 16.296cqi, 88px);
+        --hero-en: clamp(14px, 3.704cqi, 20px);
+        --hero-kr: clamp(13px, 2.963cqi, 16px);
+        --hero-side-en: clamp(14px, 3.333cqi, 18px);
+        --hero-side-kr: clamp(13px, 2.963cqi, 16px);
+        --hero-side-sub: clamp(28px, 9.259cqi, 50px);
+        --hero-text-w: min(87.037cqi, 470px);
+        --hero-inner-gap: clamp(14px, 4.444cqi, 24px);
       }
 
-      .desktop-section-hero__circle--value .hero-title-block__line--57 {
-        font-size: clamp(40px, 10.556cqi, 57px);
-      }
-
-      .desktop-section-hero__circle--value .hero-title-block__line--88 {
-        font-size: clamp(48px, 16.296cqi, 88px);
-      }
-
-      .desktop-section-hero__circle--value .hero-body-en--desktop {
-        font-size: clamp(14px, 3.704cqi, 20px);
-        max-width: min(87.037cqi, 470px);
-      }
-
-      .desktop-section-hero__circle--value .hero-body-kr--desktop {
-        font-size: clamp(13px, 2.963cqi, 16px);
-        max-width: min(85.185cqi, 460px);
-      }
-
-      .desktop-section-hero__circle--creative {
-        container-type: inline-size;
-        container-name: hero-creative;
-        --hc-gap: clamp(24px, 10cqi, 54px);
-        --hc-pad: clamp(16px, 4.444cqi, 24px);
-        --hc-title-57: clamp(34px, 10.556cqi, 57px);
-        --hc-title-88: clamp(48px, 16.296cqi, 88px);
-        --hc-body-en: clamp(14px, 3.704cqi, 20px);
-        --hc-body-kr: clamp(13px, 2.963cqi, 16px);
-        --hc-stack-gap: 0px;
-        gap: var(--hc-gap);
-        padding: var(--hc-pad);
-      }
-
-      .desktop-section-hero__circle--creative .hero-title-block {
-        min-height: clamp(100px, 31.481cqi, 170px);
-        max-width: min(74.259cqi, 401px);
-        flex-shrink: 1;
-      }
-
-      .desktop-section-hero__circle--creative .hero-title-block__line--57 {
-        font-size: var(--hc-title-57);
-      }
-
-      .desktop-section-hero__circle--creative .hero-title-block__line--88 {
-        font-size: var(--hc-title-88);
-      }
-
-      .desktop-section-hero__circle--creative .hero-body-stack {
-        gap: var(--hc-stack-gap);
-        flex-shrink: 1;
-        min-height: 0;
+      .hero-copy--pc {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 100%;
       }
 
-      .desktop-section-hero__circle--creative .hero-body-en {
-        font-size: var(--hc-body-en);
+      .hero-copy--wide {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .hero-copy--mid {
+        display: none !important;
+      }
+
+      .hero-copy--mob {
+        display: none !important;
+      }
+
+      .desktop-section-hero__circle--value .hero-title-block,
+      .desktop-section-hero__circle--creative .hero-title-block {
+        min-height: clamp(100px, 25.556cqi, 138px);
+        flex: 0 1 auto;
+      }
+
+      .hero-circle-inner {
+        flex: 1 1 auto;
+        justify-content: center;
+        max-height: 100%;
+      }
+
+      .desktop-section-hero__circle--creative .hero-circle-inner > * {
+        transform: translateY(-10px);
+      }
+
+      .desktop-section-hero__circle .hero-body-en--desktop,
+      .desktop-section-hero__circle .hero-body-kr--desktop {
+        flex: 0 1 auto;
+        min-height: 0;
+      }
+
+      .desktop-section-hero__circle .hero-body-en--desktop {
+        font-size: clamp(14px, 3.704cqi, 20px);
         line-height: 1.35;
         max-width: min(87.037cqi, 470px);
-        flex-shrink: 1;
       }
 
-      .desktop-section-hero__circle--creative .hero-body-en p {
-        font-size: inherit;
-        line-height: inherit;
-      }
-
-      .desktop-section-hero__circle--creative .hero-body-kr {
-        font-size: var(--hc-body-kr);
+      .desktop-section-hero__circle .hero-body-kr--desktop {
+        font-size: clamp(13px, 2.963cqi, 16px);
         line-height: 1.4;
         max-width: min(85.185cqi, 460px);
-        flex-shrink: 1;
       }
 
-      .desktop-section-hero__circle--creative .hero-body-kr p {
-        font-size: inherit;
-        line-height: inherit;
-      }
-
-      /* hero-02 Side — PC 유동 */
       .desktop-section-hero__circle--side {
-        container-type: inline-size;
-        container-name: hero-side;
-        --hs-gap: clamp(14px, 6.481cqi, 35px);
-        --hs-pad: clamp(16px, 4.444cqi, 24px);
-        --hs-stack-gap: clamp(14px, 5.37cqi, 29px);
-        --hs-title-on: clamp(48px, 16.296cqi, 88px);
-        --hs-title-sub: clamp(28px, 9.259cqi, 50px);
-        --hs-body-en: clamp(14px, 3.333cqi, 18px);
-        --hs-body-kr: clamp(13px, 2.963cqi, 16px);
-        gap: var(--hs-gap);
-        padding: var(--hs-pad);
+        gap: 0;
+        padding: clamp(16px, 4.444cqi, 24px);
+        justify-content: center;
+        align-items: center;
       }
 
       .desktop-section-hero__circle--side .hero-title-block {
-        min-height: clamp(96px, 30.37cqi, 164px);
+        min-height: 0;
         max-width: min(74.259cqi, 401px);
-        flex-shrink: 1;
+        flex: 0 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
 
       .desktop-section-hero__circle--side .hero-title-block__line--on {
-        font-size: var(--hs-title-on);
+        font-size: clamp(48px, 16.296cqi, 88px);
       }
 
-      .desktop-section-hero__circle--side .hero-title-block__line--sub {
-        font-size: var(--hs-title-sub);
+      .desktop-section-hero__circle--side .hero-title-block__line--sub-m {
+        font-size: clamp(28px, 9.259cqi, 50px);
       }
 
-      .desktop-section-hero__circle--side .hero-body-stack {
-        gap: var(--hs-stack-gap);
-        flex-shrink: 1;
+      .desktop-section-hero__circle--side .hero-body-en--desktop {
+        font-size: clamp(14px, 3.333cqi, 18px);
+        line-height: 1.35;
+        max-width: min(87.037cqi, 470px);
+      }
+
+      .desktop-section-hero__circle--side .hero-body-kr--desktop {
+        font-size: clamp(13px, 2.963cqi, 16px);
+        line-height: 1.4;
+        max-width: min(85.185cqi, 460px);
+      }
+
+      .desktop-section-hero__circle--side .hero-body-en--desktop p,
+      .desktop-section-hero__circle--side .hero-body-kr--desktop p {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+        margin-inline: 0;
+        text-align: center;
+      }
+
+      /* PC — 3번 원 타이틀 PC 마크업(On / the Client's Side) */
+      .hero-title-block__side-pc {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        line-height: 0.8;
+      }
+
+      .hero-title-block__side-mob {
+        display: none !important;
+      }
+
+      .hero-title-block--side .hero-title-block__line--sub {
+        font-size: clamp(28px, 9.259cqi, 50px);
+      }
+    }
+
+    /* 1200px 3열 — 원 폭이 줄어들 때 PC 구조 유지 + 타이포 cqi 축소 */
+    @media (max-width: 1200px) and (min-width: 601px) {
+      .desktop-section-hero__inner {
+        padding-inline: 12px;
+      }
+
+      .desktop-section-hero__circle-list {
+        gap: 10px;
+      }
+
+      .desktop-section-hero__circle {
+        --hero-t57: clamp(28px, 9.5cqi, 48px);
+        --hero-t88: clamp(36px, 13cqi, 72px);
+        --hero-en: clamp(14px, 3.2cqi, 16px);
+        --hero-kr: clamp(13px, 2.9cqi, 16px);
+        --hero-side-en: clamp(14px, 3.1cqi, 16px);
+        --hero-side-kr: clamp(13px, 2.8cqi, 16px);
+        --hero-side-sub: clamp(22px, 7.5cqi, 40px);
+        --hero-inner-gap: clamp(8px, 2.4cqi, 14px);
+        padding: clamp(10px, 2.8cqi, 16px);
+      }
+
+      .desktop-section-hero__circle--value .hero-title-block,
+      .desktop-section-hero__circle--creative .hero-title-block {
         min-height: 0;
+      }
+
+      .desktop-section-hero__circle--creative .hero-circle-inner > * {
+        transform: none;
+      }
+
+      .desktop-section-hero__circle .hero-body-en--desktop,
+      .desktop-section-hero__circle .hero-body-kr--desktop,
+      .hero-copy--pc {
+        max-width: min(92cqi, 100%);
         width: 100%;
       }
 
-      .desktop-section-hero__circle--side .hero-body-en {
-        font-size: var(--hs-body-en);
+      .desktop-section-hero__circle .hero-body-en--desktop {
+        font-size: clamp(14px, 3.2cqi, 16px);
         line-height: 1.35;
-        max-width: min(87.037cqi, 470px);
-        flex-shrink: 1;
       }
 
-      .desktop-section-hero__circle--side .hero-body-en p {
+      .desktop-section-hero__circle .hero-body-kr--desktop {
+        font-size: clamp(13px, 2.9cqi, 16px);
+        line-height: 1.35;
+      }
+
+      .hero-copy--pc p {
         font-size: inherit;
         line-height: inherit;
+        max-width: 100%;
       }
 
-      .desktop-section-hero__circle--side .hero-body-kr {
-        font-size: var(--hs-body-kr);
-        line-height: 1.4;
-        max-width: min(85.185cqi, 460px);
-        flex-shrink: 1;
+      .hero-copy--wide {
+        display: none !important;
       }
 
-      .desktop-section-hero__circle--side .hero-body-kr p {
-        font-size: inherit;
-        line-height: inherit;
+      .hero-copy--mid {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        gap: 0;
+      }
+
+      .hero-copy--mid p {
+        margin: 0;
+        margin-inline: auto;
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        font-size: clamp(11px, 2.65cqi, 13px) !important;
+        line-height: 1.35;
+      }
+
+      .desktop-section-hero__circle--value .hero-copy--mid p:nth-child(3),
+      .desktop-section-hero__circle--value .hero-copy--mid p:nth-child(4),
+      .desktop-section-hero__circle--side .hero-copy--mid p:nth-child(4) {
+        font-size: clamp(10.5px, 2.5cqi, 13px) !important;
+      }
+
+      .desktop-section-hero__circle--value .hero-copy--mid .hero-kr-line {
+        white-space: nowrap;
+      }
+
+      .desktop-section-hero__circle--side .hero-title-block__line--on {
+        font-size: clamp(36px, 13cqi, 72px);
+      }
+
+      .hero-title-block--side .hero-title-block__line--sub {
+        font-size: clamp(22px, 7.5cqi, 40px);
+        line-height: 0.8;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-en--desktop {
+        font-size: clamp(14px, 3.05cqi, 18px);
+      }
+
+      .desktop-section-hero__circle--side .hero-body-kr--desktop {
+        font-size: clamp(13px, 2.85cqi, 16px);
       }
     }
 
@@ -1912,7 +2113,7 @@
 
     .desktop-section-copyright__text {
       margin: 0;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 300;
       line-height: 1.6;
       color: #2b2b2b;
@@ -1925,6 +2126,19 @@
     }
 
     .desktop-section-copyright__text br.copyright-desktop-br {
+      display: inline;
+    }
+
+    .copyright-copy--tablet,
+    .copyright-copy--mobile {
+      display: none;
+    }
+
+    .copyright-copy--wide {
+      text-wrap: initial;
+    }
+
+    .copyright-copy--wide .copyright-pc-br {
       display: inline;
     }
 
@@ -1941,11 +2155,9 @@
         font-size: 19px;
       }
 
-      /* 세로 스택: MAIN_2_5 배경이 hero 전체를 채움 */
-      .desktop-section-hero__bg {
-        top: 0;
-        bottom: 0;
-        height: 100%;
+      /* 태블릿 — 원 세로 중앙까지 (PC와 동일 계산) */
+      .desktop-section-hero__inner > .desktop-section-hero__bg {
+        height: calc(var(--hero-pad-top) + var(--hero-circle-d) / 2);
       }
 
       .desktop-section-logo__inner {
@@ -1957,7 +2169,7 @@
         width: min(303px, 80vw);
       }
 
-      /* ABOUT — 태블릿(≤1200): 여백·박스만 조정(PC와 동일 글자 크기·두께·줄간격·줄바꿈) */
+      /* ABOUT — 태블릿(≤1200): 여백·박스 조정 + 본문 20px */
       .desktop-section-about {
         padding: 100px 20px;
         gap: 64px;
@@ -1973,6 +2185,15 @@
 
       .desktop-section-about__english {
         gap: 22px;
+        font-size: 20px;
+      }
+
+      .desktop-section-about__kr-head {
+        font-size: 20px;
+      }
+
+      .desktop-section-about__body-kr {
+        font-size: 20px;
       }
 
       .desktop-section-about__korean {
@@ -2140,7 +2361,8 @@
       }
 
       .desktop-section-portpolio__btn {
-        width: min(100%, 100vw - 40px);
+        width: min(100%, 768px);
+        max-width: 768px;
       }
 
       .desktop-section-outclients {
@@ -2186,6 +2408,17 @@
       .desktop-section-contactus__text {
         font-size: 20px;
         font-weight: 300;
+      }
+
+      .copyright-copy--wide {
+        display: none !important;
+      }
+
+      .copyright-copy--tablet {
+        display: block !important;
+        font-size: 20px;
+        line-height: 1.6;
+        text-wrap: initial;
       }
     }
 
@@ -2291,11 +2524,21 @@
       }
 
       .desktop-section-contactus__map-wrap {
+        align-self: stretch;
+        width: 100%;
         max-width: none;
+        margin-inline: 0;
+        padding-inline: 0;
+      }
+
+      .desktop-section-contactus__map-wrap picture {
+        display: block;
         width: 100%;
       }
 
       .desktop-section-contactus__map {
+        width: 100%;
+        max-width: none;
         height: auto;
         object-fit: contain;
       }
@@ -2517,14 +2760,39 @@
       }
 
       .desktop-section-contactus {
-        padding-left: var(--mob-gutter);
-        padding-right: var(--mob-gutter);
+        padding-inline: 0;
       }
 
-      .desktop-section-contactus__map-wrap,
+      .desktop-section-contactus__title {
+        padding-inline: var(--mob-gutter);
+        box-sizing: border-box;
+        width: 100%;
+      }
+
+      .desktop-section-contactus__map-wrap {
+        align-self: stretch;
+        width: 100%;
+        max-width: none;
+        margin-inline: 0;
+        padding-inline: 0;
+      }
+
+      .desktop-section-contactus__map-wrap picture {
+        display: block;
+        width: 100%;
+      }
+
+      .desktop-section-contactus__map {
+        width: 100%;
+        max-width: none;
+        object-fit: contain;
+      }
+
       .desktop-section-contactus__info {
         width: 100%;
         max-width: 100%;
+        padding-inline: var(--mob-gutter);
+        box-sizing: border-box;
       }
 
       .desktop-section-copyright {
@@ -2730,6 +2998,15 @@
         width: 122px;
       }
 
+      .copyright-copy--wide,
+      .copyright-copy--tablet {
+        display: none !important;
+      }
+
+      .copyright-copy--mobile {
+        display: block !important;
+      }
+
       .desktop-section-copyright__text br.copyright-mobile-br {
         display: inline;
       }
@@ -2766,25 +3043,24 @@
       /* Figma mobile text-list 25:666 — 세로 스택 */
       .desktop-section-hero {
         --hero-pad-top: 40px;
-        --hero-mob-circle-size: min(340px, var(--mob-safe-w), 100%);
-        --hero-circle-d: min(540px, calc(100cqi - 2 * var(--mob-gutter)));
       }
 
       /* MAIN_2_5 — 두 번째 원(hero-02) 세로 중앙까지 */
-      .desktop-section-hero__bg {
-        top: 0;
-        bottom: auto;
-        height: calc(var(--hero-pad-top) + var(--hero-mob-circle-size) + var(--hero-gap) + var(--hero-mob-circle-size) / 2);
-      }
-
       .desktop-section-hero__inner {
         --hero-pad-top: 40px;
-        --hero-circle-d: min(540px, calc(100cqi - 2 * var(--mob-gutter)));
+        --hero-mob-circle-size: min(340px, var(--mob-safe-w), 100cqi);
+        --hero-circle-d: var(--hero-mob-circle-size);
         padding: 40px var(--mob-gutter) 0;
       }
 
+      .desktop-section-hero__inner > .desktop-section-hero__bg {
+        top: 0;
+        bottom: auto;
+        height: calc(var(--hero-pad-top) + var(--hero-circle-d) + var(--hero-gap) + var(--hero-circle-d) / 2);
+      }
+
       .desktop-section-hero__circle-list {
-        flex-direction: column;
+        flex-direction: column !important;
         flex-wrap: nowrap;
         align-items: center;
         justify-content: flex-start;
@@ -2792,108 +3068,55 @@
         width: 100%;
       }
 
+      .hero-copy--pc,
+      .hero-copy--wide,
+      .hero-copy--mid {
+        display: none !important;
+      }
+
+      .hero-copy--mob {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .hero-title-block__side-pc {
+        display: none !important;
+      }
+
+      .hero-title-block__side-mob {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        line-height: 0.8;
+      }
+
       .desktop-section-hero__circle {
         flex: 0 0 auto;
         width: min(340px, var(--mob-safe-w), 100%);
         height: auto;
         aspect-ratio: 1;
-        gap: 24px;
-        padding: 24px;
         max-width: 100%;
-      }
-
-      /* hero-01 모바일 (25:667) */
-      .desktop-section-hero__circle--value {
-        container-type: inline-size;
-        gap: clamp(10px, 4.118cqi, 14px);
+        justify-content: center;
+        align-items: center;
+        gap: 0;
         padding: clamp(14px, 4.444cqi, 24px);
+        --hero-kr: 11px;
+        --hero-side-kr: 11px;
       }
 
-      .desktop-section-hero__circle--value .hero-title-block {
-        min-height: 0;
-        flex-shrink: 1;
+      /* hero-01·02·03 모바일 — 타이포는 --hero-* 공통 */
+      .desktop-section-hero__circle--value,
+      .desktop-section-hero__circle--creative,
+      .desktop-section-hero__circle--side {
+        container-type: inline-size;
       }
 
-      .desktop-section-hero__circle--value .hero-title-block__line--57 {
-        font-size: clamp(26px, 10cqi, 34px);
-        font-weight: 900;
-        line-height: 0.8;
+      .desktop-section-hero__circle--creative .hero-circle-inner > * {
+        transform: none;
       }
 
-      .desktop-section-hero__circle--value .hero-title-block__line--88 {
-        font-size: clamp(38px, 14.118cqi, 48px);
-        font-weight: 900;
-        line-height: 0.8;
-      }
-
-      .desktop-section-hero__circle--value .hero-body-en--mobile {
-        font-size: clamp(12px, 4.706cqi, 16px);
-        line-height: 1.35;
-        max-width: min(85.882cqi, 292px);
-        width: 100%;
-        flex-shrink: 1;
-        text-align: center;
-      }
-
-      .desktop-section-hero__circle--value .hero-body-kr--mobile {
-        font-size: clamp(11px, 4.118cqi, 14px);
-        line-height: 1.4;
-        max-width: min(85.882cqi, 292px);
-        width: 100%;
-        flex-shrink: 1;
-        text-align: center;
-      }
-
-      .desktop-section-hero__circle--value .hero-body-en--mobile p,
-      .desktop-section-hero__circle--value .hero-body-kr--mobile p {
-        font-size: inherit;
-        line-height: inherit;
-        margin-inline: auto;
-        text-align: center;
-      }
-
-      .hero-body-en--desktop,
-      .hero-body-kr--desktop,
-      .hero-title-block__side-pc {
-        display: none;
-      }
-
-      .hero-body-en--mobile,
-      .hero-body-kr--mobile {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        align-self: center;
-        min-width: 0;
-        box-sizing: border-box;
-        width: 100%;
-        margin-inline: auto;
-        text-align: center;
-        text-wrap: initial;
-        color: #ffffff;
-        font-weight: 300;
-      }
-
-      .hero-body-en--mobile p,
-      .hero-body-kr--mobile p {
-        margin: 0;
-        margin-inline: auto;
-        width: auto;
-        max-width: 100%;
-        text-align: center;
-        font-weight: 300;
-        color: #ffffff;
-      }
-
-      .hero-title-block__side-mob {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        line-height: 0.8;
-        color: #d7df23;
-      }
-
-      /* 모바일 hero 타이틀 — 라임 (#d7df23), 본문 흰색 상속 방지 */
       .desktop-section-hero__circle .hero-title-block,
       .desktop-section-hero__circle .hero-title-block__line,
       .desktop-section-hero__circle .hero-title-block__creative-inner,
@@ -2901,159 +3124,72 @@
         color: #d7df23;
       }
 
-      /* hero-03 모바일 (25:1054) */
-      .desktop-section-hero__circle--creative {
-        container-type: inline-size;
-        --hc-gap: clamp(10px, 4.118cqi, 14px);
-        --hc-pad: clamp(14px, 4.444cqi, 24px);
-        --hc-title-57: clamp(26px, 10cqi, 34px);
-        --hc-title-88: clamp(38px, 14.118cqi, 48px);
-        --hc-body-en: clamp(12px, 4.706cqi, 16px);
-        --hc-body-kr: clamp(11px, 4.118cqi, 14px);
-        gap: var(--hc-gap);
-        padding: var(--hc-pad);
-      }
-
-      .desktop-section-hero__circle--creative .hero-title-block {
+      .desktop-section-hero__circle--value .hero-title-block,
+      .desktop-section-hero__circle--creative .hero-title-block,
+      .desktop-section-hero__circle--side .hero-title-block {
         min-height: 0;
-        justify-content: center;
         flex-shrink: 1;
-      }
-
-      .desktop-section-hero__circle--creative .hero-title-block__line--57 {
-        font-size: var(--hc-title-57);
-      }
-
-      .desktop-section-hero__circle--creative .hero-title-block__line--88 {
-        font-size: var(--hc-title-88);
-      }
-
-      .desktop-section-hero__circle--creative .hero-body-stack {
-        gap: var(--hc-gap);
-        flex-shrink: 1;
-        min-height: 0;
-      }
-
-      .desktop-section-hero__circle--creative .hero-body-en--mobile {
-        font-size: var(--hc-body-en);
-        line-height: 1.35;
-        max-width: min(85.882cqi, 292px);
-        width: 100%;
-        flex-shrink: 1;
-        text-align: center;
-      }
-
-      .desktop-section-hero__circle--creative .hero-body-kr--mobile {
-        font-size: var(--hc-body-kr);
-        line-height: 1.4;
-        max-width: min(85.882cqi, 292px);
-        width: 100%;
-        flex-shrink: 1;
-        text-align: center;
-      }
-
-      .desktop-section-hero__circle--creative .hero-body-en--mobile p,
-      .desktop-section-hero__circle--creative .hero-body-kr--mobile p {
-        font-size: inherit;
-        line-height: inherit;
-        margin-inline: auto;
-        text-align: center;
-      }
-
-      /* hero-02 모바일 (25:1059) */
-      .desktop-section-hero__circle--side {
-        container-type: inline-size;
-        --hs-gap: clamp(10px, 4.118cqi, 14px);
-        --hs-pad: clamp(14px, 4.444cqi, 24px);
-        --hs-title-on: clamp(26px, 10cqi, 34px);
-        --hs-title-sub: clamp(30px, 10.882cqi, 37px);
-        --hs-body-en: clamp(11px, 4.118cqi, 14px);
-        --hs-body-kr: clamp(10px, 3.529cqi, 12px);
-        gap: var(--hs-gap);
-        padding: var(--hs-pad);
       }
 
       .desktop-section-hero__circle--side .hero-title-block {
-        min-height: 0;
+        flex: 0 1 auto;
         justify-content: center;
-        line-height: 0.8;
-        flex-shrink: 1;
-      }
-
-      .desktop-section-hero__circle--side .hero-title-block__line--on {
-        font-size: var(--hs-title-on);
+        align-items: center;
         line-height: 0.8;
       }
 
-      .desktop-section-hero__circle--side .hero-title-block__line--sub-m {
-        font-size: var(--hs-title-sub);
-        line-height: 0.8;
-      }
-
-      .desktop-section-hero__circle--side .hero-body-stack {
-        gap: var(--hs-gap);
-        flex-shrink: 1;
-        min-height: 0;
-      }
-
-      .desktop-section-hero__circle--side .hero-body-en--mobile {
-        font-size: var(--hs-body-en);
-        line-height: 1.35;
-        max-width: min(85.882cqi, 292px);
-        flex-shrink: 1;
-      }
-
-      .desktop-section-hero__circle--side .hero-body-kr--mobile {
-        font-size: var(--hs-body-kr);
-        line-height: 1.4;
-        max-width: min(85.882cqi, 292px);
-        flex-shrink: 1;
-      }
-
-      .desktop-section-hero__circle--side .hero-body-en--mobile p,
-      .desktop-section-hero__circle--side .hero-body-kr--mobile p {
-        font-size: inherit;
-        line-height: inherit;
-        margin-inline: auto;
-        text-align: center;
-      }
-
-      .desktop-section-hero__circle--creative .hero-title-block__line--57,
-      .desktop-section-hero__circle--creative .hero-title-block__line--88,
+      .desktop-section-hero__circle .hero-title-block__line--57,
+      .desktop-section-hero__circle .hero-title-block__line--88,
       .desktop-section-hero__circle--side .hero-title-block__line--on,
       .desktop-section-hero__circle--side .hero-title-block__line--sub-m {
         font-weight: 900;
+        line-height: 0.8;
       }
 
-      @container hero-value (max-width: 360px) {
-        .desktop-section-hero__circle--value .hero-title-block__line--57 {
-          font-size: clamp(24px, 9.5cqi, 32px);
-        }
+      .desktop-section-hero__circle .hero-body-en--desktop p,
+      .desktop-section-hero__circle .hero-body-kr--desktop p {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+        margin-inline: 0;
+        text-align: center;
+        font-weight: 300;
+        color: #ffffff;
+        line-height: inherit;
+      }
 
-        .desktop-section-hero__circle--value .hero-title-block__line--88 {
-          font-size: clamp(34px, 13cqi, 44px);
-        }
+      /* hero 국문 — 768px 11px 전체 */
+      .desktop-section-hero__circle .hero-body-kr--desktop,
+      .desktop-section-hero__circle .hero-body-kr,
+      .desktop-section-hero__circle--side .hero-body-kr--desktop {
+        font-size: 11px;
+        line-height: 1.4;
+      }
 
-        .desktop-section-hero__circle--value .hero-body-en--mobile {
-          font-size: clamp(11px, 4.2cqi, 14px);
-        }
+      .desktop-section-hero__circle .hero-body-kr--desktop p,
+      .desktop-section-hero__circle .hero-body-kr p,
+      .desktop-section-hero__circle .hero-body-kr .hero-copy--mob p,
+      .desktop-section-hero__circle--value .hero-kr-line {
+        font-size: 11px;
+        line-height: 1.4;
+      }
 
-        .desktop-section-hero__circle--value .hero-body-kr--mobile {
-          font-size: clamp(10px, 3.8cqi, 12px);
-        }
+      /* hero-01 국문 — 4줄 고정(줄 내부 자동 줄바꿈 방지) */
+      .desktop-section-hero__circle--value .hero-body-kr__value {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        width: 100%;
+        max-width: min(85.882cqi, 292px);
+        font-size: 11px;
+      }
 
-        .desktop-section-hero__circle--creative {
-          --hc-gap: clamp(8px, 3.529cqi, 12px);
-          --hc-body-en: clamp(11px, 4.118cqi, 14px);
-          --hc-body-kr: clamp(10px, 3.529cqi, 12px);
-        }
-
-        .desktop-section-hero__circle--side {
-          --hs-gap: clamp(8px, 3.529cqi, 12px);
-          --hs-title-sub: clamp(28px, 9.5cqi, 34px);
-          --hs-body-en: clamp(10px, 3.824cqi, 13px);
-          --hs-body-kr: clamp(9px, 3.235cqi, 11px);
-        }
+      .desktop-section-hero__circle--value .hero-body-kr__value p {
+        width: 100%;
+        white-space: nowrap;
+        font-size: 11px;
+        line-height: 1.4;
       }
 
       .desktop-section-service__col h3 {
@@ -3380,7 +3516,131 @@
       }
     }
 
-    @media (min-width: 601px) and (max-width: 768px) {
+    /* 태블릿(601~767) — hero PC 3열 가로(768부터 모바일 세로 스택) */
+    @media (min-width: 601px) and (max-width: 767px) {
+      .desktop-section-hero__inner {
+        container-type: inline-size;
+        --hero-pad-top: 56px;
+        --hero-gap: 24px;
+        --hero-circle-d: min(540px, calc((100cqi - 2 * var(--hero-gap)) / 3));
+        max-width: min(1670px, 100%);
+        width: 100%;
+        padding: var(--hero-pad-top) 24px 0;
+        box-sizing: border-box;
+      }
+
+      .desktop-section-hero__inner > .desktop-section-hero__bg {
+        top: 0;
+        bottom: auto;
+        height: calc(var(--hero-pad-top) + var(--hero-circle-d) / 2);
+      }
+
+      .desktop-section-hero__circle-list {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: var(--hero-gap);
+        width: 100%;
+        max-width: min(1668px, 100%);
+        padding-inline: 0;
+      }
+
+      .desktop-section-hero__circle {
+        flex: 1 1 0;
+        width: auto;
+        min-width: 0;
+        max-width: 540px;
+        aspect-ratio: 1;
+        gap: 0;
+        padding: clamp(16px, 4.444cqi, 24px);
+      }
+
+      .desktop-section-hero__circle--value,
+      .desktop-section-hero__circle--creative,
+      .desktop-section-hero__circle--side {
+        container-type: inline-size;
+      }
+
+      .desktop-section-hero__circle {
+        --hero-t57: clamp(40px, 10.556cqi, 57px);
+        --hero-t88: clamp(48px, 16.296cqi, 88px);
+        --hero-en: clamp(14px, 3.704cqi, 20px);
+        --hero-kr: clamp(13px, 2.963cqi, 16px);
+        --hero-side-en: clamp(14px, 3.333cqi, 18px);
+        --hero-side-kr: clamp(13px, 2.963cqi, 16px);
+        --hero-side-sub: clamp(28px, 9.259cqi, 50px);
+        --hero-text-w: min(87.037cqi, 470px);
+        --hero-inner-gap: clamp(14px, 4.444cqi, 24px);
+      }
+
+      .hero-copy--pc {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .hero-copy--mob {
+        display: none !important;
+      }
+
+      .hero-title-block__side-pc {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        line-height: 0.8;
+      }
+
+      .hero-title-block__side-mob {
+        display: none !important;
+      }
+
+      .hero-title-block--side .hero-title-block__line--sub {
+        font-size: clamp(28px, 9.259cqi, 50px);
+      }
+
+      .desktop-section-hero__circle--value .hero-title-block,
+      .desktop-section-hero__circle--creative .hero-title-block {
+        min-height: clamp(100px, 25.556cqi, 138px);
+        flex: 0 1 auto;
+      }
+
+      .desktop-section-hero__circle--side .hero-title-block {
+        min-height: 0;
+        max-width: min(74.259cqi, 401px);
+      }
+
+      .desktop-section-hero__circle--side .hero-title-block__line--on {
+        font-size: clamp(48px, 16.296cqi, 88px);
+      }
+
+      .desktop-section-hero__circle--creative .hero-circle-inner > * {
+        transform: translateY(-10px);
+      }
+
+      .desktop-section-hero__circle .hero-body-en--desktop {
+        font-size: clamp(14px, 3.704cqi, 20px);
+        line-height: 1.35;
+        max-width: min(87.037cqi, 470px);
+      }
+
+      .desktop-section-hero__circle .hero-body-kr--desktop {
+        font-size: clamp(13px, 2.963cqi, 16px);
+        line-height: 1.4;
+        max-width: min(85.185cqi, 460px);
+      }
+
+      .desktop-section-hero__circle--side .hero-body-en--desktop {
+        font-size: clamp(14px, 3.333cqi, 18px);
+        max-width: min(87.037cqi, 470px);
+      }
+
+      .desktop-section-hero__circle--side .hero-body-kr--desktop {
+        font-size: clamp(13px, 2.963cqi, 16px);
+        max-width: min(85.185cqi, 460px);
+      }
+
       .desktop-section-outclients__list {
         width: 100%;
         max-width: 290px;
@@ -3447,27 +3707,13 @@
         width: min(100%, 289px);
       }
 
-      .desktop-section-hero__circle {
-        flex: 0 0 auto;
-        width: min(340px, var(--mob-safe-w), 100%);
-        gap: 20px;
-        padding: 20px 16px;
-        max-width: 100%;
-      }
-
-      .desktop-section-hero__circle--creative {
-        gap: var(--hc-gap);
-        padding: var(--hc-pad);
-      }
-
-      .desktop-section-hero__circle--side {
-        gap: var(--hs-gap);
-        padding: var(--hs-pad);
-      }
-
-      .desktop-section-hero,
       .desktop-section-hero__inner {
-        --hero-circle-d: min(340px, 100cqi);
+        --hero-mob-circle-size: min(340px, var(--mob-safe-w), 100cqi);
+        --hero-circle-d: var(--hero-mob-circle-size);
+      }
+
+      .desktop-section-hero__inner > .desktop-section-hero__bg {
+        height: calc(var(--hero-pad-top) + var(--hero-circle-d) + var(--hero-gap) + var(--hero-circle-d) / 2);
       }
 
       /* Figma mobile(375w): outclients-list 1열 */
@@ -3520,17 +3766,24 @@
       }
 
       .desktop-section-contactus__map-wrap {
-        max-width: 375px;
+        align-self: stretch;
+        width: 100%;
+        max-width: none;
+        margin-inline: 0;
       }
 
       .desktop-section-contactus__map {
+        width: 100%;
+        max-width: none;
         height: auto;
         object-fit: contain;
       }
 
       .desktop-section-contactus__info {
         max-width: 375px;
-        padding: 0;
+        width: 100%;
+        margin-inline: auto;
+        padding-inline: var(--mob-gutter);
         gap: 44px;
       }
 
@@ -3609,66 +3862,81 @@
 
   <main>
     <section class="desktop-section-hero" aria-label="소개">
-      <div class="desktop-section-hero__bg" aria-hidden="true">
-        <img src="images/main_backgorund.png" alt="" width="1201" height="389" decoding="async" fetchpriority="high" />
-      </div>
       <div class="desktop-section-hero__inner">
+        <div class="desktop-section-hero__bg" aria-hidden="true"></div>
         <div class="desktop-section-hero__circle-list">
           <article class="desktop-section-hero__circle desktop-section-hero__circle--value">
+            <div class="hero-circle-inner">
             <h2 class="hero-title-block">
               <span class="hero-title-block__line hero-title-block__line--57">Value </span>
               <span class="hero-title-block__line hero-title-block__line--88">Creation!</span>
             </h2>
             <div class="hero-body-en hero-body-en--desktop">
-              <p>Integrated marketing communication for our partners,</p>
-              <p>creating new value through strategic collaboration</p>
-              <p>and innovation.</p>
-            </div>
-            <div class="hero-body-en--mobile">
-              <p>Integrated marketing communication for our partners, creating new value through strategic collaboration
+              <div class="hero-copy--pc">
+                <p>Integrated marketing communication for our partners,</p>
+                <p>creating new value through strategic collaboration</p>
+                <p>and innovation.</p>
+              </div>
+              <p class="hero-copy--mob">Integrated marketing communication for our partners, creating new value through strategic collaboration
                 and innovation.</p>
             </div>
             <div class="hero-body-kr hero-body-kr--desktop">
-              <p>파트너 고객사의 통합 마케팅 커뮤니케이션에 새로운 가치를 구현하기 위해</p>
-              <p>오랜 준비를 통한 치밀한 전략과 엄격한 내부 기준 그리고 조화롭고</p>
-              <p>효율적인 파트너쉽을 통해 혁신적이고 진보적인 가치를</p>
-              <p>구현하기 위해 노력하고 있습니다.</p>
+              <div class="hero-copy--pc hero-copy--wide">
+                <p>파트너 고객사의 통합 마케팅 커뮤니케이션에 새로운 <span class="hero-kr-line">가치를 구현하기 위해</span></p>
+                <p>오랜 준비를 통한 치밀한 전략과 엄격한 내부 기준 그리고 조화롭고</p>
+                <p>효율적인 파트너쉽을 통해 혁신적이고 진보적인 가치를</p>
+                <p><span class="hero-kr-line">구현하기 위해</span> 노력하고 있습니다.</p>
+              </div>
+              <div class="hero-copy--pc hero-copy--mid">
+                <p>파트너 고객사의 통합 마케팅 커뮤니케이션에 새로운 가치를</p>
+                <p><span class="hero-kr-line">구현하기 위해</span> 오랜 준비를 통한 치밀한 전략과 엄격한</p>
+                <p>내부 기준 그리고 조화롭고 효율적인 파트너쉽을 통해 혁신적이고</p>
+                <p>진보적인 가치를 <span class="hero-kr-line">구현하기 위해</span> 노력하고 있습니다.</p>
+              </div>
+              <div class="hero-copy--mob hero-body-kr__value">
+                <p>파트너 고객사의 통합 마케팅 커뮤니케이션에 새로운 가치를</p>
+                <p><span class="hero-kr-line">구현하기 위해</span> 오랜 준비를 통한 치밀한 전략과 엄격한</p>
+                <p>내부 기준 그리고 조화롭고 효율적인 파트너쉽을 통해 혁신적이고</p>
+                <p>진보적인 가치를 <span class="hero-kr-line">구현하기 위해</span> 노력하고 있습니다.</p>
+              </div>
             </div>
-            <div class="hero-body-kr--mobile">
-              <p>파트너 고객사의 통합 마케팅 커뮤니케이션에 새로운 가치를 구현하기 위해 오랜 준비를 통한 치밀한 전략과 엄격한 </p>
-              <p>내부 기준 그리고 조화롭고 효율적인 파트너쉽을 통해 </p>
-              <p>혁신적이고 진보적인 가치를 구현하기 위해 </p>
-              <p>노력하고 있습니다.</p>
             </div>
           </article>
           <article class="desktop-section-hero__circle desktop-section-hero__circle--creative">
-            <h2 class="hero-title-block hero-title-block--creative">
-              <span class="hero-title-block__creative-inner"><span
-                  class="hero-title-block__line hero-title-block__line--57">Creative </span><span
-                  class="hero-title-block__line hero-title-block__line--88">Insight!</span></span>
+            <div class="hero-circle-inner">
+            <h2 class="hero-title-block">
+              <span class="hero-title-block__line hero-title-block__line--57">Creative </span>
+              <span class="hero-title-block__line hero-title-block__line--88">Insight!</span>
             </h2>
-            <div class="hero-body-stack hero-body-stack--creative">
-              <div class="hero-body-en hero-body-en--desktop">
+            <div class="hero-body-en hero-body-en--desktop">
+              <div class="hero-copy--pc">
                 <p>We deliver creative insights that unlock new</p>
                 <p>possibilities and bring differentiated ideas to our</p>
                 <p>customers.</p>
               </div>
-              <div class="hero-body-en--mobile">
-                <p>We deliver creative insights that unlock new possibilities and bring differentiated ideas to our
-                  customers.</p>
-              </div>
-              <div class="hero-body-kr hero-body-kr--desktop">
+              <p class="hero-copy--mob">We deliver creative insights that unlock new possibilities and bring differentiated ideas to our
+                customers.</p>
+            </div>
+            <div class="hero-body-kr hero-body-kr--desktop">
+              <div class="hero-copy--pc hero-copy--wide">
                 <p>크리에이티브 한 통찰력으로 더 큰 미래를 위한 새로운 가능성을</p>
                 <p>줄 수 있는 차별화된 아이디어를 고객에게 제공하기 위해</p>
                 <p>노력하고 있습니다.</p>
               </div>
-              <div class="hero-body-kr--mobile">
+              <div class="hero-copy--pc hero-copy--mid">
+                <p>크리에이티브 한 통찰력으로 더 큰 미래를 위한</p>
+                <p>새로운 가능성을 줄 수 있는 차별화된 아이디어를</p>
+                <p>고객에게 제공하기 위해 노력하고 있습니다.</p>
+              </div>
+              <div class="hero-copy--mob">
                 <p>크리에이티브 한 통찰력으로 더 큰 미래를 위한 새로운 가능성을 줄 수 있는 차별화된 아이디어를 고객에게</p>
                 <p>제공하기 위해 노력하고 있습니다.</p>
               </div>
             </div>
+            </div>
           </article>
           <article class="desktop-section-hero__circle desktop-section-hero__circle--side">
+            <div class="hero-circle-inner">
             <h2 class="hero-title-block hero-title-block--side">
               <span class="hero-title-block__side-pc">
                 <span class="hero-title-block__line hero-title-block__line--on">On</span>
@@ -3680,32 +3948,37 @@
                 <span class="hero-title-block__line hero-title-block__line--sub-m">Side</span>
               </span>
             </h2>
-            <div class="hero-body-stack hero-body-stack--side">
-              <div class="hero-body-en hero-body-en--desktop">
+            <div class="hero-body-en hero-body-en--desktop">
+              <div class="hero-copy--pc">
                 <p>We take a customer-centric approach, developing</p>
                 <p>marketing strategies that resonate emotionally and build</p>
                 <p>powerful brands. At designMODE, we consider both</p>
                 <p>business perspectives and the interconnected nature of</p>
                 <p>visual communication.</p>
               </div>
-              <div class="hero-body-en--mobile">
-                <p>We take a customer-centric approach, developing marketing strategies that resonate emotionally and
-                  build powerful brands. At designMODE, we consider both business perspectives and the interconnected
-                  nature of visual communication.</p>
-              </div>
-              <div class="hero-body-kr hero-body-kr--desktop">
+              <p class="hero-copy--mob">We take a customer-centric approach, developing marketing strategies that resonate emotionally and build powerful brands. At designMODE, we consider both business perspectives and the interconnected nature of visual communication.</p>
+            </div>
+            <div class="hero-body-kr hero-body-kr--desktop">
+              <div class="hero-copy--pc hero-copy--wide">
                 <p>소비자 중심의 커뮤니케이션 전략은 그 어떤 마케팅보다 효과적이며,</p>
                 <p>소비자의 감성을 자극하여 흡입력 있는 파워 브랜드를 완성합니다.</p>
                 <p>디자인모드는 항상 고객의 관점에서 비즈니스와</p>
                 <p>시각적 이미지의 상호 연관성을 고려합니다.</p>
               </div>
-              <div class="hero-body-kr--mobile">
+              <div class="hero-copy--pc hero-copy--mid">
+                <p>소비자 중심의 커뮤니케이션 전략은 그 어떤 마케팅보다</p>
+                <p>효과적이며, 소비자의 감성을 자극하여 흡입력 있는</p>
+                <p>파워 브랜드를 완성합니다. 디자인모드는 항상 고객의</p>
+                <p>관점에서 비즈니스와 시각적 이미지의 상호 연관성을 고려합니다.</p>
+              </div>
+              <div class="hero-copy--mob">
                 <p>소비자 중심의 커뮤니케이션 전략은 그 어떤 마케팅보다 </p>
                 <p>효과적이며, 소비자의 감성을 자극하여 흡입력 있는 </p>
                 <p>파워 브랜드를 완성합니다. 디자인모드는 항상 고객의 </p>
                 <p>관점에서 비즈니스와 시각적 이미지의 </p>
                 <p>상호 연관성을 고려합니다.</p>
               </div>
+            </div>
             </div>
           </article>
         </div>
@@ -4206,14 +4479,24 @@
     </section>
 
     <section class="desktop-section-copyright" aria-label="사업자 정보">
-      <p class="desktop-section-copyright__text">
+      <p class="desktop-section-copyright__text copyright-copy--wide">
+        상호: 디자인모드&nbsp;&nbsp;&nbsp;&nbsp;사업자번호: 211-03-55241&nbsp;&nbsp;&nbsp;&nbsp;대표: 조현정&nbsp;&nbsp;&nbsp;&nbsp;주소: 서울 강남구 학동로 5길 8, 2층(논현동, 마가SY빌딩)<br
+          class="copyright-pc-br" aria-hidden="true" />
+        Tel: 02-541-2013&nbsp;&nbsp;&nbsp;&nbsp;팩스: 02-541-1747&nbsp;&nbsp;&nbsp;&nbsp;이메일: dnmode@dnmode.com
+      </p>
+      <p class="desktop-section-copyright__text copyright-copy--tablet">
+        상호: 디자인모드&nbsp;&nbsp;사업자번호: 211-03-55241<br aria-hidden="true" />
+        대표: 조현정&nbsp;&nbsp;주소: 서울 강남구 학동로 5길 8, 2층(논현동, 마가SY빌딩)<br aria-hidden="true" />
+        Tel: 02-541-2013&nbsp;&nbsp;팩스: 02-541-1747<br aria-hidden="true" />
+        이메일: dnmode@dnmode.com
+      </p>
+      <p class="desktop-section-copyright__text copyright-copy--mobile">
         상호: 디자인모드<br class="copyright-mobile-br" aria-hidden="true" />
         사업자번호: 211-03-55241<br class="copyright-mobile-br" aria-hidden="true" />
         대표: 조현정<br class="copyright-mobile-br" aria-hidden="true" />
         주소: 서울 강남구 학동로 5길 8, 2층<br class="copyright-mobile-br" aria-hidden="true" />
         (논현동, 마가SY빌딩)<br class="copyright-mobile-br" aria-hidden="true" />
-        Tel: 02-541-2013<br class="copyright-desktop-br" aria-hidden="true" />&nbsp;&nbsp;팩스: 02-541-1747<br
-          class="copyright-mobile-br" aria-hidden="true" />
+        Tel: 02-541-2013&nbsp;&nbsp;팩스: 02-541-1747<br class="copyright-mobile-br" aria-hidden="true" />
         이메일: dnmode@dnmode.com
       </p>
     </section>
