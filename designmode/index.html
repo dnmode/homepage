@@ -2047,13 +2047,22 @@
     }
 
     .desktop-section-contactus__map-wrap {
+      align-self: stretch;
       width: 100%;
-      max-width: 1920px;
+      max-width: none;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+
+    .desktop-section-contactus__map-wrap picture {
+      display: block;
+      width: 100%;
     }
 
     .desktop-section-contactus__map {
       display: block;
       width: 100%;
+      max-width: none;
       height: auto;
     }
 
@@ -2629,6 +2638,7 @@
     @media (max-width: 768px) {
       :root {
         --mob-gutter: 16px;
+        --mob-line-inset: 32px;
         --mob-safe-w: calc(100vw - 2 * var(--mob-gutter));
       }
 
@@ -2712,13 +2722,27 @@
       }
 
       .desktop-section-logo__mark {
-        width: min(303px, 100%);
+        width: min(202px, 100%);
       }
 
-      .desktop-section-logo__line {
-        width: 100%;
-        max-width: 100%;
+      .desktop-section-logo__line,
+      .desktop-section-certifiction__line,
+      .desktop-section-outclients__line {
+        display: block;
+        flex-shrink: 0;
+        align-self: stretch;
+        width: auto;
+        max-width: none;
+        margin-inline: var(--mob-line-inset);
         padding-inline: 0;
+        line-height: 0;
+        overflow: visible;
+        box-sizing: border-box;
+      }
+
+      .desktop-section-logo__line,
+      .desktop-section-outclients__line {
+        margin-inline: calc(var(--mob-line-inset) - var(--mob-gutter));
       }
 
       .desktop-section-service {
@@ -2841,11 +2865,21 @@
       }
 
       img,
-      .desktop-section-logo__line img,
       .desktop-section-portpolio__grid img,
       .desktop-section-contactus__map {
         max-width: 100%;
         height: auto;
+      }
+
+      .desktop-section-logo__line img,
+      .desktop-section-certifiction__line img,
+      .desktop-section-outclients__line img {
+        display: block;
+        width: 100%;
+        height: 2px;
+        min-height: 2px;
+        max-width: 100%;
+        object-fit: fill;
       }
 
       .hero-body-en,
@@ -3286,13 +3320,6 @@
         font-weight: 300;
         line-height: normal;
         color: #d7df23;
-      }
-
-      .desktop-section-certifiction__line {
-        width: 100%;
-        max-width: 340px;
-        padding-inline: 17.5px;
-        box-sizing: border-box;
       }
 
       .desktop-section-contactus__text {
