@@ -2635,8 +2635,7 @@
     }
 
     /* Mobile — 뷰포트 안에 좌우 고정(Android 포함, 가로 스크롤 방지) */
-    @media (max-width: 768px),
-    screen and (orientation: landscape) and (max-height: 520px) {
+    @media (max-width: 768px) {
       :root {
         --mob-gutter: 16px;
         --mob-line-inset: 32px;
@@ -3521,8 +3520,7 @@
       }
     }
 
-    @media (max-width: 600px),
-    screen and (orientation: landscape) and (max-height: 520px) {
+    @media (max-width: 600px) {
       .desktop-section-outclients__list {
         width: 100%;
         max-width: 241px;
@@ -3692,8 +3690,7 @@
       }
     }
 
-    @media (max-width: 480px),
-    screen and (orientation: landscape) and (max-height: 520px) {
+    @media (max-width: 480px) {
       :root {
         --mob-gutter: 16px;
       }
@@ -3837,34 +3834,6 @@
 
       .desktop-section-contactus__nowrap {
         white-space: normal;
-      }
-    }
-
-    /* 모바일 세로 고정 — 가로 회전 시에도 세로 레이아웃 유지(안내 화면 없음) */
-    @media screen and (orientation: landscape) and (max-height: 520px) {
-      :root {
-        --mob-safe-w: calc(100vh - 2 * var(--mob-gutter, 16px));
-      }
-
-      html {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vh;
-        height: 100vw;
-        max-width: 100vh;
-        max-height: 100vw;
-        transform: rotate(90deg) translate3d(0, -100%, 0);
-        transform-origin: top left;
-        overflow-x: hidden;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      body {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0 !important;
       }
     }
   </style>
