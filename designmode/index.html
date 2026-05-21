@@ -3836,10 +3836,67 @@
         white-space: normal;
       }
     }
+
+    /* 모바일 세로 고정 — 가로 회전 시 안내(스마트폰 landscape, 태블릿 제외) */
+    .portrait-lock {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 32px 24px;
+      background-color: #222222;
+      color: #ffffff;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.55;
+      letter-spacing: -0.025em;
+    }
+
+    .portrait-lock.is-active {
+      display: flex;
+    }
+
+    .portrait-lock__icon {
+      width: 56px;
+      height: 56px;
+      opacity: 0.92;
+    }
+
+    .portrait-lock__title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    @media screen and (orientation: landscape) and (max-height: 520px) {
+      html.portrait-lock--on,
+      html.portrait-lock--on body {
+        overflow: hidden !important;
+        height: 100%;
+        max-height: 100%;
+        touch-action: none;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <div id="portraitLock" class="portrait-lock" role="dialog" aria-modal="true" aria-labelledby="portrait-lock-title"
+    hidden>
+    <svg class="portrait-lock__icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true">
+      <rect x="18" y="8" width="20" height="36" rx="3" stroke="currentColor" stroke-width="2" />
+      <path d="M28 14v6M24 40h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M40 20l4-4M40 28h6M40 36l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+    <p id="portrait-lock-title" class="portrait-lock__title">세로 화면으로 이용해 주세요</p>
+    <p>이 페이지는 모바일 세로 화면에 맞춰 제작되었습니다.<br />기기를 세로로 돌려 주세요.</p>
+  </div>
   <header class="desktop-header">
     <div class="desktop-header__inner">
       <a class="desktop-header__logo" href="/" aria-label="designmode 홈">
@@ -4537,6 +4594,32 @@
 
   <script>
     (function () {
+      const portraitLock = document.getElementById("portraitLock");
+      const portraitMq = window.matchMedia(
+        "(orientation: landscape) and (max-height: 520px)"
+      );
+
+      const syncPortraitLock = () => {
+        if (!portraitLock) return;
+        const on = portraitMq.matches;
+        portraitLock.classList.toggle("is-active", on);
+        portraitLock.hidden = !on;
+        document.documentElement.classList.toggle("portrait-lock--on", on);
+      };
+
+      syncPortraitLock();
+      if (typeof portraitMq.addEventListener === "function") {
+        portraitMq.addEventListener("change", syncPortraitLock);
+      } else if (typeof portraitMq.addListener === "function") {
+        portraitMq.addListener(syncPortraitLock);
+      }
+      window.addEventListener("orientationchange", syncPortraitLock);
+      window.addEventListener("resize", syncPortraitLock, { passive: true });
+
+      if (screen.orientation && typeof screen.orientation.lock === "function") {
+        screen.orientation.lock("portrait").catch(function () { });
+      }
+
       const menuBtn = document.getElementById("headerMenuBtn");
       const drawer = document.getElementById("headerDrawer");
       const btn = document.getElementById("floatingTopBtn");
