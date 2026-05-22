@@ -3081,7 +3081,7 @@
       }
 
       .desktop-header__nav a {
-        font-size: clamp(16px, 1.45vw, 19px);
+        font-size: 16px;
       }
 
       /* 태블릿 — 원 세로 중앙까지 (PC와 동일 계산) */
@@ -3743,10 +3743,14 @@
       }
 
       .desktop-section-contactus__info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 100%;
         max-width: 100%;
         padding-inline: var(--mob-gutter);
         box-sizing: border-box;
+        gap: 44px;
       }
 
       .desktop-section-copyright {
@@ -4060,6 +4064,10 @@
         margin-left: auto;
       }
 
+    }
+
+    /* hero — 1023 이하만 (1024~1279는 말단 sm-desktop 블록 · nowrap/fit-content 충돌 방지) */
+    @media (max-width: 1023px) {
       .desktop-section-hero,
       .desktop-section-hero__inner {
         overflow: hidden;
@@ -4395,7 +4403,9 @@
         font-size: 11px;
         line-height: 1.4;
       }
+    }
 
+    @media (max-width: 1279px) {
       /* CERTIFICATION — Figma 375 (25:713) · 이미지 220px + 프레임 244px */
       .desktop-section-certifiction {
         --cert-mob-img-w: 220px;
@@ -4908,8 +4918,8 @@
       }
     }
 
-    /* ~1279 — hero 세로 스택 배경 높이 */
-    @media (max-width: 1279px) {
+    /* ~1023 — hero 세로 스택 배경 높이 */
+    @media (max-width: 1023px) {
       .desktop-section-hero__inner {
         --hero-pad-top: 48px;
         --hero-mob-circle-size: min(340px, var(--mob-safe-w));
@@ -4929,7 +4939,9 @@
       .desktop-section-hero__circle--creative .hero-circle-inner > * {
         transform: none;
       }
+    }
 
+    @media (max-width: 1279px) {
       .desktop-section-outclients__list {
         width: 100%;
         max-width: 290px;
@@ -5057,6 +5069,10 @@
       }
 
       .desktop-section-contactus__info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        grid-template-columns: none;
         max-width: 375px;
         width: 100%;
         margin-inline: auto;
@@ -5686,7 +5702,7 @@
       }
 
       .desktop-header .desktop-header__nav a {
-        font-size: clamp(13px, 1.16vw, 17px) !important;
+        font-size: 16px !important;
       }
 
       .desktop-header .desktop-header__menu-btn {
@@ -5729,20 +5745,154 @@
         min-width: 0 !important;
         max-width: min(432px, calc((100cqi - 2 * var(--hero-gap)) / 3)) !important;
         aspect-ratio: 1 !important;
+        --hero-t57: clamp(28px, 8.5cqi, 40px);
+        --hero-t88: clamp(32px, 11cqi, 48px);
+        --hero-en: clamp(11px, 3.2cqi, 14px);
+        --hero-kr: 12px;
+        --hero-side-en: clamp(11px, 3.1cqi, 14px);
+        --hero-side-kr: 12px;
+        --hero-side-sub: clamp(20px, 6.5cqi, 32px);
+        --hero-text-w: min(88cqi, 280px);
+        --hero-inner-gap: clamp(6px, 2cqi, 12px);
+        padding: clamp(10px, 2.5cqi, 18px) !important;
+        box-sizing: border-box !important;
       }
 
-      .hero-copy--pc,
-      .hero-copy--wide {
+      .desktop-section-hero__circle .hero-circle-inner {
         display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        gap: var(--hero-inner-gap) !important;
+        text-align: center !important;
+        overflow: hidden !important;
       }
 
-      .hero-copy--mid,
-      .hero-copy--mob {
+      .desktop-section-hero__circle .hero-body-en--desktop,
+      .desktop-section-hero__circle .hero-body-kr--desktop {
+        width: 100% !important;
+        max-width: var(--hero-text-w) !important;
+        text-align: center !important;
+      }
+
+      .desktop-section-hero__circle .hero-body-en--desktop {
+        font-size: var(--hero-en) !important;
+        line-height: 1.35 !important;
+      }
+
+      .desktop-section-hero__circle .hero-body-kr--desktop {
+        font-size: var(--hero-kr) !important;
+        line-height: 1.4 !important;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-en--desktop {
+        font-size: var(--hero-side-en) !important;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-kr--desktop {
+        font-size: var(--hero-side-kr) !important;
+      }
+
+      /* 1024~1279 hero 본문 — EN: mob 1단락 · KR: mid 줄바꿈 (wide/pc 숨김) */
+      .desktop-section-hero__circle .hero-copy--pc,
+      .desktop-section-hero__circle .hero-copy--wide,
+      .desktop-section-hero__circle .hero-copy--mob,
+      .desktop-section-hero__circle .hero-body-kr__value {
         display: none !important;
+      }
+
+      .desktop-section-hero__circle .hero-body-en--desktop > p.hero-copy--mob {
+        display: block !important;
+        width: 100% !important;
+        max-width: var(--hero-text-w) !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        font-size: var(--hero-en) !important;
+        line-height: 1.35 !important;
+        font-weight: 300 !important;
+        color: #ffffff !important;
+      }
+
+      .desktop-section-hero__circle .hero-body-kr--desktop > .hero-copy--mid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: var(--hero-text-w) !important;
+        margin: 0 auto !important;
+        gap: 0 !important;
+      }
+
+      .desktop-section-hero__circle .hero-body-kr--desktop > .hero-copy--mid p {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        text-align: center !important;
+        white-space: normal !important;
+        word-break: keep-all !important;
+        overflow-wrap: break-word !important;
+        font-size: var(--hero-kr) !important;
+        line-height: 1.4 !important;
+        font-weight: 300 !important;
+        color: #ffffff !important;
+      }
+
+      /* side 국문 — HTML 4줄(<p>×4) 고정, 모바일 hero-body-kr__side와 동일 */
+      .desktop-section-hero__circle--side .hero-body-kr--desktop > .hero-copy--mid p {
+        width: fit-content !important;
+        max-width: 100% !important;
+        margin-inline: auto !important;
+        white-space: nowrap !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+        text-wrap: nowrap !important;
+      }
+
+      .desktop-section-hero__circle .hero-kr-line {
+        white-space: normal !important;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-kr--desktop > .hero-copy--mid p:nth-child(3),
+      .desktop-section-hero__circle--side .hero-body-kr--desktop > .hero-copy--mid p:nth-child(4) {
+        font-size: 12px !important;
+      }
+
+      .desktop-section-hero__circle .hero-body-kr--desktop > .hero-copy--mid p,
+      .desktop-section-hero__circle .hero-body-kr--desktop > .hero-copy--mid .hero-kr-line {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-en--desktop > p.hero-copy--mob {
+        font-size: clamp(10px, 3cqi, 13px) !important;
+      }
+
+      .desktop-section-hero__circle .hero-title-block {
+        max-width: var(--hero-text-w) !important;
+        width: 100% !important;
+        margin-inline: auto !important;
+      }
+
+      .desktop-section-hero__circle .hero-title-block__line {
+        display: block !important;
+        width: auto !important;
+        max-width: 100% !important;
+        margin-inline: auto !important;
+        text-align: center !important;
+        white-space: normal !important;
       }
 
       .hero-title-block__side-pc {
         display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
       }
 
       .hero-title-block__side-mob {
@@ -6262,6 +6412,86 @@
       }
     }
 
+    /* CONTACT US — 말단 · 모바일(≤767) 세로 스택 · Figma 375 */
+    @media (max-width: 767px) {
+      .desktop-section-contactus {
+        padding: 40px 0 120px !important;
+        gap: 112px !important;
+      }
+
+      .desktop-section-divide-wrap--contact-top {
+        padding-top: 40px !important;
+        margin-bottom: 0 !important;
+      }
+
+      .desktop-section-contactus__title {
+        font-size: 32px !important;
+        color: #000000 !important;
+        padding-inline: var(--mob-gutter) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        margin-top: 0 !important;
+      }
+
+      .desktop-section-contactus__map-wrap {
+        align-self: stretch !important;
+        width: 100% !important;
+        max-width: none !important;
+        margin-inline: 0 !important;
+        padding-inline: 0 !important;
+      }
+
+      .desktop-section-contactus__map {
+        width: 100% !important;
+        max-width: none !important;
+        height: auto !important;
+        object-fit: contain !important;
+      }
+
+      .desktop-section-contactus__info {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        grid-template-columns: none !important;
+        width: 100% !important;
+        max-width: 375px !important;
+        margin-inline: auto !important;
+        padding: 0 var(--mob-gutter) !important;
+        gap: 44px !important;
+      }
+
+      .desktop-section-contactus__item {
+        width: auto !important;
+        max-width: 100% !important;
+      }
+
+      .desktop-section-contactus__item:nth-child(1) {
+        width: min(337px, 100%) !important;
+      }
+
+      .desktop-section-contactus__item:nth-child(2) {
+        width: min(375px, 100%) !important;
+      }
+
+      .desktop-section-contactus__item:nth-child(3) {
+        width: min(207px, 100%) !important;
+      }
+
+      .desktop-section-contactus__text {
+        font-size: 20px !important;
+        line-height: 1.55 !important;
+        font-weight: 300 !important;
+      }
+
+      .desktop-section-contactus__text br.contact-mobile-br {
+        display: inline !important;
+      }
+
+      .desktop-section-contactus__nowrap {
+        white-space: normal !important;
+      }
+    }
+
     @media (min-width: 768px) and (max-width: 1023px) {
       .desktop-section-about {
         --about-en-mob: 13px;
@@ -6455,6 +6685,61 @@
         word-break: normal !important;
         overflow-wrap: normal !important;
         hyphens: none !important;
+      }
+    }
+
+    /* HERO — 1024~1279 최종 말단(≤1023 hero 규칙·nowrap 격리 후 재확인) */
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      .desktop-section-hero__circle .hero-body-en--desktop p,
+      .desktop-section-hero__circle .hero-body-kr--desktop p {
+        width: 100% !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        text-wrap: wrap !important;
+        text-align: center !important;
+        word-break: keep-all !important;
+        overflow-wrap: break-word !important;
+      }
+
+      .desktop-section-hero__circle .hero-copy--pc,
+      .desktop-section-hero__circle .hero-copy--wide,
+      .desktop-section-hero__circle .hero-copy--mob,
+      .desktop-section-hero__circle .hero-body-kr__value {
+        display: none !important;
+      }
+
+      .desktop-section-hero__circle .hero-body-en--desktop > p.hero-copy--mob {
+        display: block !important;
+      }
+
+      .desktop-section-hero__circle .hero-body-kr--desktop > .hero-copy--mid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+      }
+
+      .desktop-section-hero__circle .hero-body-kr--desktop,
+      .desktop-section-hero__circle .hero-body-kr--desktop > .hero-copy--mid,
+      .desktop-section-hero__circle .hero-body-kr--desktop > .hero-copy--mid p,
+      .desktop-section-hero__circle .hero-body-kr--desktop > .hero-copy--mid .hero-kr-line {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+      }
+
+      /* side 국문 4줄 — 말단 nowrap이 ≤1023·전역 p 규칙보다 우선 */
+      .desktop-section-hero__circle--side .hero-body-kr--desktop > .hero-copy--mid p {
+        width: fit-content !important;
+        max-width: 100% !important;
+        margin-inline: auto !important;
+        white-space: nowrap !important;
+        text-wrap: nowrap !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+      }
+
+      .desktop-section-hero__circle--side .hero-body-kr--desktop > .hero-copy--mid p:nth-child(3),
+      .desktop-section-hero__circle--side .hero-body-kr--desktop > .hero-copy--mid p:nth-child(4) {
+        font-size: clamp(10px, 3.45cqi, 12px) !important;
       }
     }
 
