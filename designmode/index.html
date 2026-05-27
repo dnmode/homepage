@@ -3233,17 +3233,20 @@
         width: 100% !important;
       }
 
-      /* PORTFOLIO — 1024~1279 · 4×6 · 행 높이 = 타일 비율(줄 사이 여백 없음) */
+      /* PORTFOLIO — 1024~1279 · 6×4(24장) · 512px */
       .desktop-section-portpolio {
-        --portpolio-cols: 4;
-        --portpolio-rows: 6;
-        --portpolio-tile-h: calc((100vw / var(--portpolio-cols)) * 393 / 405);
-        min-height: calc(var(--portpolio-tile-h) * var(--portpolio-rows));
+        --portpolio-cols: 6;
+        --portpolio-rows: 4;
+        --portpolio-section-h: min(512px, 100svh);
+        --portpolio-tile-h: calc(var(--portpolio-section-h) / var(--portpolio-rows));
+        height: var(--portpolio-section-h);
+        min-height: var(--portpolio-section-h);
+        max-height: var(--portpolio-section-h);
       }
 
       .desktop-section-portpolio__grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        grid-template-rows: repeat(6, var(--portpolio-tile-h));
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-rows: repeat(4, var(--portpolio-tile-h));
         gap: 0;
         line-height: 0;
         width: 100%;
@@ -3261,7 +3264,7 @@
       }
 
       .desktop-section-portpolio__ico {
-        padding: 48px 20px;
+        padding: 24px 20px;
       }
 
       .desktop-section-portpolio__btn {
@@ -3440,12 +3443,15 @@
         display: none;
       }
 
-      /* PORTFOLIO — 태블릿(768~1023) · 4×6 · 타일 높이 고정(행 사이 검은 여백 제거) */
+      /* PORTFOLIO — 태블릿·아이패드(768~1023) · 6×4(24장) · 512px */
       .desktop-section-portpolio {
-        --portpolio-cols: 4;
-        --portpolio-rows: 6;
-        --portpolio-tile-h: calc((100vw / var(--portpolio-cols)) * 393 / 405);
-        min-height: calc(var(--portpolio-tile-h) * var(--portpolio-rows));
+        --portpolio-cols: 6;
+        --portpolio-rows: 4;
+        --portpolio-section-h: min(512px, 100svh);
+        --portpolio-tile-h: calc(var(--portpolio-section-h) / var(--portpolio-rows));
+        height: var(--portpolio-section-h);
+        min-height: var(--portpolio-section-h);
+        max-height: var(--portpolio-section-h);
       }
 
       .desktop-section-portpolio__bg {
@@ -3455,8 +3461,8 @@
       }
 
       .desktop-section-portpolio__grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        grid-template-rows: repeat(6, var(--portpolio-tile-h));
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-rows: repeat(4, var(--portpolio-tile-h));
         gap: 0;
         line-height: 0;
         width: 100%;
@@ -3474,7 +3480,7 @@
       }
 
       .desktop-section-portpolio__ico {
-        padding: 48px 20px;
+        padding: 24px 20px;
       }
 
       .desktop-section-portpolio__btn {
@@ -4591,12 +4597,18 @@
         font-weight: 300;
       }
 
-      /* PORTFOLIO — Figma 375 (25:761) · 4×6 · 타일 높이 = 비율(531px 고정 제거) */
+      /* PORTFOLIO — Figma 375 (25:761) · 4×6 · 1화면(100svh) */
       .desktop-section-portpolio {
         --portpolio-cols: 4;
         --portpolio-rows: 6;
-        --portpolio-tile-h: calc((100vw / var(--portpolio-cols)) * 393 / 405);
-        min-height: calc(var(--portpolio-tile-h) * var(--portpolio-rows));
+        --portpolio-section-h: min(
+          calc((100vw / var(--portpolio-cols)) * 393 / 405 * var(--portpolio-rows)),
+          100svh
+        );
+        --portpolio-tile-h: calc(var(--portpolio-section-h) / var(--portpolio-rows));
+        height: var(--portpolio-section-h);
+        min-height: var(--portpolio-section-h);
+        max-height: var(--portpolio-section-h);
       }
 
       .desktop-section-portpolio__bg {
@@ -4637,11 +4649,16 @@
       .desktop-section-portpolio__btn-list {
         width: min(289px, 100%);
         max-width: 289px;
-        gap: 24px;
+        gap: 12px;
       }
 
       .desktop-section-portpolio__category-list {
         display: flex;
+        gap: 8px;
+      }
+
+      .desktop-section-portpolio__category-item {
+        gap: 6px;
       }
 
       /* Figma 64:372 — 기본 텍스트 #D7DF23, 구분선 흰색, 버튼 portpolio_m_btn */
@@ -6573,13 +6590,19 @@
       }
     }
 
-    /* PORTFOLIO — 말단 · 모바일·태블릿 4×6 행 여백 제거 */
-    @media (max-width: 1023px) {
+    /* PORTFOLIO — 말단 · 모바일 4×6 행 여백 제거 · 1화면 */
+    @media (max-width: 767px) {
       .desktop-section-portpolio {
         --portpolio-cols: 4;
         --portpolio-rows: 6;
-        --portpolio-tile-h: calc((100vw / var(--portpolio-cols)) * 393 / 405);
-        min-height: calc(var(--portpolio-tile-h) * var(--portpolio-rows)) !important;
+        --portpolio-section-h: min(
+          calc((100vw / var(--portpolio-cols)) * 393 / 405 * var(--portpolio-rows)),
+          100svh
+        ) !important;
+        --portpolio-tile-h: calc(var(--portpolio-section-h) / var(--portpolio-rows)) !important;
+        height: var(--portpolio-section-h) !important;
+        min-height: var(--portpolio-section-h) !important;
+        max-height: var(--portpolio-section-h) !important;
       }
 
       .desktop-section-portpolio__bg {
@@ -6606,6 +6629,49 @@
         height: 100% !important;
         max-width: none !important;
         aspect-ratio: auto !important;
+        object-fit: contain !important;
+        object-position: center !important;
+        display: block !important;
+        background-color: #ffffff !important;
+      }
+    }
+
+    /* PORTFOLIO — 말단 · 태블릿·아이패드·작은 데스크탑(768~1279) 6×4 */
+    @media (min-width: 768px) and (max-width: 1279px) {
+      .desktop-section-portpolio {
+        --portpolio-cols: 6 !important;
+        --portpolio-rows: 4 !important;
+        --portpolio-section-h: min(512px, 100svh) !important;
+        --portpolio-tile-h: calc(var(--portpolio-section-h) / var(--portpolio-rows)) !important;
+        height: var(--portpolio-section-h) !important;
+        min-height: var(--portpolio-section-h) !important;
+        max-height: var(--portpolio-section-h) !important;
+      }
+
+      .desktop-section-portpolio__ico {
+        padding: 24px 20px !important;
+      }
+
+      .desktop-section-portpolio__bg {
+        position: absolute !important;
+        inset: 0 !important;
+        overflow: hidden !important;
+      }
+
+      .desktop-section-portpolio__grid {
+        display: grid !important;
+        grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+        grid-template-rows: repeat(4, var(--portpolio-tile-h)) !important;
+        gap: 0 !important;
+        line-height: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 100% !important;
+      }
+
+      .desktop-section-portpolio__grid img {
+        width: 100% !important;
+        height: 100% !important;
         object-fit: contain !important;
         object-position: center !important;
         display: block !important;
