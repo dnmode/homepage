@@ -2632,6 +2632,34 @@
       background-color: #ffffff;
     }
 
+    /* PORTFOLIO — PC(1280+) 6×4 · 타일 비율 고정(이미지 사이 여백 제거) */
+    @media (min-width: 1280px) {
+      .desktop-section-portpolio {
+        --portpolio-cols: 6;
+        --portpolio-rows: 4;
+        --portpolio-tile-h: min(
+          calc((100vw / var(--portpolio-cols)) * 393 / 405),
+          calc(100svh / var(--portpolio-rows))
+        );
+        --portpolio-section-h: calc(var(--portpolio-tile-h) * var(--portpolio-rows));
+
+        height: var(--portpolio-section-h);
+        min-height: var(--portpolio-section-h);
+        max-height: var(--portpolio-section-h);
+      }
+
+      .desktop-section-portpolio__grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-rows: repeat(4, var(--portpolio-tile-h));
+        gap: 0;
+        row-gap: 0;
+        column-gap: 0;
+        height: var(--portpolio-section-h);
+        min-height: var(--portpolio-section-h);
+        max-height: var(--portpolio-section-h);
+      }
+    }
+
     /* Figma portpolio-forground + portpolio-ico */
     .desktop-section-portpolio__foreground {
       position: absolute;
