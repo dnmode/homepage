@@ -8022,6 +8022,9 @@
         });
 
         drawer.querySelector(".desktop-header__drawer-panel")?.addEventListener("click", (e) => {
+          const target = e.target;
+          // 닫기 요소(링크/닫기버튼/백드롭) 클릭은 drawer의 close 핸들러로 전파시켜야 함
+          if (target && target instanceof Element && target.closest('[data-drawer-close="true"]')) return;
           e.stopPropagation();
         });
 
