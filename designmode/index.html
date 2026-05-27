@@ -3233,12 +3233,15 @@
         width: 100% !important;
       }
 
-      /* PORTFOLIO — 1024~1279 · 6×4(24장) · 512px */
+      /* PORTFOLIO — 1024~1279 · 6×4 · 비율 맞춤 contain(전체 노출) */
       .desktop-section-portpolio {
         --portpolio-cols: 6;
         --portpolio-rows: 4;
-        --portpolio-section-h: min(512px, 100svh);
-        --portpolio-tile-h: calc(var(--portpolio-section-h) / var(--portpolio-rows));
+        --portpolio-tile-h: min(
+          calc((100vw / var(--portpolio-cols)) * 393 / 405),
+          calc(100svh / var(--portpolio-rows))
+        );
+        --portpolio-section-h: calc(var(--portpolio-tile-h) * var(--portpolio-rows));
         height: var(--portpolio-section-h);
         min-height: var(--portpolio-section-h);
         max-height: var(--portpolio-section-h);
@@ -3248,6 +3251,8 @@
         grid-template-columns: repeat(6, minmax(0, 1fr));
         grid-template-rows: repeat(4, var(--portpolio-tile-h));
         gap: 0;
+        row-gap: 0;
+        column-gap: 0;
         line-height: 0;
         width: 100%;
         height: 100%;
@@ -3443,12 +3448,15 @@
         display: none;
       }
 
-      /* PORTFOLIO — 태블릿·아이패드(768~1023) · 6×4(24장) · 512px */
+      /* PORTFOLIO — 태블릿·아이패드(768~1023) · 6×4 · 비율 맞춤 contain */
       .desktop-section-portpolio {
         --portpolio-cols: 6;
         --portpolio-rows: 4;
-        --portpolio-section-h: min(512px, 100svh);
-        --portpolio-tile-h: calc(var(--portpolio-section-h) / var(--portpolio-rows));
+        --portpolio-tile-h: min(
+          calc((100vw / var(--portpolio-cols)) * 393 / 405),
+          calc(100svh / var(--portpolio-rows))
+        );
+        --portpolio-section-h: calc(var(--portpolio-tile-h) * var(--portpolio-rows));
         height: var(--portpolio-section-h);
         min-height: var(--portpolio-section-h);
         max-height: var(--portpolio-section-h);
@@ -3464,6 +3472,8 @@
         grid-template-columns: repeat(6, minmax(0, 1fr));
         grid-template-rows: repeat(4, var(--portpolio-tile-h));
         gap: 0;
+        row-gap: 0;
+        column-gap: 0;
         line-height: 0;
         width: 100%;
         height: 100%;
@@ -4597,15 +4607,15 @@
         font-weight: 300;
       }
 
-      /* PORTFOLIO — Figma 375 (25:761) · 4×6 · 1화면(100svh) */
+      /* PORTFOLIO — Figma 375 (25:761) · 4×6 · 비율 맞춤 contain */
       .desktop-section-portpolio {
         --portpolio-cols: 4;
         --portpolio-rows: 6;
-        --portpolio-section-h: min(
-          calc((100vw / var(--portpolio-cols)) * 393 / 405 * var(--portpolio-rows)),
-          100svh
+        --portpolio-tile-h: min(
+          calc((100vw / var(--portpolio-cols)) * 393 / 405),
+          calc(100svh / var(--portpolio-rows))
         );
-        --portpolio-tile-h: calc(var(--portpolio-section-h) / var(--portpolio-rows));
+        --portpolio-section-h: calc(var(--portpolio-tile-h) * var(--portpolio-rows));
         height: var(--portpolio-section-h);
         min-height: var(--portpolio-section-h);
         max-height: var(--portpolio-section-h);
@@ -4619,6 +4629,8 @@
         grid-template-columns: repeat(4, minmax(0, 1fr));
         grid-template-rows: repeat(6, var(--portpolio-tile-h));
         gap: 0;
+        row-gap: 0;
+        column-gap: 0;
         line-height: 0;
         width: 100%;
         height: 100%;
@@ -6590,16 +6602,16 @@
       }
     }
 
-    /* PORTFOLIO — 말단 · 모바일 4×6 행 여백 제거 · 1화면 */
+    /* PORTFOLIO — 말단 · 모바일 4×6 · contain · 전체 노출 */
     @media (max-width: 767px) {
       .desktop-section-portpolio {
         --portpolio-cols: 4;
         --portpolio-rows: 6;
-        --portpolio-section-h: min(
-          calc((100vw / var(--portpolio-cols)) * 393 / 405 * var(--portpolio-rows)),
-          100svh
+        --portpolio-tile-h: min(
+          calc((100vw / var(--portpolio-cols)) * 393 / 405),
+          calc(100svh / var(--portpolio-rows))
         ) !important;
-        --portpolio-tile-h: calc(var(--portpolio-section-h) / var(--portpolio-rows)) !important;
+        --portpolio-section-h: calc(var(--portpolio-tile-h) * var(--portpolio-rows)) !important;
         height: var(--portpolio-section-h) !important;
         min-height: var(--portpolio-section-h) !important;
         max-height: var(--portpolio-section-h) !important;
@@ -6636,13 +6648,16 @@
       }
     }
 
-    /* PORTFOLIO — 말단 · 태블릿·아이패드·작은 데스크탑(768~1279) 6×4 */
+    /* PORTFOLIO — 말단 · 태블릿·아이패드·작은 데스크탑(768~1279) 6×4 · contain */
     @media (min-width: 768px) and (max-width: 1279px) {
       .desktop-section-portpolio {
         --portpolio-cols: 6 !important;
         --portpolio-rows: 4 !important;
-        --portpolio-section-h: min(512px, 100svh) !important;
-        --portpolio-tile-h: calc(var(--portpolio-section-h) / var(--portpolio-rows)) !important;
+        --portpolio-tile-h: min(
+          calc((100vw / var(--portpolio-cols)) * 393 / 405),
+          calc(100svh / var(--portpolio-rows))
+        ) !important;
+        --portpolio-section-h: calc(var(--portpolio-tile-h) * var(--portpolio-rows)) !important;
         height: var(--portpolio-section-h) !important;
         min-height: var(--portpolio-section-h) !important;
         max-height: var(--portpolio-section-h) !important;
@@ -6663,6 +6678,8 @@
         grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
         grid-template-rows: repeat(4, var(--portpolio-tile-h)) !important;
         gap: 0 !important;
+        row-gap: 0 !important;
+        column-gap: 0 !important;
         line-height: 0 !important;
         width: 100% !important;
         height: 100% !important;
