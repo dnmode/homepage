@@ -2659,16 +2659,19 @@
         max-height: var(--portpolio-section-h);
       }
 
-      /* contain으로 인한 투명영역(또는 여백) 노출 제거 */
+      /* PC — gap 0 + 이미지가 셀을 꽉 채워 흰 여백 제거 */
       .desktop-section-portpolio__grid img {
-        object-fit: contain !important;
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        object-fit: cover !important;
         object-position: center !important;
-        background-color: #ffffff !important;
+        background-color: transparent !important;
       }
 
       /* 그리드 경계 서브픽셀 seam(검정 배경 비침) 방지 */
       .desktop-section-portpolio__grid {
-        background-color: #ffffff !important;
+        background-color: transparent !important;
       }
     }
 
