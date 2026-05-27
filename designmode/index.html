@@ -2637,10 +2637,10 @@
       .desktop-section-portpolio {
         --portpolio-cols: 6;
         --portpolio-rows: 4;
-        --portpolio-tile-h: min(
-          calc((100vw / var(--portpolio-cols)) * 393 / 405),
-          calc(100svh / var(--portpolio-rows))
-        );
+        /* 타일 셀 높이를 컨테이너 가로폭 기준으로 정확히 맞추기 */
+        container-type: inline-size;
+        /* 높이 상한(100svh) 제거: 행 사이 여백 없이 이미지 비율 우선 */
+        --portpolio-tile-h: calc((100cqi / var(--portpolio-cols)) * 310 / 320);
         --portpolio-section-h: calc(var(--portpolio-tile-h) * var(--portpolio-rows));
 
         height: var(--portpolio-section-h);
@@ -2657,6 +2657,18 @@
         height: var(--portpolio-section-h);
         min-height: var(--portpolio-section-h);
         max-height: var(--portpolio-section-h);
+      }
+
+      /* contain으로 인한 투명영역(또는 여백) 노출 제거 */
+      .desktop-section-portpolio__grid img {
+        object-fit: contain !important;
+        object-position: center !important;
+        background-color: #ffffff !important;
+      }
+
+      /* 그리드 경계 서브픽셀 seam(검정 배경 비침) 방지 */
+      .desktop-section-portpolio__grid {
+        background-color: #ffffff !important;
       }
     }
 
