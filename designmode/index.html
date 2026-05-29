@@ -4226,11 +4226,15 @@
       .desktop-section-about__body-kr-mob-line {
         margin: 0;
         width: 100%;
+        max-width: 100%;
         font-size: var(--about-kr-mob, 11px);
         font-weight: 400;
         line-height: 1.5;
         text-align: center;
         color: #818181;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        text-wrap: pretty;
       }
 
       .desktop-section-about__sign {
@@ -6785,28 +6789,168 @@
       }
     }
 
-    /* ABOUT — 말단 · 모바일 Figma(25:684) 줄바꿈 · 해상도별 폰트 */
+    /*
+     * ABOUT — 말단 · 모바일만 Figma 25:684 · 25:692
+     * (≤767 · PC·태블릿 미적용)
+     * text px 32만 적용(섹션 gutter 중복 제거) · 줄 단위 nowrap
+     */
     @media (max-width: 767px) {
       .desktop-section-about {
         --about-en-mob: 12px;
         --about-kr-mob: 11px;
+        padding: 40px 0 !important;
+        gap: 40px !important;
+        overflow-x: hidden !important;
       }
 
-      .desktop-section-about__body-en--mobile .desktop-section-about__body-en-mob-line,
-      .desktop-section-about__body-en--mobile .desktop-section-about__body-en-mob-line .desktop-section-about__tagline-mob {
+      .desktop-section-about__english.about-reveal-target,
+      .desktop-section-about__body-en--mobile {
+        transform: none !important;
+      }
+
+      .desktop-section-about__title {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-inline: 32px !important;
+        box-sizing: border-box !important;
+      }
+
+      .desktop-section-about__ceo {
+        gap: 28px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-inline: 32px !important;
+        box-sizing: border-box !important;
+        align-items: center !important;
+      }
+
+      .desktop-section-about__subtitle {
+        width: 100% !important;
+        text-align: center !important;
+      }
+
+      .desktop-section-about__text {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-inline: 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      .desktop-section-about__english {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-inline: auto !important;
+      }
+
+      .desktop-section-about__body-en--mobile {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
         font-size: 12px !important;
         line-height: 1.5 !important;
+        color: #818181 !important;
+      }
+
+      .desktop-section-about__body-en--mobile .desktop-section-about__body-en-mob-line {
+        display: block !important;
+        width: fit-content !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        align-self: center !important;
+        font-size: inherit !important;
+        font-weight: 400 !important;
+        line-height: inherit !important;
+        text-align: center !important;
+        color: inherit !important;
+        white-space: nowrap !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+        text-wrap: nowrap !important;
+        box-sizing: border-box !important;
+      }
+
+      .desktop-section-about__body-en--mobile .desktop-section-about__body-en-mob-line--lead {
+        width: 100% !important;
+        max-width: 100% !important;
+        align-self: stretch !important;
+        white-space: normal !important;
+        text-wrap: wrap !important;
         text-align: center !important;
       }
 
-      .desktop-section-about__body-kr--mobile .desktop-section-about__body-kr-mob-line {
-        font-size: 11px !important;
+      .desktop-section-about__body-en--mobile .desktop-section-about__tagline-mob {
+        font-size: 12px !important;
+        font-weight: 700 !important;
         line-height: 1.5 !important;
-        text-align: center !important;
+        color: #818181 !important;
       }
 
       .desktop-section-about__body-en--mobile br.about-mob-br {
         display: inline !important;
+      }
+
+      .desktop-section-about__korean {
+        width: calc(100% + 64px) !important;
+        max-width: calc(100vw - 32px) !important;
+        margin-inline: -32px !important;
+        padding: 12px 16px !important;
+        gap: 16px !important;
+        border-radius: 24px !important;
+        box-sizing: border-box !important;
+      }
+
+      .desktop-section-about__body-kr--mobile {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      .desktop-section-about__body-kr--mobile .desktop-section-about__body-kr-mob-line {
+        display: block !important;
+        width: fit-content !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        align-self: center !important;
+        font-size: 11px !important;
+        font-weight: 400 !important;
+        line-height: 1.5 !important;
+        text-align: center !important;
+        color: #818181 !important;
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+        overflow-wrap: normal !important;
+        text-wrap: nowrap !important;
+      }
+
+      .desktop-section-about__sign {
+        justify-content: center !important;
+        padding: 0 !important;
+        gap: 7px !important;
+      }
+
+      .desktop-section-about__sign-text {
+        font-size: 15px !important;
+        line-height: 1.3 !important;
+        white-space: nowrap !important;
+      }
+
+      .desktop-section-about__sign img {
+        width: 69px !important;
+        height: auto !important;
       }
     }
 
@@ -8635,18 +8779,16 @@
                   class="about-mob-br" aria-hidden="true" />
                 In a rapidly changing market, designMODE
               </p>
-              <p class="desktop-section-about__body-en-mob-line">has been delivering integrated marketing services that
-                drive our clients’ success.</p>
+              <p class="desktop-section-about__body-en-mob-line">has been delivering integrated marketing services that</p>
+              <p class="desktop-section-about__body-en-mob-line">drive our clients’ success.</p>
               <p class="desktop-section-about__body-en-mob-line">Through in-depth research, strategic insight,</p>
               <p class="desktop-section-about__body-en-mob-line">and creative execution, we help businesses</p>
               <p class="desktop-section-about__body-en-mob-line">move forward and create meaningful value.</p>
-              <p class="desktop-section-about__body-en-mob-line">We believe that a customer-centric approach-grounded
-              </p>
-              <p class="desktop-section-about__body-en-mob-line">in both rational understanding and emotional
-                insight-is key to building impactful design strategies.</p>
+              <p class="desktop-section-about__body-en-mob-line">We believe that a customer-centric approach-grounded</p>
+              <p class="desktop-section-about__body-en-mob-line">in both rational understanding and emotional</p>
+              <p class="desktop-section-about__body-en-mob-line">insight-is key to building impactful design strategies.</p>
               <p class="desktop-section-about__body-en-mob-line">designMODE will continue to create new value from</p>
-              <p class="desktop-section-about__body-en-mob-line">our customers’ perspective, today and into the future.
-              </p>
+              <p class="desktop-section-about__body-en-mob-line">our customers’ perspective, today and into the future.</p>
             </div>
           </div>
           <div class="desktop-section-about__korean about-reveal-target">
