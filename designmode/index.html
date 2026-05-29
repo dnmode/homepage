@@ -4613,6 +4613,7 @@
         width: 100%;
         max-width: var(--hero-text-w);
         margin-inline: auto;
+        margin-bottom: clamp(8px, 3cqi, 16px);
         line-height: 0.8;
       }
 
@@ -8025,6 +8026,10 @@
 
     /* hero-03 모바일 — 영문·국문 대칭 중앙(말단) */
     @media (max-width: 1023px) {
+      .desktop-section-hero__circle--side .hero-title-block {
+        margin-bottom: clamp(8px, 3cqi, 16px) !important;
+      }
+
       .desktop-section-hero__circle--side .hero-circle-inner {
         padding-inline: 0 !important;
         align-items: center !important;
